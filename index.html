@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Life Automation Framework</title>
+  <title>Life Automation Framework - Performance Chart</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -30,7 +30,7 @@
     </button>
   </header>
 
-  <!-- Side Menu -->
+  <!-- Right-Side Sliding Menu -->
   <aside class="side-menu" id="sideMenu">
     <button class="close-menu" id="closeMenu" title="Close Menu">
       <span class="material-symbols-outlined">close</span>
@@ -80,7 +80,6 @@
   <!-- Solid Bottom-Sheet Overlay -->
   <div class="full-overlay" id="detailOverlay">
     <div class="solid-sheet-container">
-      <!-- Overlay Header -->
       <div class="solid-sheet-header">
         <h2 id="overlayTitle">Full Details</h2>
         <button class="close-sheet" id="closeOverlay" title="Close Overlay">
@@ -88,7 +87,6 @@
         </button>
       </div>
 
-      <!-- Main Body -->
       <div class="solid-sheet-body">
         <div id="overlayBody" class="main-overlay-content"></div>
 
@@ -105,9 +103,15 @@
           <h3>Photos</h3>
           <div id="overlayPhotos" class="photo-gallery"></div>
         </div>
+
+        <!-- Performance Chart Section -->
+        <div class="performance-section">
+          <h3>Performance Over Time</h3>
+          <canvas id="overlayPerformanceCanvas" width="300" height="150"></canvas>
+        </div>
       </div>
 
-      <!-- Modern Chat at Bottom -->
+      <!-- Modern AI chat at bottom -->
       <div class="modern-chat-container">
         <h3>Ask AI About This</h3>
         <div class="modern-chat-history" id="overlayChatHistory"></div>
