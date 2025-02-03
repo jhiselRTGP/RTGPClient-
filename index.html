@@ -59,7 +59,7 @@
     </nav>
   </aside>
 
-  <!-- Chat Overlay (global) -->
+  <!-- Global Chat Overlay (top-right chat icon) -->
   <div class="chat-overlay" id="chatOverlay">
     <div class="chat-content">
       <button class="close-chat" id="closeChat" title="Close Chat">
@@ -77,10 +77,9 @@
     </div>
   </div>
 
-  <!-- Full-Page Overlay (Solid) that slides up -->
+  <!-- Solid Full-Page Overlay that slides up from bottom -->
   <div class="full-overlay" id="detailOverlay">
     <div class="solid-sheet-container">
-      <!-- Header row with title, close button, drift/warning if needed -->
       <div class="solid-sheet-header">
         <h2 id="overlayTitle">Full Details</h2>
         <button class="close-sheet" id="closeOverlay" title="Close Overlay">
@@ -88,31 +87,27 @@
         </button>
       </div>
 
-      <!-- Main body: includes summary, checklist, attachments, calendar, photos, etc. -->
       <div class="solid-sheet-body">
+        <!-- main text from JS -->
         <div id="overlayBody" class="main-overlay-content"></div>
 
-        <!-- Common components row: Checklist, Attachments, Calendar, Photos -->
+        <!-- Common components: checklist, attachments, calendar, photos -->
         <div class="common-components">
           <h3>Checklist</h3>
           <ul id="overlayChecklist" class="checklist"></ul>
 
           <h3>Attachments</h3>
-          <div id="overlayAttachments" class="attachments">
-            <!-- Example: icons or file names appended via JS -->
-          </div>
+          <div id="overlayAttachments" class="attachments"></div>
 
           <h3>Add to Calendar</h3>
           <button class="calendar-btn" id="overlayCalendarBtn">Add to Calendar</button>
 
           <h3>Photos</h3>
-          <div id="overlayPhotos" class="photo-gallery">
-            <!-- Photos / Thumbnails appended via JS -->
-          </div>
+          <div id="overlayPhotos" class="photo-gallery"></div>
         </div>
       </div>
 
-      <!-- Modern AI chat at the bottom -->
+      <!-- Modern AI chat at bottom of overlay -->
       <div class="modern-chat-container">
         <h3>Ask AI About This</h3>
         <div class="modern-chat-history" id="overlayChatHistory"></div>
