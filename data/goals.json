@@ -1,0 +1,62 @@
+{
+  "lifeGoals": [
+    {
+      "id": "retirement",
+      "title": "Retirement",
+      "targetDate": "2040",
+      "milestones": [
+        "Save 1 million by 2035",
+        "Achieve stable monthly returns by 2040"
+      ],
+      "performanceCanvasId": "retirementPerfChart",
+      "progressCanvasId": "retirementProgChart",
+      "options": [
+        "Include on Calendar",
+        "Add to Budget",
+        "Tie to IRA Account"
+      ],
+      "advisorPrompt": "Should I adjust my 401(k) contributions?"
+    },
+    {
+      "id": "house",
+      "title": "Buy a House",
+      "targetDate": "2028",
+      "milestones": [
+        "Save 20% down payment",
+        "Get mortgage pre-approval",
+        "Find a realtor"
+      ],
+      "performanceCanvasId": "housePerfChart",
+      "progressCanvasId": "houseProgChart",
+      "options": [
+        "Include on Calendar",
+        "Add to Budget",
+        "Tie to Checking Account"
+      ],
+      "advisorPrompt": "How much more do I need for the down payment?"
+    },
+    {
+      "id": "kidsDance",
+      "title": "Kids' Dance Event",
+      "targetDate": "Next Month",
+      "milestones": [
+        "Buy costumes",
+        "Finalize routine",
+        "Schedule practice sessions"
+      ],
+      "performanceCanvasId": "kidsDancePerfChart",
+      "progressCanvasId": "kidsDanceProgChart",
+      "options": [
+        "Include on Calendar",
+        "Add to Budget",
+        "Tie to Debit Card"
+      ],
+      "advisorPrompt": "Any local store discount for dance gear?",
+      "checklist": [
+        { "label": "Buy Shoes", "done": false },
+        { "label": "Buy Costumes", "done": false },
+        { "label": "Plan Snacks", "done": false }
+      ]
+    }
+  ]
+}
