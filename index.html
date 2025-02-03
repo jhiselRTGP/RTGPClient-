@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Life Automation Framework - Solid Overlay</title>
+  <title>Life Automation Framework</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -30,7 +30,7 @@
     </button>
   </header>
 
-  <!-- Right-Side Sliding Menu -->
+  <!-- Side Menu -->
   <aside class="side-menu" id="sideMenu">
     <button class="close-menu" id="closeMenu" title="Close Menu">
       <span class="material-symbols-outlined">close</span>
@@ -59,7 +59,7 @@
     </nav>
   </aside>
 
-  <!-- Global Chat Overlay (top-right chat icon) -->
+  <!-- Global Chat Overlay -->
   <div class="chat-overlay" id="chatOverlay">
     <div class="chat-content">
       <button class="close-chat" id="closeChat" title="Close Chat">
@@ -77,9 +77,10 @@
     </div>
   </div>
 
-  <!-- Solid Full-Page Overlay that slides up from bottom -->
+  <!-- Solid Bottom-Sheet Overlay -->
   <div class="full-overlay" id="detailOverlay">
     <div class="solid-sheet-container">
+      <!-- Overlay Header -->
       <div class="solid-sheet-header">
         <h2 id="overlayTitle">Full Details</h2>
         <button class="close-sheet" id="closeOverlay" title="Close Overlay">
@@ -87,11 +88,10 @@
         </button>
       </div>
 
+      <!-- Main Body -->
       <div class="solid-sheet-body">
-        <!-- main text from JS -->
         <div id="overlayBody" class="main-overlay-content"></div>
 
-        <!-- Common components: checklist, attachments, calendar, photos -->
         <div class="common-components">
           <h3>Checklist</h3>
           <ul id="overlayChecklist" class="checklist"></ul>
@@ -107,7 +107,7 @@
         </div>
       </div>
 
-      <!-- Modern AI chat at bottom of overlay -->
+      <!-- Modern Chat at Bottom -->
       <div class="modern-chat-container">
         <h3>Ask AI About This</h3>
         <div class="modern-chat-history" id="overlayChatHistory"></div>
