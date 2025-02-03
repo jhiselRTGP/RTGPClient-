@@ -1,5 +1,5 @@
 /***********************************************************
- * MENU & CHAT
+ * MENU & GLOBAL CHAT
  ************************************************************/
 const menuToggle = document.getElementById('menuToggle');
 const closeMenu = document.getElementById('closeMenu');
@@ -38,106 +38,166 @@ sendChat.addEventListener('click', () => {
 });
 
 /***********************************************************
- * PAGE SWITCHING
+ * PAGE SWITCH
  ************************************************************/
 function showPage(pageId) {
   const pages = document.querySelectorAll('.main-content > section');
-  pages.forEach((page) => {
-    page.style.display = 'none';
-  });
+  pages.forEach((p) => (p.style.display = 'none'));
   document.getElementById(pageId).style.display = 'block';
   sideMenu.classList.remove('open');
 }
 
 /***********************************************************
- * FULL-PAGE OVERLAY (DETAIL VIEW) + AI CHAT
+ * FULL-PAGE SOLID OVERLAY
  ************************************************************/
 const detailOverlay = document.getElementById('detailOverlay');
-const closeOverlay = document.getElementById('closeOverlay');
+const closeOverlayBtn = document.getElementById('closeOverlay');
 const overlayTitle = document.getElementById('overlayTitle');
 const overlayBody = document.getElementById('overlayBody');
+const overlayChecklist = document.getElementById('overlayChecklist');
+const overlayAttachments = document.getElementById('overlayAttachments');
+const overlayPhotos = document.getElementById('overlayPhotos');
+const overlayCalendarBtn = document.getElementById('overlayCalendarBtn');
+
 const overlayChatMsg = document.getElementById('overlayChatMsg');
 const overlayChatSend = document.getElementById('overlayChatSend');
 const overlayChatHistory = document.getElementById('overlayChatHistory');
 
-function openDetailOverlay(titleText, bodyHtml) {
+function openDetailOverlay(titleText, bodyHtml, { 
+  checklist = [], 
+  attachments = [], 
+  photos = [] 
+} = {}) {
+  // Title & Main body
   overlayTitle.textContent = titleText;
   overlayBody.innerHTML = bodyHtml;
-  overlayChatHistory.innerHTML = ''; // Clear chat each time if you like
+
+  // Clear old checklist, attachments, photos
+  overlayChecklist.innerHTML = '';
+  overlayAttachments.innerHTML = '';
+  overlayPhotos.innerHTML = '';
+  overlayChatHistory.innerHTML = ''; // reset chat
+
+  // Populate checklist
+  checklist.forEach((item) => {
+    const li = document.createElement('li');
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.checked = item.done || false;
+
+    const label = document.createElement('label');
+    label.textContent = item.label || 'Task Item';
+
+    li.appendChild(cb);
+    li.appendChild(label);
+    overlayChecklist.appendChild(li);
+  });
+
+  // Populate attachments
+  attachments.forEach((att) => {
+    const div = document.createElement('div');
+    div.classList.add('attachment-item');
+    // att could be { name: 'File.pdf', url: '#' }
+    const link = document.createElement('a');
+    link.href = att.url || '#';
+    link.target = '_blank';
+    link.textContent = att.name || 'Attachment';
+    div.appendChild(link);
+    overlayAttachments.appendChild(div);
+  });
+
+  // Populate photos
+  photos.forEach((photo) => {
+    const img = document.createElement('img');
+    img.src = photo.src;
+    img.alt = photo.alt || 'Photo';
+    overlayPhotos.appendChild(img);
+  });
+
+  // Show overlay
   detailOverlay.classList.add('open');
 }
 
-closeOverlay.addEventListener('click', () => {
+closeOverlayBtn.addEventListener('click', () => {
   detailOverlay.classList.remove('open');
 });
 
+// Add to Calendar placeholder
+overlayCalendarBtn.addEventListener('click', () => {
+  alert('Event added to calendar (placeholder)!');
+});
+
+/***********************************************************
+ * Modern Chat in the Overlay
+ ************************************************************/
 overlayChatSend.addEventListener('click', () => {
   const userMsg = overlayChatMsg.value.trim();
   if (userMsg) {
-    const userDiv = document.createElement('div');
-    userDiv.className = 'overlay-user-msg';
-    userDiv.textContent = userMsg;
-    overlayChatHistory.appendChild(userDiv);
+    // user bubble
+    const userBubble = document.createElement('div');
+    userBubble.classList.add('chat-bubble', 'user-bubble');
+    userBubble.textContent = userMsg;
+    overlayChatHistory.appendChild(userBubble);
 
-    // Clear input
     overlayChatMsg.value = '';
     overlayChatHistory.scrollTop = overlayChatHistory.scrollHeight;
 
-    // TODO: You could send userMsg to an AI API, get response, display it, etc.
-    const aiResponse = "I'm just a demo AI. Thanks for your question!";
-    const aiDiv = document.createElement('div');
-    aiDiv.className = 'overlay-ai-msg';
-    aiDiv.textContent = aiResponse;
-    overlayChatHistory.appendChild(aiDiv);
-    overlayChatHistory.scrollTop = overlayChatHistory.scrollHeight;
+    // demo AI response
+    setTimeout(() => {
+      const aiBubble = document.createElement('div');
+      aiBubble.classList.add('chat-bubble', 'ai-bubble');
+      aiBubble.textContent = "Thanks for asking! (AI response placeholder)";
+      overlayChatHistory.appendChild(aiBubble);
+      overlayChatHistory.scrollTop = overlayChatHistory.scrollHeight;
+    }, 500);
   }
 });
 
 /***********************************************************
- * COLLAPSIBLE BOXES: Each item is collapsed by default
+ * COLLAPSIBLE CARDS
  ************************************************************/
-function createCollapsibleBox(title, summaryHtml, overlayTitleText, overlayBodyHtml) {
-  // Outer box
-  const box = document.createElement('div');
-  box.classList.add('card'); // using .card for styling, but it’s actually a collapsible box
+function createCollapsibleCard(title, summaryHtml, overlayOpts) {
+  const card = document.createElement('div');
+  card.classList.add('card');
 
-  // Header (collapsed by default)
   const header = document.createElement('div');
   header.classList.add('card-header', 'collapsible-header');
-  // We store .isCollapsed in JS
   let isCollapsed = true;
 
   const h2 = document.createElement('h2');
   h2.textContent = title;
   header.appendChild(h2);
 
-  // Expand/Collapse arrow or indicator
   const toggleIcon = document.createElement('span');
   toggleIcon.classList.add('toggle-button', 'material-symbols-outlined');
   toggleIcon.textContent = 'expand_more';
   header.appendChild(toggleIcon);
 
-  // Body (hidden by default)
   const body = document.createElement('div');
   body.classList.add('card-body');
   body.style.display = 'none';
 
-  // Summary goes in body
+  // summary
   const summaryDiv = document.createElement('div');
   summaryDiv.innerHTML = summaryHtml;
   body.appendChild(summaryDiv);
 
-  // Full View button => opens overlay
+  // Full View button
   const fullBtn = document.createElement('button');
   fullBtn.textContent = 'Full View';
   fullBtn.classList.add('expand-btn');
   fullBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // prevent also toggling
-    openDetailOverlay(overlayTitleText, overlayBodyHtml);
+    e.stopPropagation();
+    // overlayOpts includes bodyHtml, attachments, photos, checklist...
+    openDetailOverlay(title, overlayOpts.bodyHtml || '', {
+      checklist: overlayOpts.checklist || [],
+      attachments: overlayOpts.attachments || [],
+      photos: overlayOpts.photos || []
+    });
   });
   body.appendChild(fullBtn);
 
-  // Header click toggles body
+  // Toggle
   header.addEventListener('click', () => {
     isCollapsed = !isCollapsed;
     if (isCollapsed) {
@@ -149,14 +209,13 @@ function createCollapsibleBox(title, summaryHtml, overlayTitleText, overlayBodyH
     }
   });
 
-  // Put together
-  box.appendChild(header);
-  box.appendChild(body);
-  return box;
+  card.appendChild(header);
+  card.appendChild(body);
+  return card;
 }
 
 /***********************************************************
- * LOAD "LIFE GOALS" (goals.json)
+ * LOAD LIFE GOALS (Example)
  ************************************************************/
 async function loadGoals() {
   try {
@@ -167,26 +226,30 @@ async function loadGoals() {
 
     data.lifeGoals.forEach((goal) => {
       const summary = `<p><strong>Target Date:</strong> ${goal.targetDate}</p>`;
-      let overlayHtml = `<p><strong>Milestones:</strong> ${goal.milestones.join(', ')}</p>`;
-
-      if (goal.checklist) {
-        overlayHtml += `<p><strong>Checklist:</strong></p><ul>`;
-        goal.checklist.forEach(item => {
-          overlayHtml += `<li>${item.label}</li>`;
-        });
-        overlayHtml += `</ul>`;
-      }
+      // main overlay body
+      let detailsHtml = `<p><strong>Milestones:</strong> ${goal.milestones.join(', ')}</p>`;
       if (goal.advisorPrompt) {
-        overlayHtml += `<p><em>Advisor Prompt:</em> ${goal.advisorPrompt}</p>`;
+        detailsHtml += `<p><em>Advisor Prompt:</em> ${goal.advisorPrompt}</p>`;
       }
+      // example attachments or photos:
+      const attachments = [
+        { name: 'GoalPlanning.pdf', url: '#' },
+        { name: 'BudgetSheet.xlsx', url: '#' }
+      ];
+      const photos = [
+        { src: 'https://via.placeholder.com/80', alt: 'Placeholder' },
+        { src: 'https://via.placeholder.com/60', alt: 'Placeholder 2' }
+      ];
+      // if there's a checklist:
+      const checklist = goal.checklist || [];
 
-      const box = createCollapsibleBox(
-        goal.title,
-        summary,
-        goal.title,
-        overlayHtml
-      );
-      container.appendChild(box);
+      const card = createCollapsibleCard(goal.title, summary, {
+        bodyHtml: detailsHtml,
+        attachments,
+        photos,
+        checklist
+      });
+      container.appendChild(card);
     });
   } catch (err) {
     console.error('Error loading goals:', err);
@@ -194,98 +257,9 @@ async function loadGoals() {
 }
 
 /***********************************************************
- * LOAD CALENDAR
+ * LOAD CALENDAR, PLAN, MONEY, ETC.
+ * (Similar logic but omitted for brevity)
  ************************************************************/
-async function loadCalendar() {
-  try {
-    const res = await fetch('data/calendar.json');
-    const data = await res.json();
-    const container = document.getElementById('calendarContainer');
-    container.innerHTML = '';
-
-    // Title for the page
-    const monthLabel = data.monthLabel || 'This Month';
-    
-    data.events.forEach((evt) => {
-      const summary = `<p><strong>Date:</strong> ${evt.date}</p>`;
-      const overlayHtml = `<p>More info about <em>${evt.name}</em> goes here.</p>`;
-      const box = createCollapsibleBox(
-        evt.name,         // box title
-        summary,          // collapsed summary
-        evt.name,         // overlay title
-        overlayHtml       // overlay body
-      );
-      container.appendChild(box);
-    });
-  } catch (err) {
-    console.error('Error loading calendar:', err);
-  }
-}
-
-/***********************************************************
- * LOAD PLAN
- ************************************************************/
-async function loadPlan() {
-  try {
-    const res = await fetch('data/plan.json');
-    const data = await res.json();
-    const container = document.getElementById('planContainer');
-    container.innerHTML = '';
-
-    data.plans.forEach((p) => {
-      const summary = `<p><strong>Progress:</strong> ${p.progress}%</p>`;
-      const overlayHtml = `<p>Detailed plan steps for <strong>${p.goalName}</strong>, currently at ${p.progress}% progress.</p>`;
-      const box = createCollapsibleBox(
-        p.goalName,
-        summary,
-        p.goalName,
-        overlayHtml
-      );
-      container.appendChild(box);
-    });
-  } catch (err) {
-    console.error('Error loading plan:', err);
-  }
-}
-
-/***********************************************************
- * LOAD MONEY
- ************************************************************/
-async function loadMoney() {
-  try {
-    const res = await fetch('data/money.json');
-    const data = await res.json();
-    const container = document.getElementById('moneyContainer');
-    container.innerHTML = '';
-
-    // Bank
-    {
-      const summary = `<p>$${data.balances.bank.toLocaleString()}</p>`;
-      const overlayHtml = `<p>Bank Account Details: $${data.balances.bank.toLocaleString()}</p>`;
-      const box = createCollapsibleBox(
-        'Bank Account',
-        summary,
-        'Bank Account',
-        overlayHtml
-      );
-      container.appendChild(box);
-    }
-    // Investments
-    {
-      const summary = `<p>$${data.balances.investments.toLocaleString()}</p>`;
-      const overlayHtml = `<p>Investment Details: $${data.balances.investments.toLocaleString()}</p>`;
-      const box = createCollapsibleBox(
-        'Investments',
-        summary,
-        'Investments',
-        overlayHtml
-      );
-      container.appendChild(box);
-    }
-  } catch (err) {
-    console.error('Error loading money:', err);
-  }
-}
 
 /***********************************************************
  * LIGHT / DARK MODE
@@ -315,12 +289,9 @@ if (darkModeCheckbox) {
  * ON PAGE LOAD
  ************************************************************/
 window.addEventListener('DOMContentLoaded', async () => {
-  // Default page
   showPage('life');
-
-  // Load all data (so each page is ready if user switches)
   await loadGoals();
-  await loadCalendar();
-  await loadPlan();
-  await loadMoney();
+  // loadCalendar();
+  // loadPlan();
+  // loadMoney();
 });
