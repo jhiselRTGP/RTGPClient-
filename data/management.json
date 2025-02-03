@@ -1,0 +1,39 @@
+{
+  "sections": [
+    {
+      "id": "driftEvent",
+      "title": "Drift Event (10 Accounts)",
+      "alert": "DRIFT",
+      "buttonLabel": "Generate",
+      "overlayDataFile": "data/lifeDetails.json"
+    },
+    {
+      "id": "newAccounts",
+      "title": "New Accounts (5 Accounts)",
+      "alert": "+5",
+      "buttonLabel": "Generate",
+      "overlayDataFile": "data/calendarDetails.json"
+    },
+    {
+      "id": "life",
+      "title": "Life Section",
+      "alert": "Goals",
+      "buttonLabel": "Open",
+      "overlayDataFile": "data/lifeDetails.json"
+    },
+    {
+      "id": "plan",
+      "title": "Plan Section",
+      "alert": "3 Items",
+      "buttonLabel": "View",
+      "overlayDataFile": "data/planDetails.json"
+    },
+    {
+      "id": "money",
+      "title": "Money Overview",
+      "alert": "$",
+      "buttonLabel": "Open",
+      "overlayDataFile": "data/moneyDetails.json"
+    }
+  ]
+}
