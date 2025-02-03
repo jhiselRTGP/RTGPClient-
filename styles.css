@@ -1,6 +1,6 @@
-/* ------------------------------------------
+/* ------------------------------------------------
    BASIC RESET & BODY
-------------------------------------------- */
+------------------------------------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -20,9 +20,9 @@ a {
   text-decoration: none;
 }
 
-/* ------------------------------------------
+/* ------------------------------------------------
    TOP BANNER
-------------------------------------------- */
+------------------------------------------------- */
 .top-banner {
   display: flex;
   align-items: center;
@@ -45,9 +45,9 @@ a {
   font-size: 1.2rem;
 }
 
-/* ------------------------------------------
+/* ------------------------------------------------
    SIDE MENU
-------------------------------------------- */
+------------------------------------------------- */
 .side-menu {
   position: fixed;
   top: 0;
@@ -83,13 +83,14 @@ a {
   color: #fff;
 }
 
-/* ------------------------------------------
+/* ------------------------------------------------
    GLOBAL CHAT OVERLAY
-------------------------------------------- */
+------------------------------------------------- */
 .chat-overlay {
   position: fixed;
   top: 0; left: 0;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0,0,0,0.6);
   display: none;
   opacity: 0;
@@ -104,7 +105,8 @@ a {
 }
 .chat-content {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   width: 90%;
   max-width: 400px;
   transform: translate(-50%, -50%);
@@ -164,9 +166,9 @@ a {
   color: #111;
 }
 
-/* ------------------------------------------
+/* ------------------------------------------------
    MAIN CONTENT & CARDS
-------------------------------------------- */
+------------------------------------------------- */
 .main-content {
   margin-top: 3rem;
   padding-bottom: 3rem;
@@ -227,14 +229,14 @@ a {
   color: #111;
 }
 
-/* ------------------------------------------
+/* ------------------------------------------------
    FULL-PAGE SOLID SHEET OVERLAY
-------------------------------------------- */
+------------------------------------------------- */
 .full-overlay {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: #2a2a2a; /* solid background (not transparent) */
+  background-color: #2a2a2a; /* fully solid, no transparency */
   display: none;
   opacity: 0;
   pointer-events: none;
@@ -328,7 +330,15 @@ a {
   border-radius: 4px;
 }
 
-/* Modern AI chat at bottom */
+/* Performance section for the chart */
+.performance-section {
+  margin-top: 1rem;
+}
+.performance-section h3 {
+  margin-bottom: 0.5rem;
+}
+
+/* Modern chat at bottom */
 .modern-chat-container {
   position: absolute;
   bottom: 0; left: 0;
@@ -403,9 +413,9 @@ a {
   color: #111;
 }
 
-/* ------------------------------------------
+/* ------------------------------------------------
    FOOTER
-------------------------------------------- */
+------------------------------------------------- */
 .footer {
   position: fixed;
   bottom: 0; left: 0;
