@@ -41,38 +41,6 @@ sendChat.addEventListener('click', () => {
 });
 
 /***********************************************************
- * ADD GOAL OVERLAY
- ************************************************************/
-const floatingButton = document.getElementById('floatingButton');
-const goalOverlay = document.getElementById('goalOverlay');
-const closeGoal = document.getElementById('closeGoal');
-const goalForm = document.getElementById('goalForm');
-
-floatingButton.addEventListener('click', () => {
-  goalOverlay.classList.add('show');
-});
-
-closeGoal.addEventListener('click', () => {
-  goalOverlay.classList.remove('show');
-});
-
-goalForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const name = document.getElementById('goalName').value.trim();
-  const progress = document.getElementById('goalProgress').value.trim();
-
-  if (name && progress) {
-    alert(`Goal "${name}" added with ${progress}% progress!`);
-    // Additional logic to update your JSON or UI can go here
-
-    // Reset form
-    document.getElementById('goalName').value = '';
-    document.getElementById('goalProgress').value = '';
-    goalOverlay.classList.remove('show');
-  }
-});
-
-/***********************************************************
  * PAGE SWITCHING
  ************************************************************/
 function showPage(pageId) {
@@ -85,166 +53,105 @@ function showPage(pageId) {
 }
 
 /***********************************************************
- * BUILD LIFE GOALS FROM JSON
+ * FULL-PAGE OVERLAY HANDLING
+ ************************************************************/
+const cardOverlay = document.getElementById('cardOverlay');
+const closeOverlayBtn = document.getElementById('closeOverlay');
+const overlayTitle = document.getElementById('overlayTitle');
+const overlayBody = document.getElementById('overlayBody');
+
+function openCardOverlay(titleText, detailsHtml) {
+  overlayTitle.textContent = titleText;
+  overlayBody.innerHTML = detailsHtml || '';
+  cardOverlay.classList.add('open');
+}
+
+closeOverlayBtn.addEventListener('click', () => {
+  cardOverlay.classList.remove('open');
+});
+
+/***********************************************************
+ * LIFE (GOALS) PAGE
  ************************************************************/
 async function loadGoals() {
   try {
-    const res = await fetch('data/goals.json'); // Make sure data/ folder is correct
+    const res = await fetch('data/goals.json');
     const data = await res.json();
-    const goalsContainer = document.getElementById('goalsContainer');
+    const container = document.getElementById('goalsContainer');
+    container.innerHTML = '';
 
     data.lifeGoals.forEach((goal) => {
-      // Outer card
+      // Create card
       const card = document.createElement('div');
       card.classList.add('card');
 
-      // Card header
+      // Header
       const header = document.createElement('div');
       header.classList.add('card-header');
+      const titleH2 = document.createElement('h2');
+      titleH2.textContent = goal.title;
+      header.appendChild(titleH2);
 
-      const title = document.createElement('h2');
-      title.textContent = goal.title;
-
-      // Toggle icon
-      const toggleIcon = document.createElement('span');
-      toggleIcon.classList.add('toggle-button', 'material-symbols-outlined');
-      toggleIcon.textContent = 'expand_more';
-
-      // Card body
+      // Body
       const body = document.createElement('div');
       body.classList.add('card-body');
-      body.id = `${goal.id}CardBody`;
-      body.style.display = 'none';
 
-      // Target date
-      const targetP = document.createElement('p');
-      targetP.innerHTML = `<strong>Target Date:</strong> ${goal.targetDate}`;
+      // Basic summary
+      const summaryP = document.createElement('p');
+      summaryP.innerHTML = `<strong>Target Date:</strong> ${goal.targetDate}`;
+      body.appendChild(summaryP);
 
-      // Milestones
-      const milestonesP = document.createElement('p');
-      milestonesP.innerHTML = `<strong>Milestones:</strong> ${goal.milestones.join(', ')}`;
+      // Expand button
+      const expandBtn = document.createElement('button');
+      expandBtn.textContent = 'Expand';
+      expandBtn.classList.add('expand-btn');
+      expandBtn.addEventListener('click', () => {
+        // Build expanded HTML
+        let detailsHtml = `<p><strong>Milestones:</strong> ${goal.milestones.join(', ')}</p>`;
 
-      // Chart section
-      const chartSection = document.createElement('div');
-      chartSection.classList.add('chart-section');
+        // If there's a checklist
+        if (goal.checklist) {
+          detailsHtml += `<h4>Checklist:</h4><ul>`;
+          goal.checklist.forEach((item) => {
+            detailsHtml += `<li>${item.label}</li>`;
+          });
+          detailsHtml += `</ul>`;
+        }
 
-      const perfH3 = document.createElement('h3');
-      perfH3.textContent = 'Performance';
-      const perfCanvas = document.createElement('canvas');
-      perfCanvas.id = goal.performanceCanvasId;
-      perfCanvas.width = 400;
-      perfCanvas.height = 200;
+        // Maybe show advisorPrompt
+        if (goal.advisorPrompt) {
+          detailsHtml += `<p><em>Advisor Prompt:</em> ${goal.advisorPrompt}</p>`;
+        }
 
-      const progH3 = document.createElement('h3');
-      progH3.textContent = 'Progress';
-      const progCanvas = document.createElement('canvas');
-      progCanvas.id = goal.progressCanvasId;
-      progCanvas.width = 400;
-      progCanvas.height = 200;
-
-      chartSection.appendChild(perfH3);
-      chartSection.appendChild(perfCanvas);
-      chartSection.appendChild(progH3);
-      chartSection.appendChild(progCanvas);
-
-      // Options
-      const optionsDiv = document.createElement('div');
-      optionsDiv.classList.add('goal-options');
-      goal.options.forEach((opt) => {
-        const label = document.createElement('label');
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        label.appendChild(checkbox);
-        label.appendChild(document.createTextNode(opt));
-        optionsDiv.appendChild(label);
+        openCardOverlay(goal.title, detailsHtml);
       });
 
-      // Checklist (if any)
-      if (goal.checklist) {
-        const checklistDiv = document.createElement('div');
-        checklistDiv.classList.add('checklist');
-        const h4 = document.createElement('h4');
-        h4.textContent = 'Checklist:';
-        checklistDiv.appendChild(h4);
+      body.appendChild(expandBtn);
 
-        const ul = document.createElement('ul');
-        goal.checklist.forEach((item) => {
-          const li = document.createElement('li');
-          const cb = document.createElement('input');
-          cb.type = 'checkbox';
-          cb.checked = item.done || false;
-
-          const label = document.createElement('label');
-          label.textContent = item.label;
-
-          li.appendChild(cb);
-          li.appendChild(label);
-          ul.appendChild(li);
-        });
-        checklistDiv.appendChild(ul);
-
-        body.appendChild(checklistDiv);
-      }
-
-      // Advisor chat
-      const advisorDiv = document.createElement('div');
-      advisorDiv.classList.add('advisor-chat');
-      const advisorLabel = document.createElement('label');
-      advisorLabel.innerHTML = `<strong>Ask Your Advisor / AI:</strong>`;
-      const advisorTextarea = document.createElement('textarea');
-      advisorTextarea.placeholder = goal.advisorPrompt || "Type your question...";
-      const advisorButton = document.createElement('button');
-      advisorButton.textContent = 'Send';
-
-      advisorDiv.appendChild(advisorLabel);
-      advisorDiv.appendChild(advisorTextarea);
-      advisorDiv.appendChild(advisorButton);
-
-      // Append elements
-      header.appendChild(title);
-      header.appendChild(toggleIcon);
-      body.appendChild(targetP);
-      body.appendChild(milestonesP);
-      body.appendChild(chartSection);
-      body.appendChild(optionsDiv);
-      body.appendChild(advisorDiv);
-
+      // Put card together
       card.appendChild(header);
       card.appendChild(body);
-      goalsContainer.appendChild(card);
 
-      // Toggle logic
-      header.addEventListener('click', () => {
-        if (body.style.display === 'none') {
-          body.style.display = 'block';
-          toggleIcon.classList.add('rotate');
-        } else {
-          body.style.display = 'none';
-          toggleIcon.classList.remove('rotate');
-        }
-      });
+      container.appendChild(card);
     });
-
-    // Once the DOM elements for each canvas are in place, draw the charts:
-    drawAllCharts();
-  } catch (error) {
-    console.error('Error loading goals:', error);
+  } catch (err) {
+    console.error('Error loading goals:', err);
   }
 }
 
 /***********************************************************
- * BUILD CALENDAR FROM JSON
+ * CALENDAR PAGE
  ************************************************************/
 async function loadCalendar() {
   try {
     const res = await fetch('data/calendar.json');
     const data = await res.json();
-    const calendarContainer = document.getElementById('calendarContainer');
+    const container = document.getElementById('calendarContainer');
+    container.innerHTML = '';
 
-    // For each event, create a card
-    const monthTitle = document.createElement('h2');
-    monthTitle.textContent = data.monthLabel || 'Current Month';
-    calendarContainer.appendChild(monthTitle);
+    const monthH2 = document.createElement('h2');
+    monthH2.textContent = data.monthLabel || 'This Month';
+    container.appendChild(monthH2);
 
     data.events.forEach((evt) => {
       const card = document.createElement('div');
@@ -253,150 +160,152 @@ async function loadCalendar() {
       // Header
       const header = document.createElement('div');
       header.classList.add('card-header');
-      const title = document.createElement('h2');
-      title.textContent = evt.name;
-      header.appendChild(title);
+      const titleH2 = document.createElement('h2');
+      titleH2.textContent = evt.name;
+      header.appendChild(titleH2);
 
       // Body
       const body = document.createElement('div');
       body.classList.add('card-body');
       const dateP = document.createElement('p');
       dateP.innerHTML = `<strong>Date:</strong> ${evt.date}`;
-
       body.appendChild(dateP);
+
+      // Expand button
+      const expandBtn = document.createElement('button');
+      expandBtn.textContent = 'Expand';
+      expandBtn.classList.add('expand-btn');
+      expandBtn.addEventListener('click', () => {
+        const detailsHtml = `<p><strong>Date:</strong> ${evt.date}</p>`;
+        openCardOverlay(evt.name, detailsHtml);
+      });
+      body.appendChild(expandBtn);
+
       card.appendChild(header);
       card.appendChild(body);
-
-      calendarContainer.appendChild(card);
+      container.appendChild(card);
     });
-  } catch (error) {
-    console.error('Error loading calendar:', error);
+  } catch (err) {
+    console.error('Error loading calendar:', err);
   }
 }
 
 /***********************************************************
- * BUILD PLAN ITEMS FROM JSON
+ * PLAN PAGE
  ************************************************************/
 async function loadPlan() {
   try {
     const res = await fetch('data/plan.json');
     const data = await res.json();
-    const planContainer = document.getElementById('planContainer');
+    const container = document.getElementById('planContainer');
+    container.innerHTML = '';
 
-    data.plans.forEach((item) => {
-      // Each plan item in a card
+    data.plans.forEach((p) => {
       const card = document.createElement('div');
       card.classList.add('card');
 
       // Header
       const header = document.createElement('div');
       header.classList.add('card-header');
-      const title = document.createElement('h2');
-      title.textContent = item.goalName;
-      header.appendChild(title);
+      const titleH2 = document.createElement('h2');
+      titleH2.textContent = p.goalName;
+      header.appendChild(titleH2);
 
       // Body
       const body = document.createElement('div');
       body.classList.add('card-body');
       const progressP = document.createElement('p');
-      progressP.innerHTML = `
-        <strong>Progress:</strong> ${item.progress}% 
-      `;
-      // Progress bar
-      const progressEl = document.createElement('progress');
-      progressEl.value = item.progress;
-      progressEl.max = 100;
-
+      progressP.innerHTML = `<strong>Progress:</strong> ${p.progress}%`;
       body.appendChild(progressP);
-      body.appendChild(progressEl);
+
+      // Expand button
+      const expandBtn = document.createElement('button');
+      expandBtn.textContent = 'Expand';
+      expandBtn.classList.add('expand-btn');
+      expandBtn.addEventListener('click', () => {
+        const detailsHtml = `<p>Detailed plan steps for "${p.goalName}" could go here. Currently at ${p.progress}%.</p>`;
+        openCardOverlay(p.goalName, detailsHtml);
+      });
+      body.appendChild(expandBtn);
+
       card.appendChild(header);
       card.appendChild(body);
-
-      planContainer.appendChild(card);
+      container.appendChild(card);
     });
-  } catch (error) {
-    console.error('Error loading plan:', error);
+  } catch (err) {
+    console.error('Error loading plan:', err);
   }
 }
 
 /***********************************************************
- * BUILD MONEY OVERVIEW FROM JSON
+ * MONEY PAGE
  ************************************************************/
 async function loadMoney() {
   try {
     const res = await fetch('data/money.json');
     const data = await res.json();
-    const moneyContainer = document.getElementById('moneyContainer');
+    const container = document.getElementById('moneyContainer');
+    container.innerHTML = '';
 
     // Bank
-    const bankCard = document.createElement('div');
-    bankCard.classList.add('card');
+    const card1 = document.createElement('div');
+    card1.classList.add('card');
+    const header1 = document.createElement('div');
+    header1.classList.add('card-header');
+    const title1 = document.createElement('h2');
+    title1.textContent = 'Bank Account';
+    header1.appendChild(title1);
 
-    const bankHeader = document.createElement('div');
-    bankHeader.classList.add('card-header');
-    const bankTitle = document.createElement('h2');
-    bankTitle.textContent = 'Bank Account Balance';
+    const body1 = document.createElement('div');
+    body1.classList.add('card-body');
+    const bankP = document.createElement('p');
+    bankP.textContent = `$${data.balances.bank.toLocaleString()}`;
+    body1.appendChild(bankP);
 
-    bankHeader.appendChild(bankTitle);
+    // Expand
+    const expandBtn1 = document.createElement('button');
+    expandBtn1.textContent = 'Expand';
+    expandBtn1.classList.add('expand-btn');
+    expandBtn1.addEventListener('click', () => {
+      openCardOverlay('Bank Account', `<p>Balance: $${data.balances.bank.toLocaleString()}</p>`);
+    });
+    body1.appendChild(expandBtn1);
 
-    const bankBody = document.createElement('div');
-    bankBody.classList.add('card-body');
-    const bankBalance = document.createElement('p');
-    bankBalance.innerHTML = `$${data.balances.bank.toLocaleString()}`;
-
-    bankBody.appendChild(bankBalance);
-    bankCard.appendChild(bankHeader);
-    bankCard.appendChild(bankBody);
-    moneyContainer.appendChild(bankCard);
+    card1.appendChild(header1);
+    card1.appendChild(body1);
+    container.appendChild(card1);
 
     // Investments
-    const investCard = document.createElement('div');
-    investCard.classList.add('card');
+    const card2 = document.createElement('div');
+    card2.classList.add('card');
+    const header2 = document.createElement('div');
+    header2.classList.add('card-header');
+    const title2 = document.createElement('h2');
+    title2.textContent = 'Investments';
+    header2.appendChild(title2);
 
-    const investHeader = document.createElement('div');
-    investHeader.classList.add('card-header');
-    const investTitle = document.createElement('h2');
-    investTitle.textContent = 'Investments';
+    const body2 = document.createElement('div');
+    body2.classList.add('card-body');
+    const investP = document.createElement('p');
+    investP.textContent = `$${data.balances.investments.toLocaleString()}`;
+    body2.appendChild(investP);
 
-    investHeader.appendChild(investTitle);
+    // Expand
+    const expandBtn2 = document.createElement('button');
+    expandBtn2.textContent = 'Expand';
+    expandBtn2.classList.add('expand-btn');
+    expandBtn2.addEventListener('click', () => {
+      openCardOverlay('Investments', `<p>Balance: $${data.balances.investments.toLocaleString()}</p>`);
+    });
+    body2.appendChild(expandBtn2);
 
-    const investBody = document.createElement('div');
-    investBody.classList.add('card-body');
-    const investBalance = document.createElement('p');
-    investBalance.innerHTML = `$${data.balances.investments.toLocaleString()}`;
+    card2.appendChild(header2);
+    card2.appendChild(body2);
+    container.appendChild(card2);
 
-    investBody.appendChild(investBalance);
-    investCard.appendChild(investHeader);
-    investCard.appendChild(investBody);
-    moneyContainer.appendChild(investCard);
-  } catch (error) {
-    console.error('Error loading money data:', error);
+  } catch (err) {
+    console.error('Error loading money data:', err);
   }
-}
-
-/***********************************************************
- * BUDGET PLANNING
- ************************************************************/
-const calculateBudgetBtn = document.getElementById('calculateBudget');
-if (calculateBudgetBtn) {
-  calculateBudgetBtn.addEventListener('click', () => {
-    const monthlyIncome = Number(document.getElementById('monthlyIncome').value);
-    const monthlyExpenses = Number(document.getElementById('monthlyExpenses').value);
-    const budgetResult = document.getElementById('budgetResult');
-
-    if (!isNaN(monthlyIncome) && !isNaN(monthlyExpenses)) {
-      const surplus = monthlyIncome - monthlyExpenses;
-      if (surplus > 0) {
-        budgetResult.textContent = `You have a surplus of $${surplus} per month.`;
-      } else if (surplus < 0) {
-        budgetResult.textContent = `You are over budget by $${Math.abs(surplus)} per month.`;
-      } else {
-        budgetResult.textContent = `You are breaking even. No surplus or deficit.`;
-      }
-    } else {
-      budgetResult.textContent = `Please enter valid income and expenses.`;
-    }
-  });
 }
 
 /***********************************************************
@@ -404,81 +313,23 @@ if (calculateBudgetBtn) {
  ************************************************************/
 const darkModeCheckbox = document.getElementById('darkMode');
 if (darkModeCheckbox) {
-  // Load saved theme
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'light') {
     document.body.classList.add('light-mode');
     darkModeCheckbox.checked = false;
   } else {
-    // Default is dark mode
     darkModeCheckbox.checked = true;
   }
 
   darkModeCheckbox.addEventListener('change', (e) => {
     if (e.target.checked) {
-      // Dark mode
       document.body.classList.remove('light-mode');
       localStorage.setItem('theme', 'dark');
-      drawAllCharts();
     } else {
-      // Light mode
       document.body.classList.add('light-mode');
       localStorage.setItem('theme', 'light');
-      drawAllCharts();
     }
   });
-}
-
-/***********************************************************
- * SIMPLE CHARTS (PERFORMANCE & PROGRESS)
- ************************************************************/
-function drawSimpleChart(canvasId, title) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-
-  const ctx = canvas.getContext('2d');
-  // Clear area
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Detect light/dark for styling
-  const isLightMode = document.body.classList.contains('light-mode');
-  const textColor = isLightMode ? '#111111' : '#ffffff';
-  const lineColor = '#00ff7f';
-  const gridColor = isLightMode ? '#888' : '#555';
-
-  // Title
-  ctx.fillStyle = textColor;
-  ctx.font = '16px Inter';
-  ctx.fillText(title, 40, 25);
-
-  // Baseline
-  ctx.strokeStyle = gridColor;
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.moveTo(40, canvas.height - 30);
-  ctx.lineTo(canvas.width - 20, canvas.height - 30);
-  ctx.stroke();
-
-  // Simple line
-  ctx.strokeStyle = lineColor;
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(40, canvas.height - 50);
-  ctx.lineTo(canvas.width / 2, canvas.height - 80);
-  ctx.lineTo(canvas.width - 20, canvas.height - 100);
-  ctx.stroke();
-}
-
-function drawAllCharts() {
-  // Example IDs from goals.json
-  drawSimpleChart('retirementPerfChart', 'Retirement Performance');
-  drawSimpleChart('retirementProgChart', 'Retirement Progress');
-  drawSimpleChart('housePerfChart', 'House Performance');
-  drawSimpleChart('houseProgChart', 'House Progress');
-  drawSimpleChart('kidsDancePerfChart', 'Kids Dance Performance');
-  drawSimpleChart('kidsDanceProgChart', 'Kids Dance Progress');
-
-  // If you added more goals with unique canvas IDs, add them here too
 }
 
 /***********************************************************
@@ -488,12 +339,9 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Default page
   showPage('life');
 
-  // Load data for each page
+  // Load data for each page (so it's ready when we switch pages)
   await loadGoals();
   await loadCalendar();
   await loadPlan();
   await loadMoney();
-
-  // Draw charts (in case any were not already drawn)
-  drawAllCharts();
 });
