@@ -1,6 +1,14 @@
 {
   "balances": {
-    "bank": 15000,
-    "investments": 35000
+    "checkingAccount": 5000,
+    "savingsAccount": 12000,
+    "creditCard1": -2000,
+    "creditCard2": -1000,
+    "brokerage": 28000,
+    "retirement401k": 45000,
+    "rothIRA": 15000,
+    "cryptoWallet": 2000,
+    "carLoan": -6000,
+    "mortgage": -175000
   }
 }
