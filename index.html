@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Life Automation Framework</title>
+
+  <!-- Google Font -->
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+  <link 
+
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" 
+
+    rel="stylesheet"
+
+  />
+
+  <!-- Material Symbols (Optional for Icons) -->
+
+  <link 
+
+    rel="stylesheet"
+
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+
+</head>
+
+<body>
+
+  <!-- Top Banner -->
+
+  <header class="top-banner">
+
+    <button class="chat-button" id="chatToggle" title="Open Chat">
+
+      <span class="material-symbols-outlined">chat</span>
+
+    </button>
+
+    <span class="greeting">Hello, User</span>
+
+    <button class="menu-button" id="menuToggle" title="Open Menu">
+
+      <span class="material-symbols-outlined">menu</span>
+
+    </button>
+
+  </header>
+
+  <!-- Right-Side Sliding Menu -->
+
+  <aside class="side-menu" id="sideMenu">
+
+    <button class="close-menu" id="closeMenu" title="Close Menu">
+
+      <span class="material-symbols-outlined">close</span>
+
+    </button>
+
+    <nav class="menu-options">
+
+      <a href="#" onclick="showPage('life')">
+
+        <span class="material-symbols-outlined">favorite</span>
+
+        Life
+
+      </a>
+
+      <a href="#" onclick="showPage('calendar')">
+
+        <span class="material-symbols-outlined">event</span>
+
+        Calendar
+
+      </a>
+
+      <a href="#" onclick="showPage('plan')">
+
+        <span class="material-symbols-outlined">analytics</span>
+
+        Plan
+
+      </a>
+
+      <a href="#" onclick="showPage('money')">
+
+        <span class="material-symbols-outlined">attach_money</span>
+
+        Money
+
+      </a>
+
+      <a href="#" onclick="showPage('settings')">
+
+        <span class="material-symbols-outlined">settings</span>
+
+        Settings
+
+      </a>
+
+    </nav>
+
+  </aside>
+
+  <!-- Chat Overlay -->
+
+  <div class="chat-overlay" id="chatOverlay">
+
+    <div class="chat-content">
+
+      <button class="close-chat" id="closeChat" title="Close Chat">
+
+        <span class="material-symbols-outlined">close</span>
+
+      </button>
+
+      <h2>Chat Assistant</h2>
+
+      <div class="chat-history" id="chatHistory">
+
+        <div class="chat-message">Hi! How can I help you today?</div>
+
+        <div class="chat-message">Feel free to ask any questions!</div>
+
+      </div>
+
+      <div class="chat-input">
+
+        <input type="text" id="chatMessage" placeholder="Type your message..."/>
+
+        <button id="sendChat">Send</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Add Goal Full-Page Overlay -->
+
+  <div class="goal-overlay" id="goalOverlay">
+
+    <div class="goal-content">
+
+      <button class="close-goal" id="closeGoal" title="Close">
+
+        <span class="material-symbols-outlined">close</span>
+
+      </button>
+
+      <h2>Add New Goal</h2>
+
+      <form id="goalForm">
+
+        <div class="form-group">
+
+          <label for="goalName">Goal Name:</label>
+
+          <input 
+
+            type="text"
+
+            id="goalName"
+
+            placeholder="e.g., Save for a car"
+
+            required
+
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="goalProgress">Initial Progress (%):</label>
+
+          <input 
+
+            type="number"
+
+            id="goalProgress"
+
+            placeholder="e.g., 20"
+
+            min="0"
+
+            max="100"
+
+            required
+
+          >
+
+        </div>
+
+        <button type="submit" class="submit-button">Add Goal</button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <!-- Main Content -->
+
+  <main class="main-content">
+
+    <!-- LIFE PAGE: Card-Based Goals -->
+
+    <section id="life">
+
+      <h1>Life Automation Framework</h1>
+
+      <p>Combine financial planning, budgeting, and life events in a single view.</p>
+
+      <div class="goals-grid">
+
+        <!-- Retirement Card -->
+
+        <div class="goal-card">
+
+          <div class="goal-header">
+
+            <h2>Retirement</h2>
+
+            <span class="toggle-button material-symbols-outlined" onclick="toggleCard('retirementCardBody')">
+
+              expand_more
+
+            </span>
+
+          </div>
+
+          <div id="retirementCardBody" class="goal-body" style="display: none;">
+
+            <p><strong>Target Date:</strong> 2040</p>
+
+            <p><strong>Milestones:</strong> Save 1 million by 2035, achieve stable monthly returns by 2040.</p>
+
+            <!-- Charts Section -->
+
+            <div class="chart-section">
+
+              <h3>Performance</h3>
+
+              <canvas id="retirementPerfChart" width="400" height="200"></canvas>
+
+              <h3>Progress</h3>
+
+              <canvas id="retirementProgChart" width="400" height="200"></canvas>
+
+            </div>
+
+            <!-- Options -->
+
+            <div class="goal-options">
+
+              <label>
+
+                <input type="checkbox"/>
+
+                Include on Calendar
+
+              </label>
+
+              <label>
+
+                <input type="checkbox"/>
+
+                Add to Budget
+
+              </label>
+
+              <label>
+
+                <input type="checkbox"/>
+
+                Tie to IRA Account
+
+              </label>
+
+            </div>
+
+            <!-- Advisor Chat / Comments -->
+
+            <div class="advisor-chat">
+
+              <label><strong>Ask Your Advisor:</strong></label>
+
+              <textarea placeholder="e.g., 'Should I adjust my 401(k) contributions?'"></textarea>
+
+              <button>Send</button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Buy a House Card -->
+
+        <div class="goal-card">
+
+          <div class="goal-header">
+
+            <h2>Buy a House</h2>
+
+            <span class="toggle-button material-symbols-outlined" onclick="toggleCard('houseCardBody')">
+
+              expand_more
+
+            </span>
+
+          </div>
+
+          <div id="houseCardBody" class="goal-body" style="display: none;">
+
+            <p><strong>Target Date:</strong> 2028</p>
+
+            <p><strong>Milestones:</strong> Save 20% down payment, get mortgage pre-approval, find a realtor.</p>
+
+            <!-- Charts Section -->
+
+            <div class="chart-section">
+
+              <h3>Performance</h3>
+
+              <canvas id="housePerfChart" width="400" height="200"></canvas>
+
+              <h3>Progress</h3>
+
+              <canvas id="houseProgChart" width="400" height="200"></canvas>
+
+            </div>
+
+            <!-- Options -->
+
+            <div class="goal-options">
+
+              <label>
+
+                <input type="checkbox"/>
+
+                Include on Calendar
+
+              </label>
+
+              <label>
+
+                <input type="checkbox"/>
+
+                Add to Budget
+
+              </label>
+
+              <label>
+
+                <input type="checkbox"/>
+
+                Tie to Checking Account
+
+              </label>
+
+            </div>
+
+            <!-- Advisor Chat / Comments -->
+
+            <div class="advisor-chat">
+
+              <label><strong>Ask Your Advisor:</strong></label>
+
+              <textarea placeholder="e.g., 'How much more do I need for the down payment?'"></textarea>
+
+              <button>Send</button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Kids' Dance Event Card -->
+
+        <div class="goal-card">
+
+          <div class="goal-header">
+
+            <h2>Kids' Dance Event</h2>
+
+            <span class="toggle-button material-symbols-outlined" onclick="toggleCard('kidsDanceCardBody')">
+
+              expand_more
+
+            </span>
+
+          </div>
+
+          <div id="kidsDanceCardBody" class="goal-body" style="display: none;">
+
+            <p><strong>Target Date:</strong> Next Month</p>
+
+            <p><strong>Milestones:</strong> Buy costumes, finalize routine, schedule practice sessions.</p>
+
+            <!-- Charts Section -->
+
+            <div class="chart-section">
+
+              <h3>Performance</h3>
+
+              <canvas id="kidsDancePerfChart" width="400" height="200"></canvas>
+
+              <h3>Progress</h3>
+
+              <canvas id="kidsDanceProgChart" width="400" height="200"></canvas>
+
+            </div>
+
+            <!-- Options -->
+
+            <div class="goal-options">
+
+              <label>
+
+                <input type="checkbox"/>
+
+                Include on Calendar
+
+              </label>
+
+              <label>
+
+                <input type="checkbox"/>
+
+                Add to Budget
+
+              </label>
+
+              <label>
+
+                <input type="checkbox"/>
+
+                Tie to Debit Card
+
+              </label>
+
+            </div>
+
+            <!-- Checklist Example -->
+
+            <div class="checklist">
+
+              <h4>Checklist:</h4>
+
+              <ul>
+
+                <li>
+
+                  <input type="checkbox" id="danceShoes"/>
+
+                  <label for="danceShoes">Buy Shoes</label>
+
+                </li>
+
+                <li>
+
+                  <input type="checkbox" id="danceCostumes"/>
+
+                  <label for="danceCostumes">Buy Costumes</label>
+
+                </li>
+
+                <li>
+
+                  <input type="checkbox" id="danceSnacks"/>
+
+                  <label for="danceSnacks">Plan Snacks</label>
+
+                </li>
+
+              </ul>
+
+            </div>
+
+            <!-- Advisor Chat / Comments -->
+
+            <div class="advisor-chat">
+
+              <label><strong>Ask Your Advisor / AI:</strong></label>
+
+              <textarea placeholder="e.g., 'Any local store discount for dance gear?'"></textarea>
+
+              <button>Send</button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CALENDAR PAGE -->
+
+    <section id="calendar" style="display: none;">
+
+      <h1>Your Calendar</h1>
+
+      <div class="calendar-section">
+
+        <div class="calendar-card">
+
+          <strong>Upcoming Events</strong>
+
+          <ul>
+
+            <li>Meeting with Advisor - Jan 25</li>
+
+            <li>Tax Filing Deadline - Feb 10</li>
+
+            <li>Vacation - Feb 20 - Feb 25</li>
+
+          </ul>
+
+        </div>
+
+        <div class="calendar-placeholder">
+
+          <h3>January 2025</h3>
+
+          <p>Mini Calendar Placeholder</p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- PLAN PAGE -->
+
+    <section id="plan" style="display: none;">
+
+      <h1>Your Plans</h1>
+
+      <div class="goal-list">
+
+        <div class="goal-item">
+
+          <strong>Goal: Save for a house</strong>
+
+          <progress value="40" max="100"></progress> 40% Complete
+
+        </div>
+
+        <div class="goal-item">
+
+          <strong>Goal: Build an emergency fund</strong>
+
+          <progress value="60" max="100"></progress> 60% Complete
+
+        </div>
+
+        <div class="goal-item">
+
+          <strong>Goal: Invest in stocks</strong>
+
+          <progress value="25" max="100"></progress> 25% Complete
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- MONEY PAGE -->
+
+    <section id="money" style="display: none;">
+
+      <h1>Money Overview</h1>
+
+      <div class="money-section">
+
+        <div class="card">
+
+          <strong>Bank Account Balance:</strong>
+
+          <p>$15,000</p>
+
+        </div>
+
+        <div class="card">
+
+          <strong>Investments:</strong>
+
+          <p>$35,000</p>
+
+        </div>
+
+      </div>
+
+      <!-- Basic Budget Planning -->
+
+      <h2>Basic Budget Planning</h2>
+
+      <form class="budget-planning">
+
+        <div class="budget-row">
+
+          <label for="monthlyIncome">Monthly Income:</label>
+
+          <input type="number" id="monthlyIncome" placeholder="E.g. 4000"/>
+
+        </div>
+
+        <div class="budget-row">
+
+          <label for="monthlyExpenses">Monthly Expenses:</label>
+
+          <input type="number" id="monthlyExpenses" placeholder="E.g. 2500"/>
+
+        </div>
+
+        <button type="button" id="calculateBudget">Calculate Surplus</button>
+
+      </form>
+
+      <p id="budgetResult" class="budget-result"></p>
+
+    </section>
+
+    <!-- SETTINGS PAGE -->
+
+    <section id="settings" style="display: none;">
+
+      <h1>Settings</h1>
+
+      <form class="settings-form">
+
+        <label for="username">Username:</label>
+
+        <input type="text" id="username" placeholder="Enter your username" />
+
+        <label for="email">Email:</label>
+
+        <input type="email" id="email" placeholder="Enter your email" />
+
+        <div class="toggle-group">
+
+          <label for="notifications">Enable Notifications:</label>
+
+          <label class="switch">
+
+            <input type="checkbox" id="notifications">
+
+            <span class="slider round"></span>
+
+          </label>
+
+        </div>
+
+        <!-- Light/Dark Mode Toggle -->
+
+        <div class="toggle-group">
+
+          <label for="darkMode">Dark Mode:</label>
+
+          <label class="switch">
+
+            <input type="checkbox" id="darkMode">
+
+            <span class="slider round"></span>
+
+          </label>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+
+  <footer class="footer">
+
+    <button class="footer-button" onclick="showPage('life')">
+
+      <span class="material-symbols-outlined">favorite</span>
+
+      Life
+
+    </button>
+
+    <button class="footer-button" onclick="showPage('calendar')">
+
+      <span class="material-symbols-outlined">event</span>
+
+      Calendar
+
+    </button>
+
+    <button class="footer-button" onclick="showPage('plan')">
+
+      <span class="material-symbols-outlined">analytics</span>
+
+      Plan
+
+    </button>
+
+    <button class="footer-button" onclick="showPage('money')">
+
+      <span class="material-symbols-outlined">attach_money</span>
+
+      Money
+
+    </button>
+
+    <button class="footer-button" onclick="showPage('settings')">
+
+      <span class="material-symbols-outlined">settings</span>
+
+      Settings
+
+    </button>
+
+  </footer>
+
+  <!-- Floating Action Button -->
+
+  <button class="floating-button" id="floatingButton">+</button>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
