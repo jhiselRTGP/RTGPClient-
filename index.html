@@ -59,7 +59,7 @@
     </nav>
   </aside>
 
-  <!-- Chat Overlay -->
+  <!-- Chat Overlay (Global) -->
   <div class="chat-overlay" id="chatOverlay">
     <div class="chat-content">
       <button class="close-chat" id="closeChat" title="Close Chat">
@@ -77,14 +77,25 @@
     </div>
   </div>
 
-  <!-- Full-Page Overlay for Expanded Cards -->
-  <div class="full-overlay" id="cardOverlay">
+  <!-- Full-Page Overlay for Each Box's Detailed View -->
+  <div class="full-overlay" id="detailOverlay">
     <div class="overlay-content">
       <button class="close-overlay" id="closeOverlay" title="Close Overlay">
         <span class="material-symbols-outlined">close</span>
       </button>
-      <h2 id="overlayTitle">Expanded Card</h2>
+      <!-- Title / Info from JS -->
+      <h2 id="overlayTitle">Full Details</h2>
       <div id="overlayBody"></div>
+
+      <!-- AI Chat Box at Bottom for This Item -->
+      <div class="overlay-chat">
+        <h3>Ask AI About This</h3>
+        <div class="overlay-chat-input">
+          <input type="text" id="overlayChatMsg" placeholder="Type your question..." />
+          <button id="overlayChatSend">Send</button>
+        </div>
+        <div class="overlay-chat-history" id="overlayChatHistory"></div>
+      </div>
     </div>
   </div>
 
