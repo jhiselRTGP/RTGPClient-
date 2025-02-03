@@ -1,5 +1,5 @@
 /* ------------------------------------------
-   RESET & BODY
+   BASIC RESET & BODY
 ------------------------------------------- */
 * {
   margin: 0;
@@ -15,19 +15,14 @@ body {
   background-color: #f0f0f0;
   color: #111;
 }
-
-/* Remove link decoration */
 a {
   color: inherit;
   text-decoration: none;
 }
 
 /* ------------------------------------------
-   TOP BANNER, SIDE MENU, CHAT OVERLAY
+   TOP BANNER
 ------------------------------------------- */
-/* - you can reuse your existing CSS for these 
-   - sample snippet shown below: */
-
 .top-banner {
   display: flex;
   align-items: center;
@@ -50,7 +45,9 @@ a {
   font-size: 1.2rem;
 }
 
-/* Side menu */
+/* ------------------------------------------
+   SIDE MENU
+------------------------------------------- */
 .side-menu {
   position: fixed;
   top: 0;
@@ -86,7 +83,9 @@ a {
   color: #fff;
 }
 
-/* Chat overlay (global) */
+/* ------------------------------------------
+   GLOBAL CHAT OVERLAY
+------------------------------------------- */
 .chat-overlay {
   position: fixed;
   top: 0; left: 0;
@@ -198,7 +197,7 @@ a {
 .card-header {
   background-color: #333;
   padding: 0.75rem 1rem;
-  cursor: default; 
+  cursor: default;
 }
 .light-mode .card-header {
   background-color: #ddd;
@@ -235,7 +234,7 @@ a {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: #2a2a2a; /* solid background, no transparency */
+  background-color: #2a2a2a; /* solid background (not transparent) */
   display: none;
   opacity: 0;
   pointer-events: none;
@@ -250,8 +249,6 @@ a {
   opacity: 1;
   pointer-events: auto;
 }
-
-/* Slide-up container */
 .solid-sheet-container {
   position: absolute;
   bottom: 0; left: 0;
@@ -289,8 +286,6 @@ a {
   padding: 1rem;
   height: calc(100% - 180px);
 }
-
-/* Common components in overlay */
 .common-components h3 {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
@@ -299,7 +294,6 @@ a {
 }
 .checklist {
   list-style: none;
-  margin-left: 0;
   padding-left: 0;
 }
 .checklist li {
@@ -334,7 +328,7 @@ a {
   border-radius: 4px;
 }
 
-/* Modern chat at bottom of overlay */
+/* Modern AI chat at bottom */
 .modern-chat-container {
   position: absolute;
   bottom: 0; left: 0;
