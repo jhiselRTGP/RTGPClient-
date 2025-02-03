@@ -8,13 +8,6 @@
         "Save 1 million by 2035",
         "Achieve stable monthly returns by 2040"
       ],
-      "performanceCanvasId": "retirementPerfChart",
-      "progressCanvasId": "retirementProgChart",
-      "options": [
-        "Include on Calendar",
-        "Add to Budget",
-        "Tie to IRA Account"
-      ],
       "advisorPrompt": "Should I adjust my 401(k) contributions?"
     },
     {
@@ -25,13 +18,6 @@
         "Save 20% down payment",
         "Get mortgage pre-approval",
         "Find a realtor"
-      ],
-      "performanceCanvasId": "housePerfChart",
-      "progressCanvasId": "houseProgChart",
-      "options": [
-        "Include on Calendar",
-        "Add to Budget",
-        "Tie to Checking Account"
       ],
       "advisorPrompt": "How much more do I need for the down payment?"
     },
@@ -44,109 +30,12 @@
         "Finalize routine",
         "Schedule practice sessions"
       ],
-      "performanceCanvasId": "kidsDancePerfChart",
-      "progressCanvasId": "kidsDanceProgChart",
-      "options": [
-        "Include on Calendar",
-        "Add to Budget",
-        "Tie to Debit Card"
-      ],
       "advisorPrompt": "Any local store discount for dance gear?",
       "checklist": [
-        { "label": "Buy Shoes", "done": false },
-        { "label": "Buy Costumes", "done": false },
-        { "label": "Plan Snacks", "done": false }
+        { "label": "Buy Shoes" },
+        { "label": "Buy Costumes" },
+        { "label": "Plan Snacks" }
       ]
-    },
-    {
-      "id": "upgradeCar",
-      "title": "Upgrade Car",
-      "targetDate": "2026",
-      "milestones": [
-        "Research reliable models",
-        "Decide lease vs. buy",
-        "Get pre-approved for auto loan"
-      ],
-      "performanceCanvasId": "upgradeCarPerfChart",
-      "progressCanvasId": "upgradeCarProgChart",
-      "options": [
-        "Include on Calendar",
-        "Add to Budget",
-        "Tie to Car Savings"
-      ],
-      "advisorPrompt": "Should I lease, finance, or buy used?"
-    },
-    {
-      "id": "worldTravel",
-      "title": "World Travel",
-      "targetDate": "2030",
-      "milestones": [
-        "Obtain passports",
-        "Research visa requirements",
-        "Plan itinerary for each continent"
-      ],
-      "performanceCanvasId": "worldTravelPerfChart",
-      "progressCanvasId": "worldTravelProgChart",
-      "options": [
-        "Include on Calendar",
-        "Add to Budget",
-        "Tie to Travel Fund"
-      ],
-      "advisorPrompt": "Which travel rewards credit card is best?"
-    },
-    {
-      "id": "childEducation",
-      "title": "Fund Child's Education",
-      "targetDate": "2035",
-      "milestones": [
-        "Open 529 college savings plan",
-        "Set up monthly contributions",
-        "Research scholarship options"
-      ],
-      "performanceCanvasId": "childEduPerfChart",
-      "progressCanvasId": "childEduProgChart",
-      "options": [
-        "Include on Calendar",
-        "Add to Budget",
-        "Tie to 529 Account"
-      ],
-      "advisorPrompt": "What’s the ideal monthly contribution for a 529 plan?"
-    },
-    {
-      "id": "startBusiness",
-      "title": "Start a Business",
-      "targetDate": "2027",
-      "milestones": [
-        "Create a business plan",
-        "Incorporate or form an LLC",
-        "Secure initial funding"
-      ],
-      "performanceCanvasId": "startBizPerfChart",
-      "progressCanvasId": "startBizProgChart",
-      "options": [
-        "Include on Calendar",
-        "Add to Budget",
-        "Tie to Business Account"
-      ],
-      "advisorPrompt": "Should I apply for an SBA loan or seek investors?"
-    },
-    {
-      "id": "anniversaryTrip",
-      "title": "50th Wedding Anniversary Trip",
-      "targetDate": "2032",
-      "milestones": [
-        "Choose destination",
-        "Book flights/accommodations",
-        "Plan activities"
-      ],
-      "performanceCanvasId": "annivTripPerfChart",
-      "progressCanvasId": "annivTripProgChart",
-      "options": [
-        "Include on Calendar",
-        "Add to Budget",
-        "Tie to Vacation Fund"
-      ],
-      "advisorPrompt": "Any tips on getting group discounts for family?"
     }
   ]
 }
