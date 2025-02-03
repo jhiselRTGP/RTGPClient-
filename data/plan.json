@@ -1,16 +1,14 @@
 {
   "plans": [
-    {
-      "goalName": "Save for a house",
-      "progress": 40
-    },
-    {
-      "goalName": "Build an emergency fund",
-      "progress": 60
-    },
-    {
-      "goalName": "Invest in stocks",
-      "progress": 25
-    }
+    { "goalName": "Save for a House", "progress": 40 },
+    { "goalName": "Build an Emergency Fund", "progress": 60 },
+    { "goalName": "Invest in Stocks", "progress": 25 },
+    { "goalName": "Pay Off Car Loan", "progress": 50 },
+    { "goalName": "Vacation Fund", "progress": 30 },
+    { "goalName": "Upgrade Home Appliances", "progress": 10 },
+    { "goalName": "College Tuition Savings", "progress": 45 },
+    { "goalName": "Wedding Fund for Daughter", "progress": 15 },
+    { "goalName": "Renovate Kitchen", "progress": 5 },
+    { "goalName": "Start Side Hustle", "progress": 20 }
   ]
 }
