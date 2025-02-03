@@ -1,8 +1,11 @@
-/* Basic Reset & Body */
+/* ------------------------------------------
+   RESET & BODY
+------------------------------------------- */
 * {
-  margin: 0; padding: 0; box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 body {
   font-family: 'Inter', sans-serif;
   background-color: #1f1f1f;
@@ -19,21 +22,220 @@ a {
   text-decoration: none;
 }
 
-/* Top banner, side menu, chat overlay 
-   ... (reuse your old styles here) ...
-*/
+/* ------------------------------------------
+   TOP BANNER, SIDE MENU, CHAT OVERLAY
+------------------------------------------- */
+/* - you can reuse your existing CSS for these 
+   - sample snippet shown below: */
 
-/* -----------------------------------------
-   FULL-OVERLAY (SOLID SHEET)
------------------------------------------- */
+.top-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  padding: 0.5rem 1rem;
+}
+.light-mode .top-banner {
+  background-color: #ddd;
+}
+.greeting {
+  margin: 0 1rem;
+  font-weight: 600;
+}
+.chat-button, .menu-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* Side menu */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 260px;
+  height: 100%;
+  background-color: #222;
+  padding: 1rem;
+  transition: right 0.3s;
+  z-index: 998;
+}
+.side-menu.open {
+  right: 0;
+}
+.close-menu {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.2rem;
+  float: right;
+  cursor: pointer;
+}
+.menu-options {
+  margin-top: 2rem;
+}
+.menu-options a {
+  display: block;
+  padding: 0.5rem 0;
+  color: #ccc;
+  font-weight: 500;
+}
+.menu-options a:hover {
+  color: #fff;
+}
+
+/* Chat overlay (global) */
+.chat-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 999;
+}
+.chat-overlay.open {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+.chat-content {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 90%;
+  max-width: 400px;
+  transform: translate(-50%, -50%);
+  background-color: #2a2a2a;
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+.light-mode .chat-content {
+  background-color: #fff;
+  color: #111;
+}
+.close-chat {
+  background: none;
+  border: none;
+  color: inherit;
+  float: right;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+.chat-history {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  border: 1px solid #444;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+.chat-message {
+  margin-bottom: 0.5rem;
+}
+.chat-input {
+  display: flex;
+  gap: 0.5rem;
+}
+.chat-input input[type="text"] {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background: #1f1f1f;
+  color: #fff;
+}
+.light-mode .chat-input input[type="text"] {
+  background: #f0f0f0;
+  color: #111;
+}
+.chat-input button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #555;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.light-mode .chat-input button {
+  background: #ccc;
+  color: #111;
+}
+
+/* ------------------------------------------
+   MAIN CONTENT & CARDS
+------------------------------------------- */
+.main-content {
+  margin-top: 3rem;
+  padding-bottom: 3rem;
+}
+.main-content h1 {
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+.cards-grid {
+  display: grid;
+  grid-gap: 1rem;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.card {
+  background-color: #2a2a2a;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s;
+}
+.light-mode .card {
+  background-color: #fff;
+  color: #111;
+}
+.card-header {
+  background-color: #333;
+  padding: 0.75rem 1rem;
+  cursor: default; 
+}
+.light-mode .card-header {
+  background-color: #ddd;
+}
+.card-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.toggle-button.material-symbols-outlined {
+  font-size: 24px;
+  transition: transform 0.3s;
+}
+.card-body {
+  padding: 1rem;
+}
+.expand-btn {
+  margin-top: 1rem;
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background: #555;
+  color: #fff;
+  cursor: pointer;
+}
+.light-mode .expand-btn {
+  background: #ccc;
+  color: #111;
+}
+
+/* ------------------------------------------
+   FULL-PAGE SOLID SHEET OVERLAY
+------------------------------------------- */
 .full-overlay {
   position: fixed;
   top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  /* Instead of a semi-transparent background, 
-     we can make it fully solid. */
-  background-color: #2a2a2a; /* or #333, etc. */
+  width: 100%; height: 100%;
+  background-color: #2a2a2a; /* solid background, no transparency */
   display: none;
   opacity: 0;
   pointer-events: none;
@@ -43,37 +245,30 @@ a {
 .light-mode .full-overlay {
   background-color: #fff;
 }
-
 .full-overlay.open {
   display: block;
   opacity: 1;
   pointer-events: auto;
 }
 
-/* The container that slides up */
+/* Slide-up container */
 .solid-sheet-container {
   position: absolute;
   bottom: 0; left: 0;
   width: 100%;
   height: 100%;
-  /* No additional background— it's the parent's color. 
-     If you want a distinct color, you can do:
-     background-color: #2a2a2a; 
-  */
-  border-radius: 0; /* or 16px 16px 0 0 if you want a top-round */
   transform: translateY(100%);
   transition: transform 0.3s;
 }
 .full-overlay.open .solid-sheet-container {
   transform: translateY(0);
 }
-
 .solid-sheet-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
   background-color: #333;
+  padding: 1rem;
 }
 .light-mode .solid-sheet-header {
   background-color: #ddd;
@@ -89,12 +284,10 @@ a {
   color: inherit;
   cursor: pointer;
 }
-
 .solid-sheet-body {
   overflow-y: auto;
   padding: 1rem;
-  height: calc(100% - 180px); 
-  /* adjust so there's room for the chat container at bottom */
+  height: calc(100% - 180px);
 }
 
 /* Common components in overlay */
@@ -104,7 +297,11 @@ a {
   font-size: 1.1rem;
   font-weight: 600;
 }
-.checklist ul { list-style: none; }
+.checklist {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
 .checklist li {
   margin-bottom: 0.5rem;
   display: flex;
@@ -113,7 +310,6 @@ a {
 .checklist li input[type="checkbox"] {
   margin-right: 0.5rem;
 }
-
 .attachments .attachment-item {
   margin-bottom: 0.5rem;
 }
@@ -130,7 +326,6 @@ a {
   background: #ccc;
   color: #111;
 }
-
 .photo-gallery img {
   width: 60px;
   height: 60px;
@@ -177,7 +372,6 @@ a {
 }
 .user-bubble {
   background-color: #00bfa5;
-  align-self: flex-end;
   color: #fff;
   margin-left: 20%;
 }
@@ -215,9 +409,36 @@ a {
   color: #111;
 }
 
-/* 
-   The rest: 
-   .main-content, .card, .card-header, .card-body, 
-   .expand-btn, .footer, etc. 
-   (Reuse your existing styles)
-*/
+/* ------------------------------------------
+   FOOTER
+------------------------------------------- */
+.footer {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  background-color: #333;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0;
+  z-index: 997;
+}
+.light-mode .footer {
+  background-color: #ddd;
+}
+.footer-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.light-mode .footer-button {
+  color: #111;
+}
+.footer-button span.material-symbols-outlined {
+  font-size: 24px;
+}
