@@ -48,7 +48,7 @@ function showPage(pageId) {
 }
 
 /***********************************************************
- * FULL-PAGE SOLID OVERLAY
+ * FULL-PAGE SOLID OVERLAY (BOTTOM SHEET)
  ************************************************************/
 const detailOverlay = document.getElementById('detailOverlay');
 const closeOverlayBtn = document.getElementById('closeOverlay');
@@ -72,13 +72,13 @@ function openDetailOverlay(titleText, bodyHtml, {
   overlayTitle.textContent = titleText;
   overlayBody.innerHTML = bodyHtml;
 
-  // Clear old checklist, attachments, photos
+  // Reset old data
   overlayChecklist.innerHTML = '';
   overlayAttachments.innerHTML = '';
   overlayPhotos.innerHTML = '';
-  overlayChatHistory.innerHTML = ''; // reset chat
+  overlayChatHistory.innerHTML = '';
 
-  // Populate checklist
+  // Checklist
   checklist.forEach((item) => {
     const li = document.createElement('li');
     const cb = document.createElement('input');
@@ -86,18 +86,17 @@ function openDetailOverlay(titleText, bodyHtml, {
     cb.checked = item.done || false;
 
     const label = document.createElement('label');
-    label.textContent = item.label || 'Task Item';
+    label.textContent = item.label || 'Task';
 
     li.appendChild(cb);
     li.appendChild(label);
     overlayChecklist.appendChild(li);
   });
 
-  // Populate attachments
+  // Attachments
   attachments.forEach((att) => {
     const div = document.createElement('div');
     div.classList.add('attachment-item');
-    // att could be { name: 'File.pdf', url: '#' }
     const link = document.createElement('a');
     link.href = att.url || '#';
     link.target = '_blank';
@@ -106,7 +105,7 @@ function openDetailOverlay(titleText, bodyHtml, {
     overlayAttachments.appendChild(div);
   });
 
-  // Populate photos
+  // Photos
   photos.forEach((photo) => {
     const img = document.createElement('img');
     img.src = photo.src;
@@ -117,18 +116,17 @@ function openDetailOverlay(titleText, bodyHtml, {
   // Show overlay
   detailOverlay.classList.add('open');
 }
-
 closeOverlayBtn.addEventListener('click', () => {
   detailOverlay.classList.remove('open');
 });
 
-// Add to Calendar placeholder
+// Add to Calendar button
 overlayCalendarBtn.addEventListener('click', () => {
-  alert('Event added to calendar (placeholder)!');
+  alert('Event added to calendar (placeholder)');
 });
 
 /***********************************************************
- * Modern Chat in the Overlay
+ * MODERN CHAT IN OVERLAY
  ************************************************************/
 overlayChatSend.addEventListener('click', () => {
   const userMsg = overlayChatMsg.value.trim();
@@ -142,11 +140,11 @@ overlayChatSend.addEventListener('click', () => {
     overlayChatMsg.value = '';
     overlayChatHistory.scrollTop = overlayChatHistory.scrollHeight;
 
-    // demo AI response
+    // Demo AI response
     setTimeout(() => {
       const aiBubble = document.createElement('div');
       aiBubble.classList.add('chat-bubble', 'ai-bubble');
-      aiBubble.textContent = "Thanks for asking! (AI response placeholder)";
+      aiBubble.textContent = "AI says: Thanks for asking! (placeholder)";
       overlayChatHistory.appendChild(aiBubble);
       overlayChatHistory.scrollTop = overlayChatHistory.scrollHeight;
     }, 500);
@@ -161,7 +159,8 @@ function createCollapsibleCard(title, summaryHtml, overlayOpts) {
   card.classList.add('card');
 
   const header = document.createElement('div');
-  header.classList.add('card-header', 'collapsible-header');
+  header.classList.add('card-header');
+  header.classList.add('collapsible-header');
   let isCollapsed = true;
 
   const h2 = document.createElement('h2');
@@ -177,7 +176,7 @@ function createCollapsibleCard(title, summaryHtml, overlayOpts) {
   body.classList.add('card-body');
   body.style.display = 'none';
 
-  // summary
+  // Summary
   const summaryDiv = document.createElement('div');
   summaryDiv.innerHTML = summaryHtml;
   body.appendChild(summaryDiv);
@@ -188,7 +187,6 @@ function createCollapsibleCard(title, summaryHtml, overlayOpts) {
   fullBtn.classList.add('expand-btn');
   fullBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    // overlayOpts includes bodyHtml, attachments, photos, checklist...
     openDetailOverlay(title, overlayOpts.bodyHtml || '', {
       checklist: overlayOpts.checklist || [],
       attachments: overlayOpts.attachments || [],
@@ -197,7 +195,7 @@ function createCollapsibleCard(title, summaryHtml, overlayOpts) {
   });
   body.appendChild(fullBtn);
 
-  // Toggle
+  // Collapse logic
   header.addEventListener('click', () => {
     isCollapsed = !isCollapsed;
     if (isCollapsed) {
@@ -215,7 +213,7 @@ function createCollapsibleCard(title, summaryHtml, overlayOpts) {
 }
 
 /***********************************************************
- * LOAD LIFE GOALS (Example)
+ * LOAD GOALS (EXAMPLE)
  ************************************************************/
 async function loadGoals() {
   try {
@@ -226,21 +224,19 @@ async function loadGoals() {
 
     data.lifeGoals.forEach((goal) => {
       const summary = `<p><strong>Target Date:</strong> ${goal.targetDate}</p>`;
-      // main overlay body
       let detailsHtml = `<p><strong>Milestones:</strong> ${goal.milestones.join(', ')}</p>`;
       if (goal.advisorPrompt) {
         detailsHtml += `<p><em>Advisor Prompt:</em> ${goal.advisorPrompt}</p>`;
       }
-      // example attachments or photos:
+      // Example attachments or photos:
       const attachments = [
         { name: 'GoalPlanning.pdf', url: '#' },
         { name: 'BudgetSheet.xlsx', url: '#' }
       ];
       const photos = [
-        { src: 'https://via.placeholder.com/80', alt: 'Placeholder' },
+        { src: 'https://via.placeholder.com/80', alt: 'Placeholder 1' },
         { src: 'https://via.placeholder.com/60', alt: 'Placeholder 2' }
       ];
-      // if there's a checklist:
       const checklist = goal.checklist || [];
 
       const card = createCollapsibleCard(goal.title, summary, {
@@ -257,8 +253,7 @@ async function loadGoals() {
 }
 
 /***********************************************************
- * LOAD CALENDAR, PLAN, MONEY, ETC.
- * (Similar logic but omitted for brevity)
+ * LOAD CALENDAR, PLAN, MONEY (similar approach)
  ************************************************************/
 
 /***********************************************************
@@ -289,9 +284,12 @@ if (darkModeCheckbox) {
  * ON PAGE LOAD
  ************************************************************/
 window.addEventListener('DOMContentLoaded', async () => {
+  // Default page is "Life"
   showPage('life');
+
+  // Load data
   await loadGoals();
-  // loadCalendar();
-  // loadPlan();
-  // loadMoney();
+  // await loadCalendar();
+  // await loadPlan();
+  // await loadMoney();
 });
