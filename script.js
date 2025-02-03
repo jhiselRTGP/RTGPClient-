@@ -89,7 +89,7 @@ function showPage(pageId) {
  ************************************************************/
 async function loadGoals() {
   try {
-    const res = await fetch('data/goals.json');
+    const res = await fetch('data/goals.json'); // Make sure data/ folder is correct
     const data = await res.json();
     const goalsContainer = document.getElementById('goalsContainer');
 
@@ -477,6 +477,8 @@ function drawAllCharts() {
   drawSimpleChart('houseProgChart', 'House Progress');
   drawSimpleChart('kidsDancePerfChart', 'Kids Dance Performance');
   drawSimpleChart('kidsDanceProgChart', 'Kids Dance Progress');
+
+  // If you added more goals with unique canvas IDs, add them here too
 }
 
 /***********************************************************
