@@ -1,4 +1,6 @@
-/* RESET & BODY */
+/* ------------------------------------------
+   BASIC RESET & BODY
+------------------------------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +9,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #1f1f1f;
+  background-color: #1f1f1f; /* Dark Mode by default */
   color: #fff;
 }
 
@@ -17,10 +19,194 @@ body {
   color: #111;
 }
 
-/* Top banner, side menu, chat overlay, etc. 
-   (Reuse your existing rules here) */
+/* By default, links match the text color */
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-/* Common Card Layout */
+/* ------------------------------------------
+   TOP BANNER
+------------------------------------------- */
+.top-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  padding: 0.5rem 1rem;
+}
+.light-mode .top-banner {
+  background-color: #ddd;
+}
+
+.top-banner .greeting {
+  font-weight: 600;
+  margin: 0 1rem;
+}
+
+.chat-button,
+.menu-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+/* ------------------------------------------
+   SIDE MENU (SLIDE OUT)
+------------------------------------------- */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -260px; /* off-screen by default */
+  width: 260px;
+  height: 100%;
+  background-color: #222;
+  padding: 1rem;
+  transition: right 0.3s;
+  z-index: 998;
+}
+.side-menu.open {
+  right: 0;
+}
+
+.close-menu {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.2rem;
+  float: right;
+  cursor: pointer;
+}
+
+.menu-options {
+  margin-top: 2rem;
+}
+
+.menu-options a {
+  display: block;
+  padding: 0.5rem 0;
+  color: #ccc;
+  font-weight: 500;
+}
+.menu-options a:hover {
+  color: #fff;
+}
+
+/* ------------------------------------------
+   CHAT OVERLAY
+------------------------------------------- */
+.chat-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 999;
+}
+.chat-overlay.open {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chat-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 400px;
+  transform: translate(-50%, -50%);
+  background-color: #2a2a2a;
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+.light-mode .chat-content {
+  background-color: #fff;
+  color: #111;
+}
+
+.close-chat {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.2rem;
+  float: right;
+  cursor: pointer;
+}
+
+.chat-history {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  border: 1px solid #444;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.chat-message {
+  margin-bottom: 0.5rem;
+}
+
+.chat-input {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-input input[type="text"] {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background: #1f1f1f;
+  color: #fff;
+}
+.light-mode .chat-input input[type="text"] {
+  background: #f0f0f0;
+  color: #111;
+}
+
+.chat-input button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #555;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.light-mode .chat-input button {
+  background: #ccc;
+  color: #111;
+}
+
+/* ------------------------------------------
+   MAIN CONTENT
+------------------------------------------- */
+.main-content {
+  margin-top: 3rem;  /* optional: space for top banner */
+  padding-bottom: 3rem; /* optional: space for bottom footer */
+}
+
+.main-content h1 {
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+
+.main-content p {
+  margin: 0 1rem 1rem;
+}
+
+/* ------------------------------------------
+   CARDS (Life, Calendar, Plan, Money)
+------------------------------------------- */
 .cards-grid {
   display: grid;
   grid-gap: 1rem;
@@ -59,7 +245,6 @@ body {
   padding: 1rem;
 }
 
-/* Expand button inside card */
 .expand-btn {
   margin-top: 1rem;
   padding: 0.4rem 1rem;
@@ -74,7 +259,9 @@ body {
   color: #111;
 }
 
-/* Full-page Overlay */
+/* ------------------------------------------
+   FULL-PAGE OVERLAY (Expanded Card)
+------------------------------------------- */
 .full-overlay {
   position: fixed;
   top: 0;
@@ -118,4 +305,41 @@ body {
   float: right;
   cursor: pointer;
   margin-bottom: 1rem;
+}
+
+/* ------------------------------------------
+   FOOTER (Fixed Bottom Navigation)
+------------------------------------------- */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0;
+  z-index: 997;
+}
+.light-mode .footer {
+  background-color: #ddd;
+}
+
+.footer-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.light-mode .footer-button {
+  color: #111;
+}
+
+.footer-button span.material-symbols-outlined {
+  font-size: 24px;
 }
