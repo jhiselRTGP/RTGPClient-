@@ -1,0 +1,16 @@
+{
+  "plans": [
+    {
+      "goalName": "Save for a house",
+      "progress": 40
+    },
+    {
+      "goalName": "Build an emergency fund",
+      "progress": 60
+    },
+    {
+      "goalName": "Invest in stocks",
+      "progress": 25
+    }
+  ]
+}
