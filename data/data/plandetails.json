@@ -1,0 +1,7 @@
+{
+  "title": "Plan Overview",
+  "plans": [
+    { "goalName": "Emergency Fund", "progress": 60 },
+    { "goalName": "Stock Investing", "progress": 25 }
+  ]
+}
