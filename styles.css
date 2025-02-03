@@ -435,7 +435,7 @@ a {
   border-radius: 5px;
 }
 .card-body progress::-webkit-progress-value {
-  background: #00ff7f; /* adjust color as needed */
+  background: #00ff7f;
   border-radius: 5px;
 }
 
