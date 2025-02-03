@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Base App - Expanded Card Example</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Life Automation Framework</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link
@@ -30,15 +30,27 @@
     </button>
   </header>
 
-  <!-- Slide-Out Menu -->
+  <!-- Side Menu -->
   <aside class="side-menu" id="sideMenu">
     <button class="close-menu" id="closeMenu" title="Close Menu">
       <span class="material-symbols-outlined">close</span>
     </button>
     <nav class="menu-options">
-      <a href="#" onclick="showPage('management')">
-        <span class="material-symbols-outlined">dashboard</span>
-        Management
+      <a href="#" onclick="showPage('life')">
+        <span class="material-symbols-outlined">favorite</span>
+        Life
+      </a>
+      <a href="#" onclick="showPage('calendar')">
+        <span class="material-symbols-outlined">event</span>
+        Calendar
+      </a>
+      <a href="#" onclick="showPage('plan')">
+        <span class="material-symbols-outlined">analytics</span>
+        Plan
+      </a>
+      <a href="#" onclick="showPage('money')">
+        <span class="material-symbols-outlined">attach_money</span>
+        Money
       </a>
       <a href="#" onclick="showPage('settings')">
         <span class="material-symbols-outlined">settings</span>
@@ -65,40 +77,48 @@
     </div>
   </div>
 
-  <!-- Full-Page Overlay for Detailed Info -->
-  <div class="full-overlay" id="detailOverlay">
-    <div class="overlay-content" id="overlayContent">
-      <button class="close-overlay" id="closeOverlay" title="Close">
+  <!-- Full-Page Overlay for Card Expansion -->
+  <div class="full-overlay" id="cardOverlay">
+    <div class="overlay-content">
+      <button class="close-overlay" id="closeOverlay" title="Close Overlay">
         <span class="material-symbols-outlined">close</span>
       </button>
-      <!-- We will dynamically inject details here with JS -->
-      <h2 id="overlayTitle">Overlay Title</h2>
+      <!-- We'll dynamically fill these -->
+      <h2 id="overlayTitle">Expanded Card</h2>
       <div id="overlayBody"></div>
     </div>
   </div>
 
   <!-- Main Content -->
   <main class="main-content">
-    <!-- Management PAGE -->
-    <section id="management">
-      <h1>Management</h1>
-      <p>Single expanded card with multiple sections:</p>
+    <!-- LIFE PAGE -->
+    <section id="life">
+      <h1>Life Goals</h1>
+      <div id="goalsContainer" class="cards-grid"></div>
+    </section>
 
-      <!-- Single Card -->
-      <div class="card">
-        <div class="card-header">
-          <h2>Sections Overview</h2>
-        </div>
-        <div class="card-body" id="managementContainer">
-          <!-- We will populate each section from management.json via script -->
-        </div>
-      </div>
+    <!-- CALENDAR PAGE -->
+    <section id="calendar" style="display: none;">
+      <h1>Your Calendar</h1>
+      <div id="calendarContainer" class="cards-grid"></div>
+    </section>
+
+    <!-- PLAN PAGE -->
+    <section id="plan" style="display: none;">
+      <h1>Your Plan</h1>
+      <div id="planContainer" class="cards-grid"></div>
+    </section>
+
+    <!-- MONEY PAGE -->
+    <section id="money" style="display: none;">
+      <h1>Money Overview</h1>
+      <div id="moneyContainer" class="cards-grid"></div>
     </section>
 
     <!-- SETTINGS PAGE -->
     <section id="settings" style="display: none;">
       <h1>Settings</h1>
-      <form class="settings-form">
+      <form>
         <label for="username">Username:</label>
         <input type="text" id="username" placeholder="Enter your username" />
 
@@ -113,7 +133,6 @@
           </label>
         </div>
 
-        <!-- Light/Dark Mode Toggle -->
         <div class="toggle-group">
           <label for="darkMode">Dark Mode:</label>
           <label class="switch">
@@ -127,9 +146,21 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <button class="footer-button" onclick="showPage('management')">
-      <span class="material-symbols-outlined">dashboard</span>
-      Manage
+    <button class="footer-button" onclick="showPage('life')">
+      <span class="material-symbols-outlined">favorite</span>
+      Life
+    </button>
+    <button class="footer-button" onclick="showPage('calendar')">
+      <span class="material-symbols-outlined">event</span>
+      Calendar
+    </button>
+    <button class="footer-button" onclick="showPage('plan')">
+      <span class="material-symbols-outlined">analytics</span>
+      Plan
+    </button>
+    <button class="footer-button" onclick="showPage('money')">
+      <span class="material-symbols-outlined">attach_money</span>
+      Money
     </button>
     <button class="footer-button" onclick="showPage('settings')">
       <span class="material-symbols-outlined">settings</span>
