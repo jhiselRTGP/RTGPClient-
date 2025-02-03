@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>RIA Portal - Full Features + Old Screens</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Client Portal - Life Planning</title>
 
   <!-- Google Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,18 +23,9 @@
 </head>
 <body>
 
-  <!-- TOP BANNER / HEADER -->
+  <!-- TOP BANNER -->
   <div class="top-banner">
-    <button class="menu-button" id="menuToggle">
-      <span class="material-symbols-outlined">menu</span>
-    </button>
-    <div class="greeting">Hello, Advisor!</div>
-    <button class="top-button" onclick="showPage('settingsPage')">
-      <span class="material-symbols-outlined">settings</span>
-    </button>
-    <button class="chat-button" id="chatToggle">
-      <span class="material-symbols-outlined">chat</span>
-    </button>
+    <div class="greeting">Hello, Client!</div>
   </div>
 
   <!-- SIDE MENU (slides from left) -->
@@ -43,317 +34,33 @@
       <span class="material-symbols-outlined">close</span>
     </button>
     <div class="menu-options">
-      <!-- RIA Pages -->
-      <a href="javascript:void(0)" onclick="showPage('businessPage')">
-        <span class="material-symbols-outlined">business</span>Business
+      <a href="javascript:void(0)" onclick="showPage('lifeGoalsPage')">
+        <span class="material-symbols-outlined">favorite</span>Life Goals
       </a>
-      <a href="javascript:void(0)" onclick="showPage('marketsPage')">
-        <span class="material-symbols-outlined">insights</span>Markets
+      <a href="javascript:void(0)" onclick="showPage('financialPlanPage')">
+        <span class="material-symbols-outlined">analytics</span>Financial Plan
       </a>
-      <a href="javascript:void(0)" onclick="showPage('portfolioPage')">
-        <span class="material-symbols-outlined">pie_chart</span>Portfolio
+      <a href="javascript:void(0)" onclick="showPage('progressPage')">
+        <span class="material-symbols-outlined">pie_chart</span>Progress
       </a>
-      <a href="javascript:void(0)" onclick="showPage('managementPage')">
-        <span class="material-symbols-outlined">manage_accounts</span>Management
-      </a>
-
-      <!-- Old Pages from your code -->
-      <hr style="margin:1rem 0; border:none; border-top:1px solid #666;">
-      <a href="javascript:void(0)" onclick="showPage('lifePage')">
-        <span class="material-symbols-outlined">favorite</span>Life
-      </a>
-      <a href="javascript:void(0)" onclick="showPage('calendarPage')">
-        <span class="material-symbols-outlined">event</span>Calendar
-      </a>
-      <a href="javascript:void(0)" onclick="showPage('planPage')">
-        <span class="material-symbols-outlined">analytics</span>Plan
-      </a>
-      <a href="javascript:void(0)" onclick="showPage('moneyPage')">
-        <span class="material-symbols-outlined">attach_money</span>Money
-      </a>
-      <a href="javascript:void(0)" onclick="showPage('classicSettingsPage')">
-        <span class="material-symbols-outlined">settings</span>Old Settings
+      <a href="javascript:void(0)" onclick="showPage('advisorPage')">
+        <span class="material-symbols-outlined">manage_accounts</span>Advisor
       </a>
     </div>
   </div>
 
-  <!-- SLIDE-OUT CHAT OVERLAY -->
-  <div class="chat-overlay" id="chatOverlay">
-    <div class="chat-content">
-      <button class="close-chat" id="closeChat">
-        <span class="material-symbols-outlined">close</span>
-      </button>
-      <div class="chat-tabs">
-        <button class="chat-tab-button active" data-chat-target="teamChat">
-          Team
-        </button>
-        <button class="chat-tab-button" data-chat-target="clientsChat">
-          Clients
-        </button>
-      </div>
-
-      <div id="teamChat" class="chat-history active"></div>
-      <div id="clientsChat" class="chat-history"></div>
-
-      <div class="chat-input">
-        <input type="text" id="chatMessage" placeholder="Type message..." />
-        <button id="sendChat">Send</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MAIN CONTENT (NEW + OLD SECTIONS) -->
+  <!-- MAIN CONTENT -->
   <div class="main-content">
 
-    <!-- (1) Snippet's original "SETTINGS" PAGE -->
-    <section id="settingsPage">
-      <h1>RIA - Settings</h1>
-      <p>Select a theme (placeholder logic):</p>
-      <div class="theme-selectors">
-        <label><input type="radio" name="theme" value="dark" checked /> Dark</label>
-        <label><input type="radio" name="theme" value="medium" /> Medium</label>
-        <label><input type="radio" name="theme" value="light" /> Light</label>
-      </div>
-      <p>(Additional settings can go here.)</p>
-    </section>
-
-    <!-- (2) BUSINESS PAGE -->
-    <section id="businessPage" class="active">
-      <h1>Business Dashboard</h1>
-      <div class="card" data-item="bizNetFlow">
-        <div class="card-header">
-          <div class="chevron-area-left">
-            <span class="material-symbols-outlined chevron">chevron_right</span>
-          </div>
-          <div class="card-main">Net Inflow/Outflow</div>
-          <div class="status-indicator positive">
-            <span class="material-symbols-outlined">arrow_upward</span>+$75k
-          </div>
-          <button class="card-basket-button" data-basket-id="bizNetFlow">
-            Details
-          </button>
-        </div>
-        <div class="expandable-content">
-          <p>Month-to-date inflows minus outflows. Possibly break it down by account type.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- (3) MARKETS PAGE -->
-    <section id="marketsPage">
-      <h1>Markets Dashboard</h1>
-
-      <!-- S&P 500 card -->
-      <div class="card" data-item="mktSP500">
-        <div class="card-header">
-          <div class="chevron-area-left">
-            <span class="material-symbols-outlined chevron">chevron_right</span>
-          </div>
-          <div class="card-main">S&P 500</div>
-          <div class="status-indicator positive">
-            <span class="material-symbols-outlined">arrow_upward</span>+1.5%
-          </div>
-          <button class="card-basket-button" data-basket-id="mktSP500">
-            Details
-          </button>
-        </div>
-        <div class="expandable-content">
-          <p>Placeholder chart or index performance data. Possibly daily moves or sparkline.</p>
-        </div>
-      </div>
-
-      <!-- DJIA -->
-      <div class="card" data-item="mktDJIA">
-        <div class="card-header">
-          <div class="chevron-area-left">
-            <span class="material-symbols-outlined chevron">chevron_right</span>
-          </div>
-          <div class="card-main">DJIA</div>
-          <div class="status-indicator neutral">
-            <span class="material-symbols-outlined">horizontal_rule</span>0.0%
-          </div>
-          <button class="card-basket-button" data-basket-id="mktDJIA">
-            Details
-          </button>
-        </div>
-        <div class="expandable-content">
-          <p>Interactive Grid (DJIA): show stock components or mini-charts. (demo)</p>
-        </div>
-      </div>
-
-      <!-- NASDAQ -->
-      <div class="card" data-item="mktNASDAQ">
-        <div class="card-header">
-          <div class="chevron-area-left">
-            <span class="material-symbols-outlined chevron">chevron_right</span>
-          </div>
-          <div class="card-main">NASDAQ</div>
-          <div class="status-indicator positive">
-            <span class="material-symbols-outlined">arrow_upward</span>+0.8%
-          </div>
-          <button class="card-basket-button" data-basket-id="mktNASDAQ">
-            Details
-          </button>
-        </div>
-        <div class="expandable-content">
-          <p>Interactive Grid (NASDAQ): top movers, chart, etc. (demo)</p>
-        </div>
-      </div>
-
-      <!-- Russell 2000 -->
-      <div class="card" data-item="mktRussell2k">
-        <div class="card-header">
-          <div class="chevron-area-left">
-            <span class="material-symbols-outlined chevron">chevron_right</span>
-          </div>
-          <div class="card-main">Russell 2000</div>
-          <div class="status-indicator negative">
-            <span class="material-symbols-outlined">arrow_downward</span>-0.4%
-          </div>
-          <button class="card-basket-button" data-basket-id="mktRussell2k">
-            Details
-          </button>
-        </div>
-        <div class="expandable-content">
-          <p>Interactive Grid (Russell 2000): small-cap data or mini-charts. (demo)</p>
-        </div>
-      </div>
-
-      <!-- FTSE 100 -->
-      <div class="card" data-item="mktFTSE100">
-        <div class="card-header">
-          <div class="chevron-area-left">
-            <span class="material-symbols-outlined chevron">chevron_right</span>
-          </div>
-          <div class="card-main">FTSE 100</div>
-          <div class="status-indicator neutral">
-            <span class="material-symbols-outlined">horizontal_rule</span>0.0%
-          </div>
-          <button class="card-basket-button" data-basket-id="mktFTSE100">
-            Details
-          </button>
-        </div>
-        <div class="expandable-content">
-          <p>Interactive Grid (FTSE 100): example UK market data or chart. (demo)</p>
-        </div>
-      </div>
-
-      <!-- Nikkei 225 -->
-      <div class="card" data-item="mktNikkei225">
-        <div class="card-header">
-          <div class="chevron-area-left">
-            <span class="material-symbols-outlined chevron">chevron_right</span>
-          </div>
-          <div class="card-main">Nikkei 225</div>
-          <div class="status-indicator positive">
-            <span class="material-symbols-outlined">arrow_upward</span>+1.2%
-          </div>
-          <button class="card-basket-button" data-basket-id="mktNikkei225">
-            Details
-          </button>
-        </div>
-        <div class="expandable-content">
-          <p>Interactive Grid (Nikkei 225): top Japanese stocks or mini-charts. (demo)</p>
-        </div>
-      </div>
-
-      <!-- 10-Year Treasury -->
-      <div class="card" data-item="mkt10YrTreasury">
-        <div class="card-header">
-          <div class="chevron-area-left">
-            <span class="material-symbols-outlined chevron">chevron_right</span>
-          </div>
-          <div class="card-main">10-Year Treasury</div>
-          <div class="status-indicator neutral">
-            <span class="material-symbols-outlined">horizontal_rule</span>3.5%
-          </div>
-          <button class="card-basket-button" data-basket-id="mkt10YrTreasury">
-            Details
-          </button>
-        </div>
-        <div class="expandable-content">
-          <p>Interactive Grid (10-Year): bond yield data, mini-charts, or rate analysis. (demo)</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- (4) PORTFOLIO PAGE -->
-    <section id="portfolioPage">
-      <h1>Portfolio Dashboard</h1>
-      <div class="card" data-item="portAUM">
-        <div class="card-header">
-          <div class="chevron-area-left">
-            <span class="material-symbols-outlined chevron">chevron_right</span>
-          </div>
-          <div class="card-main">Total AUM</div>
-          <div class="status-indicator positive">
-            <span class="material-symbols-outlined">arrow_upward</span>+0.8%
-          </div>
-          <button class="card-basket-button" data-basket-id="portAUM">
-            Details
-          </button>
-        </div>
-        <div class="expandable-content">
-          <p>We’re up +0.8% today. Possibly show breakdown by client or asset class.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- (5) MANAGEMENT PAGE -->
-    <section id="managementPage">
-      <h1>Management</h1>
-      <!-- DRIFT EVENT -->
-      <div class="card" data-item="mgtDriftEvent">
-        <div class="card-header">
-          <div class="chevron-area-left">
-            <span class="material-symbols-outlined chevron">chevron_right</span>
-          </div>
-          <div class="card-main">Drift Event (10 Accounts)</div>
-          <div class="status-indicator negative">
-            <span class="material-symbols-outlined">warning</span>DRIFT
-          </div>
-          <button class="card-basket-button" data-basket-id="mgtDriftEvent">
-            Generate
-          </button>
-        </div>
-        <div class="expandable-content">
-          <p>Rebalance needed for 10 accounts. Possibly show advanced settings & included accounts.</p>
-        </div>
-      </div>
-
-      <!-- NEW ACCOUNTS -->
-      <div class="card" data-item="mgtNewAccounts">
-        <div class="card-header">
-          <div class="chevron-area-left">
-            <span class="material-symbols-outlined chevron">chevron_right</span>
-          </div>
-          <div class="card-main">New Accounts (5 Accounts)</div>
-          <div class="status-indicator neutral">
-            <span class="material-symbols-outlined">horizontal_rule</span>+5
-          </div>
-          <button class="card-basket-button" data-basket-id="mgtNewAccounts">
-            Generate
-          </button>
-        </div>
-        <div class="expandable-content">
-          <p>Manage new accounts + rebalanced settings. Example: #2001, #2002, etc.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- (6) OLD PAGE: Life -->
-    <section id="lifePage">
-      <h1>Life Automation Framework</h1>
-      <p>Combine financial planning, budgeting, and life events in a single view.</p>
-
+    <!-- LIFE GOALS PAGE -->
+    <section id="lifeGoalsPage" class="active">
+      <h1>Life Goals</h1>
       <div class="goals-grid">
-        <!-- Retirement Card -->
+        <!-- Example Goal Card (this can be repeated dynamically) -->
         <div class="goal-card">
           <div class="goal-header">
             <h2>Retirement</h2>
-            <span class="toggle-button material-symbols-outlined" onclick="toggleCard('retirementCardBody')">
-              expand_more
-            </span>
+            <span class="toggle-button material-symbols-outlined" onclick="toggleCard('retirementCardBody')">expand_more</span>
           </div>
           <div id="retirementCardBody" class="goal-body" style="display: none;">
             <p><strong>Target Date:</strong> 2040</p>
@@ -365,25 +72,18 @@
               <canvas id="retirementProgChart" width="400" height="200"></canvas>
             </div>
             <div class="goal-options">
-              <label><input type="checkbox"/>Include on Calendar</label>
-              <label><input type="checkbox"/>Add to Budget</label>
-              <label><input type="checkbox"/>Tie to IRA Account</label>
-            </div>
-            <div class="advisor-chat">
-              <label><strong>Ask Your Advisor:</strong></label>
-              <textarea placeholder="e.g., 'Should I adjust my 401(k) contributions?'"></textarea>
-              <button>Send</button>
+              <label><input type="checkbox"/> Include on Calendar</label>
+              <label><input type="checkbox"/> Add to Budget</label>
+              <label><input type="checkbox"/> Tie to IRA Account</label>
             </div>
           </div>
         </div>
-
-        <!-- Buy a House Card -->
+        
+        <!-- Another Goal Card Example -->
         <div class="goal-card">
           <div class="goal-header">
             <h2>Buy a House</h2>
-            <span class="toggle-button material-symbols-outlined" onclick="toggleCard('houseCardBody')">
-              expand_more
-            </span>
+            <span class="toggle-button material-symbols-outlined" onclick="toggleCard('houseCardBody')">expand_more</span>
           </div>
           <div id="houseCardBody" class="goal-body" style="display: none;">
             <p><strong>Target Date:</strong> 2028</p>
@@ -395,215 +95,56 @@
               <canvas id="houseProgChart" width="400" height="200"></canvas>
             </div>
             <div class="goal-options">
-              <label><input type="checkbox"/>Include on Calendar</label>
-              <label><input type="checkbox"/>Add to Budget</label>
-              <label><input type="checkbox"/>Tie to Checking Account</label>
-            </div>
-            <div class="advisor-chat">
-              <label><strong>Ask Your Advisor:</strong></label>
-              <textarea placeholder="e.g., 'How much more do I need for the down payment?'"></textarea>
-              <button>Send</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Kids' Dance Event Card -->
-        <div class="goal-card">
-          <div class="goal-header">
-            <h2>Kids' Dance Event</h2>
-            <span class="toggle-button material-symbols-outlined" onclick="toggleCard('kidsDanceCardBody')">
-              expand_more
-            </span>
-          </div>
-          <div id="kidsDanceCardBody" class="goal-body" style="display: none;">
-            <p><strong>Target Date:</strong> Next Month</p>
-            <p><strong>Milestones:</strong> Buy costumes, finalize routine, schedule practice sessions.</p>
-            <div class="chart-section">
-              <h3>Performance</h3>
-              <canvas id="kidsDancePerfChart" width="400" height="200"></canvas>
-              <h3>Progress</h3>
-              <canvas id="kidsDanceProgChart" width="400" height="200"></canvas>
-            </div>
-            <div class="goal-options">
-              <label><input type="checkbox"/>Include on Calendar</label>
-              <label><input type="checkbox"/>Add to Budget</label>
-              <label><input type="checkbox"/>Tie to Debit Card</label>
-            </div>
-            <div class="checklist">
-              <h4>Checklist:</h4>
-              <ul>
-                <li><input type="checkbox" id="danceShoes"/><label for="danceShoes">Buy Shoes</label></li>
-                <li><input type="checkbox" id="danceCostumes"/><label for="danceCostumes">Buy Costumes</label></li>
-                <li><input type="checkbox" id="danceSnacks"/><label for="danceSnacks">Plan Snacks</label></li>
-              </ul>
-            </div>
-            <div class="advisor-chat">
-              <label><strong>Ask Your Advisor / AI:</strong></label>
-              <textarea placeholder="e.g., 'Any local store discount for dance gear?'"></textarea>
-              <button>Send</button>
+              <label><input type="checkbox"/> Include on Calendar</label>
+              <label><input type="checkbox"/> Add to Budget</label>
+              <label><input type="checkbox"/> Tie to Checking Account</label>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- (7) OLD PAGE: Calendar -->
-    <section id="calendarPage">
-      <h1>Your Calendar</h1>
-      <div class="calendar-section">
-        <div class="calendar-card">
-          <strong>Upcoming Events</strong>
-          <ul>
-            <li>Meeting with Advisor - Jan 25</li>
-            <li>Tax Filing Deadline - Feb 10</li>
-            <li>Vacation - Feb 20 - Feb 25</li>
-          </ul>
-        </div>
-        <div class="calendar-placeholder">
-          <h3>January 2025</h3>
-          <p>Mini Calendar Placeholder</p>
-        </div>
+    <!-- FINANCIAL PLAN PAGE -->
+    <section id="financialPlanPage">
+      <h1>Financial Plan</h1>
+      <p>Define your goals, income sources, and investment strategies.</p>
+      <!-- Add financial planning components here (optional) -->
+    </section>
+
+    <!-- PROGRESS PAGE -->
+    <section id="progressPage">
+      <h1>Progress Tracking</h1>
+      <p>Track your progress towards each goal.</p>
+      <!-- Add progress tracking components here (optional) -->
+    </section>
+
+    <!-- ADVISOR PAGE -->
+    <section id="advisorPage">
+      <h1>Advisor Chat</h1>
+      <div class="advisor-chat">
+        <textarea placeholder="Ask your advisor something..."></textarea>
+        <button>Send</button>
       </div>
     </section>
-
-    <!-- (8) OLD PAGE: Plan -->
-    <section id="planPage">
-      <h1>Your Plans</h1>
-      <div class="goal-list">
-        <div class="goal-item">
-          <strong>Goal: Save for a house</strong>
-          <progress value="40" max="100"></progress> 40% Complete
-        </div>
-        <div class="goal-item">
-          <strong>Goal: Build an emergency fund</strong>
-          <progress value="60" max="100"></progress> 60% Complete
-        </div>
-        <div class="goal-item">
-          <strong>Goal: Invest in stocks</strong>
-          <progress value="25" max="100"></progress> 25% Complete
-        </div>
-      </div>
-    </section>
-
-    <!-- (9) OLD PAGE: Money -->
-    <section id="moneyPage">
-      <h1>Money Overview</h1>
-      <div class="money-section">
-        <div class="card">
-          <strong>Bank Account Balance:</strong>
-          <p>$15,000</p>
-        </div>
-        <div class="card">
-          <strong>Investments:</strong>
-          <p>$35,000</p>
-        </div>
-      </div>
-      <h2>Basic Budget Planning</h2>
-      <form class="budget-planning">
-        <div class="budget-row">
-          <label for="monthlyIncome">Monthly Income:</label>
-          <input type="number" id="monthlyIncome" placeholder="E.g. 4000"/>
-        </div>
-        <div class="budget-row">
-          <label for="monthlyExpenses">Monthly Expenses:</label>
-          <input type="number" id="monthlyExpenses" placeholder="E.g. 2500"/>
-        </div>
-        <button type="button" id="calculateBudget">Calculate Surplus</button>
-      </form>
-      <p id="budgetResult" class="budget-result"></p>
-    </section>
-
-    <!-- (10) OLD PAGE: (Renamed) Classic Settings -->
-    <section id="classicSettingsPage">
-      <h1>Old Settings Page</h1>
-      <form class="settings-form">
-        <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter your username" />
-        <label for="email">Email:</label>
-        <input type="email" id="email" placeholder="Enter your email" />
-
-        <div class="toggle-group">
-          <label for="notifications">Enable Notifications:</label>
-          <label class="switch">
-            <input type="checkbox" id="notifications">
-            <span class="slider round"></span>
-          </label>
-        </div>
-      </form>
-    </section>
+    
   </div>
 
-  <!-- FULL-PAGE OVERLAY (From RIA sample) -->
-  <div class="full-page-overlay" id="fullPageOverlay">
-    <div class="bottom-sheet-content">
-      <div class="overlay-header-row">
-        <div class="overlay-header" id="overlayTitle"></div>
-        <button class="close-sheet-btn" onclick="closeOverlay()">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </div>
-
-      <div class="overlay-tab-bar" id="overlayTabBar" style="display:none;">
-        <button class="overlay-tab-button active" data-overlay-tab="overlayTab1">Summary</button>
-        <button class="overlay-tab-button" data-overlay-tab="overlayTab2">Orders &amp; AI</button>
-      </div>
-
-      <div class="overlay-content" id="overlayContent"></div>
-
-      <div class="overlay-ai-chat">
-        <div class="overlay-ai-messages" id="overlayAiMessages"></div>
-        <div id="overlayAiSuggestions"></div>
-        <div class="overlay-ai-input">
-          <input type="text" id="overlayAiInput" placeholder="Ask AI something..." />
-          <button onclick="sendOverlayAiChat()">Send</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BOTTOM FOOTER NAV -->
+  <!-- FOOTER NAV -->
   <div class="footer">
-    <!-- RIA pages -->
-    <button class="footer-button" onclick="showPage('businessPage')">
-      <span class="material-symbols-outlined" style="font-size:22px;">business</span>
-      Business
+    <button class="footer-button" onclick="showPage('lifeGoalsPage')">
+      <span class="material-symbols-outlined">favorite</span>Life Goals
     </button>
-    <button class="footer-button" onclick="showPage('marketsPage')">
-      <span class="material-symbols-outlined" style="font-size:22px;">insights</span>
-      Markets
+    <button class="footer-button" onclick="showPage('financialPlanPage')">
+      <span class="material-symbols-outlined">analytics</span>Financial Plan
     </button>
-    <button class="footer-button" onclick="showPage('portfolioPage')">
-      <span class="material-symbols-outlined" style="font-size:22px;">pie_chart</span>
-      Portfolio
+    <button class="footer-button" onclick="showPage('progressPage')">
+      <span class="material-symbols-outlined">pie_chart</span>Progress
     </button>
-    <button class="footer-button" onclick="showPage('managementPage')">
-      <span class="material-symbols-outlined" style="font-size:22px;">manage_accounts</span>
-      Management
-    </button>
-    <!-- Old pages -->
-    <button class="footer-button" onclick="showPage('lifePage')">
-      <span class="material-symbols-outlined" style="font-size:22px;">favorite</span>
-      Life
-    </button>
-    <button class="footer-button" onclick="showPage('calendarPage')">
-      <span class="material-symbols-outlined" style="font-size:22px;">event</span>
-      Calendar
-    </button>
-    <button class="footer-button" onclick="showPage('planPage')">
-      <span class="material-symbols-outlined" style="font-size:22px;">analytics</span>
-      Plan
-    </button>
-    <button class="footer-button" onclick="showPage('moneyPage')">
-      <span class="material-symbols-outlined" style="font-size:22px;">attach_money</span>
-      Money
-    </button>
-    <button class="footer-button" onclick="showPage('classicSettingsPage')">
-      <span class="material-symbols-outlined" style="font-size:22px;">settings</span>
-      Old Settings
+    <button class="footer-button" onclick="showPage('advisorPage')">
+      <span class="material-symbols-outlined">manage_accounts</span>Advisor
     </button>
   </div>
 
-  <!-- MAIN JS -->
   <script src="app.js"></script>
 </body>
 </html>
