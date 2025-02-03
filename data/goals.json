@@ -8,7 +8,11 @@
         "Save 1 million by 2035",
         "Achieve stable monthly returns by 2040"
       ],
-      "advisorPrompt": "Should I adjust my 401(k) contributions?"
+      "advisorPrompt": "Should I adjust my 401(k) contributions?",
+      "checklist": [
+        { "label": "Rebalance 401(k)" },
+        { "label": "Increase IRA contributions" }
+      ]
     },
     {
       "id": "house",
@@ -36,6 +40,83 @@
         { "label": "Buy Costumes" },
         { "label": "Plan Snacks" }
       ]
+    },
+    {
+      "id": "upgradeCar",
+      "title": "Upgrade Car",
+      "targetDate": "2026",
+      "milestones": [
+        "Research models",
+        "Decide lease vs. buy",
+        "Get pre-approved loan"
+      ],
+      "advisorPrompt": "Should I lease or finance?"
+    },
+    {
+      "id": "worldTravel",
+      "title": "World Travel",
+      "targetDate": "2030",
+      "milestones": [
+        "Get passports",
+        "Plan each continent",
+        "Set travel fund"
+      ],
+      "advisorPrompt": "Which travel rewards card is best?"
+    },
+    {
+      "id": "childEdu",
+      "title": "Fund Child's Education",
+      "targetDate": "2035",
+      "milestones": [
+        "Open 529 plan",
+        "Monthly contributions",
+        "Look into scholarships"
+      ],
+      "advisorPrompt": "What’s the ideal monthly 529 contribution?"
+    },
+    {
+      "id": "startBusiness",
+      "title": "Start a Business",
+      "targetDate": "2027",
+      "milestones": [
+        "Business plan",
+        "Form LLC",
+        "Secure funding"
+      ],
+      "advisorPrompt": "Should I apply for an SBA loan or find investors?"
+    },
+    {
+      "id": "anniversaryTrip",
+      "title": "50th Wedding Anniversary Trip",
+      "targetDate": "2032",
+      "milestones": [
+        "Choose destination",
+        "Book flights",
+        "Plan activities"
+      ],
+      "advisorPrompt": "Tips for large family group discounts?"
+    },
+    {
+      "id": "gymRoutine",
+      "title": "Consistent Gym Routine",
+      "targetDate": "6 Months",
+      "milestones": [
+        "Hire personal trainer",
+        "Schedule workouts",
+        "Track progress weekly"
+      ],
+      "advisorPrompt": "Any advice on gym membership deals?"
+    },
+    {
+      "id": "codingSkills",
+      "title": "Improve Coding Skills",
+      "targetDate": "1 Year",
+      "milestones": [
+        "Complete online course",
+        "Build personal projects",
+        "Attend hackathon"
+      ],
+      "advisorPrompt": "Which programming language is best for finance apps?"
     }
   ]
 }
