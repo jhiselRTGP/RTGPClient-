@@ -1,0 +1,15 @@
+{
+  "title": "Life Goals & Events",
+  "items": [
+    {
+      "name": "Retirement",
+      "target": "2040",
+      "milestones": ["Save 1 million", "Achieve stable returns"]
+    },
+    {
+      "name": "Buy a House",
+      "target": "2028",
+      "milestones": ["Save down payment", "Find realtor"]
+    }
+  ]
+}
