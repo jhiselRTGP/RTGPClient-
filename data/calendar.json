@@ -1,8 +1,15 @@
 {
+  "monthLabel": "November 2025",
   "events": [
-    { "name": "Meeting with Advisor", "date": "Jan 25" },
-    { "name": "Tax Filing Deadline", "date": "Feb 10" },
-    { "name": "Vacation", "date": "Feb 20 - Feb 25" }
-  ],
-  "monthLabel": "January 2025"
+    { "name": "Meeting with Advisor", "date": "Nov 3" },
+    { "name": "Tax Filing Prep", "date": "Nov 5" },
+    { "name": "Vacation", "date": "Nov 10 - Nov 15" },
+    { "name": "Spouse Birthday", "date": "Nov 18" },
+    { "name": "Kids' School Play", "date": "Nov 20" },
+    { "name": "Business Conference", "date": "Nov 22 - Nov 24" },
+    { "name": "Family Reunion", "date": "Nov 27" },
+    { "name": "Black Friday Shopping", "date": "Nov 29" },
+    { "name": "Car Maintenance", "date": "Nov 30" },
+    { "name": "Charity Run", "date": "Dec 1" }
+  ]
 }
