@@ -94,28 +94,29 @@ async function loadGoals() {
     const goalsContainer = document.getElementById('goalsContainer');
 
     data.lifeGoals.forEach((goal) => {
-      // Create the outer card
+      // Outer card
       const card = document.createElement('div');
-      card.classList.add('goal-card');
+      card.classList.add('card');
 
-      // Header section
+      // Card header
       const header = document.createElement('div');
-      header.classList.add('goal-header');
+      header.classList.add('card-header');
 
-      const h2 = document.createElement('h2');
-      h2.textContent = goal.title;
+      const title = document.createElement('h2');
+      title.textContent = goal.title;
 
+      // Toggle icon
       const toggleIcon = document.createElement('span');
       toggleIcon.classList.add('toggle-button', 'material-symbols-outlined');
       toggleIcon.textContent = 'expand_more';
 
-      // Card body (initially hidden)
+      // Card body
       const body = document.createElement('div');
-      body.classList.add('goal-body');
+      body.classList.add('card-body');
       body.id = `${goal.id}CardBody`;
       body.style.display = 'none';
 
-      // Create some info about the goal
+      // Target date
       const targetP = document.createElement('p');
       targetP.innerHTML = `<strong>Target Date:</strong> ${goal.targetDate}`;
 
@@ -200,7 +201,7 @@ async function loadGoals() {
       advisorDiv.appendChild(advisorButton);
 
       // Append elements
-      header.appendChild(h2);
+      header.appendChild(title);
       header.appendChild(toggleIcon);
       body.appendChild(targetP);
       body.appendChild(milestonesP);
@@ -240,18 +241,34 @@ async function loadCalendar() {
     const data = await res.json();
     const calendarContainer = document.getElementById('calendarContainer');
 
-    // For example, we just create a simple list:
-    const h3 = document.createElement('h3');
-    h3.textContent = data.monthLabel || 'Current Month';
-    calendarContainer.appendChild(h3);
+    // For each event, create a card
+    const monthTitle = document.createElement('h2');
+    monthTitle.textContent = data.monthLabel || 'Current Month';
+    calendarContainer.appendChild(monthTitle);
 
-    const ul = document.createElement('ul');
     data.events.forEach((evt) => {
-      const li = document.createElement('li');
-      li.textContent = `${evt.name} - ${evt.date}`;
-      ul.appendChild(li);
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      // Header
+      const header = document.createElement('div');
+      header.classList.add('card-header');
+      const title = document.createElement('h2');
+      title.textContent = evt.name;
+      header.appendChild(title);
+
+      // Body
+      const body = document.createElement('div');
+      body.classList.add('card-body');
+      const dateP = document.createElement('p');
+      dateP.innerHTML = `<strong>Date:</strong> ${evt.date}`;
+
+      body.appendChild(dateP);
+      card.appendChild(header);
+      card.appendChild(body);
+
+      calendarContainer.appendChild(card);
     });
-    calendarContainer.appendChild(ul);
   } catch (error) {
     console.error('Error loading calendar:', error);
   }
@@ -267,13 +284,35 @@ async function loadPlan() {
     const planContainer = document.getElementById('planContainer');
 
     data.plans.forEach((item) => {
-      const goalItem = document.createElement('div');
-      goalItem.classList.add('goal-item');
-      goalItem.innerHTML = `
-        <strong>Goal: ${item.goalName}</strong>
-        <progress value="${item.progress}" max="100"></progress> ${item.progress}% Complete
+      // Each plan item in a card
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      // Header
+      const header = document.createElement('div');
+      header.classList.add('card-header');
+      const title = document.createElement('h2');
+      title.textContent = item.goalName;
+      header.appendChild(title);
+
+      // Body
+      const body = document.createElement('div');
+      body.classList.add('card-body');
+      const progressP = document.createElement('p');
+      progressP.innerHTML = `
+        <strong>Progress:</strong> ${item.progress}% 
       `;
-      planContainer.appendChild(goalItem);
+      // Progress bar
+      const progressEl = document.createElement('progress');
+      progressEl.value = item.progress;
+      progressEl.max = 100;
+
+      body.appendChild(progressP);
+      body.appendChild(progressEl);
+      card.appendChild(header);
+      card.appendChild(body);
+
+      planContainer.appendChild(card);
     });
   } catch (error) {
     console.error('Error loading plan:', error);
@@ -289,22 +328,46 @@ async function loadMoney() {
     const data = await res.json();
     const moneyContainer = document.getElementById('moneyContainer');
 
-    // Bank card
+    // Bank
     const bankCard = document.createElement('div');
     bankCard.classList.add('card');
-    bankCard.innerHTML = `
-      <strong>Bank Account Balance:</strong>
-      <p>$${data.balances.bank.toLocaleString()}</p>
-    `;
+
+    const bankHeader = document.createElement('div');
+    bankHeader.classList.add('card-header');
+    const bankTitle = document.createElement('h2');
+    bankTitle.textContent = 'Bank Account Balance';
+
+    bankHeader.appendChild(bankTitle);
+
+    const bankBody = document.createElement('div');
+    bankBody.classList.add('card-body');
+    const bankBalance = document.createElement('p');
+    bankBalance.innerHTML = `$${data.balances.bank.toLocaleString()}`;
+
+    bankBody.appendChild(bankBalance);
+    bankCard.appendChild(bankHeader);
+    bankCard.appendChild(bankBody);
     moneyContainer.appendChild(bankCard);
 
-    // Investments card
+    // Investments
     const investCard = document.createElement('div');
     investCard.classList.add('card');
-    investCard.innerHTML = `
-      <strong>Investments:</strong>
-      <p>$${data.balances.investments.toLocaleString()}</p>
-    `;
+
+    const investHeader = document.createElement('div');
+    investHeader.classList.add('card-header');
+    const investTitle = document.createElement('h2');
+    investTitle.textContent = 'Investments';
+
+    investHeader.appendChild(investTitle);
+
+    const investBody = document.createElement('div');
+    investBody.classList.add('card-body');
+    const investBalance = document.createElement('p');
+    investBalance.innerHTML = `$${data.balances.investments.toLocaleString()}`;
+
+    investBody.appendChild(investBalance);
+    investCard.appendChild(investHeader);
+    investCard.appendChild(investBody);
     moneyContainer.appendChild(investCard);
   } catch (error) {
     console.error('Error loading money data:', error);
@@ -423,7 +486,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Default page
   showPage('life');
 
-  // Load data for each page (feel free to load them all up front, or only on demand)
+  // Load data for each page
   await loadGoals();
   await loadCalendar();
   await loadPlan();
