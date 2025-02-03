@@ -1,26 +1,300 @@
 /* ------------------------------------------
-   GENERAL LAYOUT (unchanged from your code)
+   BASIC RESET & BODY
 ------------------------------------------- */
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+body {
   font-family: 'Inter', sans-serif;
   color: #fff;
-  background-color: #1f1f1f; /* Dark mode by default */
+  background-color: #1f1f1f; /* Dark mode default */
+  margin: 0;
 }
+
+/* Light mode override */
 .light-mode {
   background-color: #f0f0f0;
   color: #111;
 }
-/* ... your existing CSS for .top-banner, .side-menu, .chat-overlay, etc. */
+
+/* Remove automatic link styling (purple) */
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 /* ------------------------------------------
-   COMMON CARD LAYOUT
+   TOP BANNER
+------------------------------------------- */
+.top-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  padding: 0.5rem 1rem;
+}
+.light-mode .top-banner {
+  background-color: #ddd;
+}
+
+.top-banner .greeting {
+  margin: 0 1rem;
+  font-weight: 600;
+}
+
+/* Icon/Buttons in top banner */
+.chat-button,
+.menu-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+/* ------------------------------------------
+   SLIDE-OUT SIDE MENU
+------------------------------------------- */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -260px; /* start hidden off screen */
+  width: 260px;
+  height: 100%;
+  background-color: #222;
+  padding: 1rem;
+  transition: right 0.3s;
+  z-index: 998;
+}
+.side-menu.open {
+  right: 0;
+}
+
+.close-menu {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.2rem;
+  float: right;
+  cursor: pointer;
+}
+
+.menu-options {
+  margin-top: 2rem;
+}
+
+.menu-options a {
+  display: block;
+  padding: 0.5rem 0;
+  color: #ccc;
+  font-weight: 500;
+}
+.menu-options a:hover {
+  color: #fff;
+}
+
+/* ------------------------------------------
+   CHAT OVERLAY
+------------------------------------------- */
+.chat-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 999;
+}
+.chat-overlay.open {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chat-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 400px;
+  transform: translate(-50%, -50%);
+  background-color: #2a2a2a;
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+.light-mode .chat-content {
+  background-color: #fff;
+  color: #111;
+}
+
+.close-chat {
+  background: none;
+  border: none;
+  color: inherit;
+  float: right;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.chat-history {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  border: 1px solid #444;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.chat-message {
+  margin-bottom: 0.5rem;
+}
+
+.chat-input {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-input input[type="text"] {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background: #1f1f1f;
+  color: #fff;
+}
+.light-mode .chat-input input[type="text"] {
+  background: #f0f0f0;
+  color: #111;
+}
+
+.chat-input button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #555;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.light-mode .chat-input button {
+  background: #ccc;
+  color: #111;
+}
+
+/* ------------------------------------------
+   ADD GOAL OVERLAY
+------------------------------------------- */
+.goal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 999;
+}
+.goal-overlay.show {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.goal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 400px;
+  transform: translate(-50%, -50%);
+  background-color: #2a2a2a;
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+.light-mode .goal-content {
+  background-color: #fff;
+  color: #111;
+}
+
+.close-goal {
+  background: none;
+  border: none;
+  color: inherit;
+  float: right;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background: #1f1f1f;
+  color: #fff;
+}
+.light-mode .form-group input[type="text"],
+.light-mode .form-group input[type="number"] {
+  background: #f0f0f0;
+  color: #111;
+}
+
+.submit-button {
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  background: #555;
+  color: #fff;
+  cursor: pointer;
+}
+.light-mode .submit-button {
+  background: #ccc;
+  color: #111;
+}
+
+/* ------------------------------------------
+   MAIN CONTENT
+------------------------------------------- */
+.main-content {
+  margin-top: 3rem; /* leave space for top banner if you want */
+  padding-bottom: 3rem; /* leave space for footer if you want */
+}
+
+.main-content h1 {
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+
+.main-content p {
+  margin: 0 1rem 1rem 1rem;
+}
+
+/* ------------------------------------------
+   CARDS GRID & CARDS
 ------------------------------------------- */
 .cards-grid {
   display: grid;
   grid-gap: 1rem;
   padding: 1rem;
-  /* Adjust the number of columns as you like */
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
@@ -43,7 +317,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  background-color: #333; /* Could also do a gradient or keep same */
+  background-color: #333;
   cursor: pointer;
 }
 .light-mode .card-header {
@@ -51,8 +325,8 @@ body {
 }
 
 .card-header h2 {
-  font-size: 1.1rem;
   margin: 0;
+  font-size: 1.1rem;
 }
 
 .toggle-button.material-symbols-outlined {
@@ -65,7 +339,6 @@ body {
 
 .card-body {
   padding: 1rem;
-  display: block; /* We toggle display via script */
 }
 
 /* Chart section style in the card body */
@@ -76,33 +349,191 @@ body {
   background: #222;
   border: 1px solid #444;
   margin-bottom: 1rem;
+  display: block;
+  max-width: 100%;
 }
 .light-mode .chart-section canvas {
   background: #fafafa;
   border-color: #ccc;
 }
 
-/* Example for the checklists inside goals */
+/* ------------------------------------------
+   GOALS / CHECKLIST / OPTIONS
+------------------------------------------- */
 .checklist ul {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 .checklist li {
   margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
 }
 
-/* Example for goal options checkboxes */
+.checklist li input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+.goal-options {
+  margin: 1rem 0;
+}
 .goal-options label {
   display: inline-block;
   margin-right: 1rem;
   cursor: pointer;
 }
 
-/* Example plan progress bar */
+/* Advisor chat area in goal cards */
+.advisor-chat {
+  margin-top: 1rem;
+}
+.advisor-chat label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.advisor-chat textarea {
+  width: 100%;
+  min-height: 50px;
+  resize: vertical;
+  padding: 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background: #1f1f1f;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.light-mode .advisor-chat textarea {
+  background: #f0f0f0;
+  color: #111;
+}
+.advisor-chat button {
+  border: none;
+  padding: 0.4rem 1rem;
+  background: #555;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.light-mode .advisor-chat button {
+  background: #ccc;
+  color: #111;
+}
+
+/* ------------------------------------------
+   PLAN PAGE - PROGRESS BAR
+------------------------------------------- */
 .card-body progress {
   width: 100%;
   margin-top: 0.5rem;
+  appearance: none;
+  height: 10px;
+  border-radius: 5px;
+}
+.card-body progress::-webkit-progress-bar {
+  background: #555;
+  border-radius: 5px;
+}
+.card-body progress::-webkit-progress-value {
+  background: #00ff7f; /* adjust color as needed */
+  border-radius: 5px;
 }
 
-/* Etc. Keep your existing CSS or adapt as needed. */
+/* ------------------------------------------
+   BUDGET PLANNING
+------------------------------------------- */
+.budget-planning {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem;
+}
+.budget-row {
+  display: flex;
+  flex-direction: column;
+}
+.budget-row label {
+  margin-bottom: 0.3rem;
+}
+.budget-row input[type="number"] {
+  padding: 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background: #1f1f1f;
+  color: #fff;
+}
+.light-mode .budget-row input[type="number"] {
+  background: #f0f0f0;
+  color: #111;
+}
+#calculateBudget {
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  background: #555;
+  color: #fff;
+  cursor: pointer;
+  margin-top: auto;
+}
+.light-mode #calculateBudget {
+  background: #ccc;
+  color: #111;
+}
+.budget-result {
+  margin: 1rem;
+  font-weight: 600;
+}
+
+/* ------------------------------------------
+   FOOTER
+------------------------------------------- */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0;
+  z-index: 997;
+}
+.light-mode .footer {
+  background-color: #ddd;
+}
+.footer-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.light-mode .footer-button {
+  color: #111;
+}
+.footer-button span.material-symbols-outlined {
+  font-size: 24px;
+}
+
+/* ------------------------------------------
+   FLOATING ADD-GOAL BUTTON
+------------------------------------------- */
+.floating-button {
+  position: fixed;
+  bottom: 4rem; /* above the footer */
+  right: 1rem;
+  width: 48px;
+  height: 48px;
+  background-color: #ff4081;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  z-index: 998;
+}
