@@ -1,0 +1,7 @@
+{
+  "title": "Calendar Details",
+  "events": [
+    { "name": "Meeting with Advisor", "date": "Jan 25" },
+    { "name": "Vacation", "date": "Feb 20 - Feb 25" }
+  ]
+}
