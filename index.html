@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Life Automation Framework</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link
@@ -59,7 +59,7 @@
     </nav>
   </aside>
 
-  <!-- Chat Overlay (Global) -->
+  <!-- Chat Overlay (Global, top-right button) -->
   <div class="chat-overlay" id="chatOverlay">
     <div class="chat-content">
       <button class="close-chat" id="closeChat" title="Close Chat">
@@ -77,18 +77,20 @@
     </div>
   </div>
 
-  <!-- Full-Page Overlay for Each Box's Detailed View -->
+  <!-- Full-Page Bottom Sheet Overlay -->
   <div class="full-overlay" id="detailOverlay">
-    <div class="overlay-content">
-      <button class="close-overlay" id="closeOverlay" title="Close Overlay">
-        <span class="material-symbols-outlined">close</span>
-      </button>
-      <!-- Title / Info from JS -->
-      <h2 id="overlayTitle">Full Details</h2>
-      <div id="overlayBody"></div>
+    <!-- The "sheet" that slides up from the bottom -->
+    <div class="sheet-container">
+      <div class="sheet-header">
+        <h2 id="overlayTitle">Full Details</h2>
+        <button class="close-sheet" id="closeOverlay" title="Close Overlay">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
 
-      <!-- AI Chat Box at Bottom for This Item -->
-      <div class="overlay-chat">
+      <div class="sheet-body" id="overlayBody"></div>
+
+      <div class="sheet-chat">
         <h3>Ask AI About This</h3>
         <div class="overlay-chat-input">
           <input type="text" id="overlayChatMsg" placeholder="Type your question..." />
