@@ -188,7 +188,8 @@ overlayCanvas.addEventListener('mouseleave', handleChartMouseLeave);
 function openDetailOverlay(goalId, titleText, bodyHtml, { 
   checklist = [], 
   attachments = [], 
-  photos = []
+  photos = [],
+  accounts = []
 } = {}) {
   overlayTitle.textContent = titleText;
   overlayBody.innerHTML = bodyHtml;
@@ -231,6 +232,24 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
     img.alt = photo.alt || 'Photo';
     overlayPhotos.appendChild(img);
   });
+
+  // If we passed an "accounts" array, list them here
+  if (accounts.length > 0) {
+    const acctHeader = document.createElement('h3');
+    acctHeader.textContent = 'Accounts in This Section';
+    overlayBody.appendChild(acctHeader);
+
+    const acctList = document.createElement('ul');
+    accounts.forEach(acct => {
+      const li = document.createElement('li');
+      li.textContent = `${acct.name}: $${acct.balance.toLocaleString()}`;
+      if (acct.lastUpdated) {
+        li.textContent += ` (updated ${acct.lastUpdated})`;
+      }
+      acctList.appendChild(li);
+    });
+    overlayBody.appendChild(acctList);
+  }
 
   // show overlay
   detailOverlay.classList.add('open');
@@ -299,11 +318,8 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts) {
   fullBtn.classList.add('expand-btn');
   fullBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    openDetailOverlay(goalId, title, overlayOpts.bodyHtml || '', {
-      checklist: overlayOpts.checklist || [],
-      attachments: overlayOpts.attachments || [],
-      photos: overlayOpts.photos || []
-    });
+    // Pass all overlay options (including "accounts") to openDetailOverlay
+    openDetailOverlay(goalId, title, overlayOpts.bodyHtml || '', overlayOpts);
   });
   body.appendChild(fullBtn);
 
@@ -420,12 +436,12 @@ async function loadMoney() {
     const container = document.getElementById('moneyContainer');
     container.innerHTML = '';
 
-    // We expect "data.moneySections" to be an array of section objects.
+    // "data.moneySections" is an array of section objects
     (data.moneySections || []).forEach((section) => {
-      // Card summary: show the total for this section
+      // 1) Card summary: show the total for this section
       const summary = `<p><strong>Total:</strong> $${section.total.toLocaleString()}</p>`;
 
-      // Build expanded details: list each account
+      // 2) Build expanded details: list each account in <ul>
       let detailsHtml = '<ul>';
       section.accounts.forEach((acct) => {
         detailsHtml += `<li>${acct.name}: $${acct.balance.toLocaleString()}`;
@@ -436,12 +452,16 @@ async function loadMoney() {
       });
       detailsHtml += '</ul>';
 
-      // Create a collapsible card for this entire section
+      // 3) Create collapsible card
+      // Pass "accounts" so we can also show them in the overlay
       const card = createCollapsibleCard(
         `money-${section.id}`,
         section.title,
         summary,
-        { bodyHtml: detailsHtml }
+        {
+          bodyHtml: detailsHtml,
+          accounts: section.accounts
+        }
       );
       container.appendChild(card);
     });
