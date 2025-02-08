@@ -14,6 +14,37 @@
           "name": "HI Bills Savings (…209…)",
           "balance": 269.70,
           "lastUpdated": "18 hours ago"
+        },
+        {
+          "name": "Cindy Spending (…1367…)",
+          "balance": 83.39,
+          "lastUpdated": "1 day ago"
+        },
+        {
+          "name": "HI CC Payment Account (…xxxx…)",
+          "balance": 349.18,
+          "lastUpdated": "1 day ago"
+        },
+        {
+          "name": "HI Savings (…5422…)",
+          "balance": 140,
+          "lastUpdated": "1 day ago"
+        },
+        {
+          "name": "HII Spending / Savings (…xxxx…)",
+          "balance": 333.86
+        },
+        {
+          "name": "HI House Savings (…xxxx…)",
+          "balance": 92.31
+        },
+        {
+          "name": "HIII Checking (…xxxx…)",
+          "balance": 80.01
+        },
+        {
+          "name": "HI House Payment Savings (…xxxx…)",
+          "balance": 30.44
         }
       ]
     },
@@ -29,7 +60,116 @@
         },
         {
           "name": "Rollover IRA (…3712…)",
-          "balance": 50.00
+          "balance": 50.00,
+          "lastUpdated": "3 days ago"
+        },
+        {
+          "name": "ROTH IRA (…4380…)",
+          "balance": 561.20
+        },
+        {
+          "name": "Indiv TOD (…9872…)",
+          "balance": 18903.87
+        },
+        {
+          "name": "Cindy IRA (…xxxx…)",
+          "balance": 183624.14
+        },
+        {
+          "name": "Jonny HSA",
+          "balance": 16120.00
+        },
+        {
+          "name": "Cindy universal 401k",
+          "balance": 13306.00
+        },
+        {
+          "name": "LPL Fine Noble ICD",
+          "balance": 41032.50
+        },
+        {
+          "name": "ROTH IRA (…xxxx…)",
+          "balance": 2266.54
+        },
+        {
+          "name": "LPL PERFORMANCE (…xxxx…)",
+          "balance": 14099.00
+        }
+      ]
+    },
+    {
+      "id": "real-estate",
+      "title": "Real Estate",
+      "total": 1010800.00,
+      "accounts": [
+        {
+          "name": "18335 Cozy Cove",
+          "balance": 1010800.00,
+          "lastUpdated": "1 month ago"
+        }
+      ]
+    },
+    {
+      "id": "vehicles",
+      "title": "Vehicles",
+      "total": 30222.14,
+      "accounts": [
+        {
+          "name": "2017 Volkswagen Passat",
+          "balance": 13022.51
+        },
+        {
+          "name": "2013 Volkswagen Multivan",
+          "balance": 17299.63
+        }
+      ]
+    },
+    {
+      "id": "other-assets",
+      "title": "Other Assets",
+      "total": 90000.00,
+      "accounts": [
+        {
+          "name": "Avi 8225",
+          "balance": 8000
+        },
+        {
+          "name": "Kelfer",
+          "balance": 82000
+        }
+      ]
+    },
+    {
+      "id": "credit-cards",
+      "title": "Credit Cards",
+      "total": 25412.67,
+      "accounts": [
+        {
+          "name": "Platinum (…0613…)",
+          "balance": 3230
+        },
+        {
+          "name": "Account (…Multi…)",
+          "balance": 1292.16
+        }
+      ]
+    },
+    {
+      "id": "loans",
+      "title": "Loans",
+      "total": 371295.00,
+      "accounts": [
+        {
+          "name": "Amort Mortgage",
+          "balance": 246300
+        },
+        {
+          "name": "Margin Loan",
+          "balance": 32000
+        },
+        {
+          "name": "Indirect Marine (…Boat…)",
+          "balance": 101625
         }
       ]
     }
