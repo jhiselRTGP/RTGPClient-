@@ -1,35 +1,188 @@
-/* A grid (or flex) layout for the account cards */
-.account-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 0.5rem;
+/* BASIC RESET / THEME EXAMPLES (OPTIONAL) */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #111; /* dark background if you want a dark theme */
+  color: #eee;
+}
+.light-mode {
+  background-color: #fff;
+  color: #111;
 }
 
-/* Each account “card” with a slight shadow or border */
-.account-card {
-  background-color: #2b2b2b; /* if you have a dark theme, or #fff for light */
+/* Example styling for top banner, side menu, etc. 
+   (Keep your existing or adapt as needed)
+*/
+
+/***********************************************************
+ * CARD LAYOUT
+ ************************************************************/
+.card {
+  background-color: #222;
+  border: 1px solid #444;
+  border-radius: 6px;
+  margin: 0.75rem;
   padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid #444; /* subtle border */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
-
-/* Larger text for account name */
-.account-card .account-name {
-  font-weight: 600;
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
   margin-bottom: 0.5rem;
 }
-
-/* Make the balance stand out */
-.account-card .account-balance {
+.card-header h2 {
   font-size: 1.1rem;
-  color: #00ff7f; /* or another accent color */
+  margin: 0;
+}
+.toggle-button {
+  font-size: 1.5rem;
+}
+.card-body {
+  margin-top: 0.5rem;
+}
+.expand-btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  background: #00ff7f;
+  color: #111;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.expand-btn:hover {
+  background: #45ff9a;
+}
+
+/***********************************************************
+ * OVERLAY & PERFORMANCE CHART
+ ************************************************************/
+.full-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  z-index: 999;
+}
+.full-overlay.open {
+  display: block;
+}
+.solid-sheet-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #222;
+  color: #fff;
+  max-height: 80vh;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  overflow-y: auto;
+}
+.solid-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #444;
+}
+.solid-sheet-header h2 {
+  margin: 0;
+}
+.close-sheet {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.solid-sheet-body {
+  padding: 1rem;
+}
+.common-components h3 {
+  margin-top: 1rem;
+}
+.checklist {
+  list-style: none;
+  padding: 0;
+}
+.checklist li {
+  margin: 0.25rem 0;
+}
+.attachments .attachment-item {
+  margin-bottom: 0.5rem;
+}
+.photo-gallery img {
+  max-width: 80px;
+  max-height: 80px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.performance-section {
+  margin-top: 1rem;
+}
+
+/* Chart tooltip */
+.chart-tooltip {
+  position: absolute;
+  display: none;
+  background: #333;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  pointer-events: none;
+  font-size: 0.9rem;
+}
+
+/***********************************************************
+ * ACCOUNT CARDS IN OVERLAY
+ ************************************************************/
+.account-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+.account-card {
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.account-name {
+  font-weight: 600;
   margin-bottom: 0.25rem;
 }
-
-/* Slightly smaller text for last updated */
-.account-card .account-updated {
-  font-size: 0.9rem;
-  color: #bbb;
+.account-balance {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+  color: #00ff7f;
 }
+.account-updated {
+  font-size: 0.85rem;
+  color: #bbb;
+  margin-top: auto;
+}
+
+/***********************************************************
+ * MAIN CONTENT / UTILS
+ ************************************************************/
+.main-content {
+  padding: 1rem;
+}
+.cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Extra styling for your chat, side menu, etc. can go here */
+/* ... */
