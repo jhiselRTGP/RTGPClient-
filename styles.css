@@ -16,7 +16,7 @@ html, body {
   color: #111;
 }
 
-/* Make sure your content doesn't go underneath notches or system UI on mobile */
+/* Make body a flex container so footer can be pinned below main content */
 body {
   min-height: 100vh;
   display: flex;
@@ -25,7 +25,7 @@ body {
 
 /*
   ------------------------
-   TOP BANNER STYLES
+   TOP BANNER
   ------------------------
 */
 .top-banner {
@@ -39,8 +39,6 @@ body {
 .top-banner .greeting {
   font-weight: 600;
 }
-
-/* Chat & menu buttons in top banner */
 .chat-button, .menu-button {
   background: none;
   border: none;
@@ -51,24 +49,26 @@ body {
 
 /*
   -----------------------
-   SIDE MENU STYLES
+   SIDE MENU
   -----------------------
 */
 .side-menu {
   position: fixed;
   top: 0;
-  left: -250px; /* hidden by default */
   width: 250px;
   height: 100vh;
   background-color: #222;
   color: #fff;
   padding: 1rem;
-  transition: left 0.3s ease;
-  z-index: 999;
   box-shadow: 2px 0 6px rgba(0,0,0,0.5);
+  z-index: 999;
+  /* Slide it fully off-screen by default */
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
 }
 .side-menu.open {
-  left: 0;
+  /* Slide in by resetting transform */
+  transform: translateX(0);
 }
 .close-menu {
   background: none;
@@ -98,7 +98,7 @@ body {
 
 /*
   -----------------------
-   CHAT OVERLAY STYLES
+   CHAT OVERLAY
   -----------------------
 */
 .chat-overlay {
@@ -169,13 +169,13 @@ body {
 
 /*
   -----------------------
-   MAIN CONTENT & PAGES
+   MAIN CONTENT & CARDS
   -----------------------
 */
 .main-content {
-  flex: 1; /* so footer can stay at bottom */
+  flex: 1;
   padding: 1rem;
-  padding-bottom: 60px; /* so content isn't hidden behind fixed footer */
+  padding-bottom: 60px; /* space for fixed footer */
 }
 .cards-grid {
   display: flex;
@@ -183,18 +183,14 @@ body {
   gap: 1rem;
 }
 
-/*
-  -----------------------
-   COLLAPSIBLE CARD
-  -----------------------
-*/
+/* Collapsible cards */
 .card {
   background-color: #222;
   border: 1px solid #444;
   border-radius: 6px;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  flex: 1 1 calc(300px); /* example sizing; adjust as needed */
+  flex: 1 1 calc(300px);
   min-width: 250px;
 }
 .card-header {
@@ -213,7 +209,7 @@ body {
 }
 .card-body {
   margin-top: 0.5rem;
-  display: none; /* hidden by default; toggled via JS */
+  display: none; /* toggled via JS */
 }
 .expand-btn {
   display: inline-block;
@@ -231,15 +227,12 @@ body {
 
 /*
   -----------------------
-   FULL OVERLAY (BOTTOM-SHEET)
+   FULL OVERLAY (BOTTOM SHEET)
   -----------------------
 */
 .full-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.6);
   display: none;
   z-index: 999;
@@ -250,8 +243,7 @@ body {
 .solid-sheet-container {
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 0; right: 0;
   background-color: #222;
   color: #fff;
   max-height: 80vh;
@@ -375,39 +367,28 @@ body {
 
 /*
   -----------------------
-   ACCOUNT CARD GRID 
-   (IN OVERLAY)
+   ACCOUNT CHART BLOCKS
   -----------------------
 */
-.account-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-top: 0.75rem;
-}
-.account-card {
-  background-color: #333;
+.overlay-account-block {
+  margin-top: 1rem;
   border: 1px solid #444;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 1rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  background-color: #333;
 }
-.account-name {
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+.overlay-account-block h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
-.account-balance {
-  font-size: 1.1rem;
-  margin-bottom: 0.25rem;
-  color: #00ff7f;
-}
-.account-updated {
-  font-size: 0.85rem;
-  color: #bbb;
-  margin-top: auto;
+.overlay-account-block select {
+  background: #222;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 0.25rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
 }
 
 /*
@@ -417,10 +398,9 @@ body {
 */
 .footer {
   position: fixed;
-  bottom: 0;
-  left: 0;
+  bottom: 0; left: 0;
   width: 100%;
-  z-index: 1001; /* above overlays if needed */
+  z-index: 1001;
   background-color: #222;
   color: #fff;
   display: flex;
