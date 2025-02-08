@@ -1,29 +1,33 @@
 {
+  "title": "Money",
+  "subtitle": "Accounts & Balances",
   "netWorth": {
-    "currentValue": 1415859.88,
-    "monthlyChange": 17341.83,
-    "monthlyChangePercent": 1.2
+    "amount": 1415859.88,           // Updated net worth
+    "change": 17341.83,            // Monthly net worth change
+    "changePercent": 1.2           // Monthly net worth change in percent
   },
   "cash": {
-    "currentValue": 1844.48,
-    "monthlyChange": -7285.49,
-    "monthlyChangePercent": -79.8
+    "amount": 1844.48,             // Total cash
+    "change": -7285.49,            // Monthly cash change
+    "changePercent": -79.8         // Monthly cash change in percent
   },
   "accounts": [
     {
+      "id": 1,
       "name": "Cash Spending (…1258)",
-      "institution": "Capital One",
       "type": "Checking",
-      "balance": 1144.27,
+      "institution": "Capital One",
+      "balance": 1144.27,          // Updated balance
       "lastUpdated": "18 hours ago"
     },
     {
+      "id": 2,
       "name": "HI Bills Savings (…209…)",
-      "institution": "Capital One",
       "type": "Savings",
-      "balance": 269.70,
+      "institution": "Capital One",
+      "balance": 269.70,           // Updated balance
       "lastUpdated": "18 hours ago"
     }
-    // ...other accounts, if any
+    // If you have more accounts, leave them as-is or update their balances similarly.
   ]
 }
