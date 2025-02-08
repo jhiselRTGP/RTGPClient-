@@ -253,7 +253,7 @@ overlayChatSend.addEventListener('click', () => {
     overlayChatMsg.value = '';
     overlayChatHistory.scrollTop = overlayChatHistory.scrollHeight;
 
-    // AI response
+    // AI response (placeholder)
     setTimeout(() => {
       const aiBubble = document.createElement('div');
       aiBubble.classList.add('chat-bubble', 'ai-bubble');
@@ -411,7 +411,7 @@ async function loadPlan() {
 }
 
 /***********************************************************
- * LOAD MONEY
+ * LOAD MONEY (UPDATED)
  ************************************************************/
 async function loadMoney() {
   try {
@@ -420,15 +420,29 @@ async function loadMoney() {
     const container = document.getElementById('moneyContainer');
     container.innerHTML = '';
 
-    // Suppose money.json has "balances"
-    Object.keys(data.balances).forEach((key) => {
-      const amount = data.balances[key];
-      const summary = `<p><strong>Amount:</strong> $${amount.toLocaleString()}</p>`;
-      const detailsHtml = `<p>Details for ${key}: $${amount.toLocaleString()}</p>`;
+    // We expect "data.moneySections" to be an array of section objects.
+    (data.moneySections || []).forEach((section) => {
+      // Card summary: show the total for this section
+      const summary = `<p><strong>Total:</strong> $${section.total.toLocaleString()}</p>`;
 
-      const card = createCollapsibleCard(`money-${key}`, key, summary, {
-        bodyHtml: detailsHtml
+      // Build expanded details: list each account
+      let detailsHtml = '<ul>';
+      section.accounts.forEach((acct) => {
+        detailsHtml += `<li>${acct.name}: $${acct.balance.toLocaleString()}`;
+        if (acct.lastUpdated) {
+          detailsHtml += ` <small>(updated ${acct.lastUpdated})</small>`;
+        }
+        detailsHtml += '</li>';
       });
+      detailsHtml += '</ul>';
+
+      // Create a collapsible card for this entire section
+      const card = createCollapsibleCard(
+        `money-${section.id}`,
+        section.title,
+        summary,
+        { bodyHtml: detailsHtml }
+      );
       container.appendChild(card);
     });
   } catch (err) {
