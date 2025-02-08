@@ -1,50 +1,29 @@
 {
-  "moneyOverview": {
-    "netWorth": {
-      "amount": 1415859.88,
-      "change": {
-        "amount": 17341.83,
-        "percentage": 1.2,
-        "period": "1M"
-      }
-    },
-    "cash": {
-      "amount": 1844.48,
-      "change": {
-        "amount": -7285.49,
-        "percentage": -79.8,
-        "period": "1M"
-      }
-    }
+  "netWorth": {
+    "currentValue": 1415859.88,
+    "monthlyChange": 17341.83,
+    "monthlyChangePercent": 1.2
   },
-  "moneyDetails": {
-    "accounts": [
-      {
-        "name": "Cash Spending (…1258)",
-        "institution": "Capital One",
-        "type": "Checking",
-        "balance": 1144.27,
-        "lastUpdated": "18 hours ago"
-      },
-      {
-        "name": "HI Bills Savings (…209…)",
-        "institution": "Capital One",
-        "type": "Savings",
-        "balance": 269.70,
-        "lastUpdated": "18 hours ago"
-      }
-    ]
+  "cash": {
+    "currentValue": 1844.48,
+    "monthlyChange": -7285.49,
+    "monthlyChangePercent": -79.8
   },
-  "cards": [
+  "accounts": [
     {
-      "title": "Net Worth",
-      "value": 1415859.88,
-      "subtext": "1.2% increase (1M)"
+      "name": "Cash Spending (…1258)",
+      "institution": "Capital One",
+      "type": "Checking",
+      "balance": 1144.27,
+      "lastUpdated": "18 hours ago"
     },
     {
-      "title": "Cash",
-      "value": 1844.48,
-      "subtext": "-79.8% change (1M)"
+      "name": "HI Bills Savings (…209…)",
+      "institution": "Capital One",
+      "type": "Savings",
+      "balance": 269.70,
+      "lastUpdated": "18 hours ago"
     }
+    // ...other accounts, if any
   ]
 }
