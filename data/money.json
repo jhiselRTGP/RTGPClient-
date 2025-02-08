@@ -1,42 +1,50 @@
 {
-  "balances": {
+  "moneyOverview": {
+    "netWorth": {
+      "amount": 1415859.88,
+      "change": {
+        "amount": 17341.83,
+        "percentage": 1.2,
+        "period": "1M"
+      }
+    },
     "cash": {
-      "Cash Spending (x0572)": 3142.37,
-      "Bill Bills Savings (x0172)": 240.27,
-      "City City Savings (x0277)": 29.27,
-      "HIC Q2 (x2024)": 341.32,
-      "HI Spending (x5429)": 9.40,
-      "HI Superline Savings (x8883)": 383.93,
-      "HI House Savings (x5449)": 214.81
-    },
-    "investments": {
-      "LPL PRT CTL INC (x0572)": 83323.55,
-      "IRA ROTH (x7772)": 500.00,
-      "RollOver IRA (x0021p)": 50.00,
-      "DCP Roth - TDC (x5330)": 1416.69,
-      "CIRDs - IRAs (x0021A)": 133820.34,
-      "LPL Financial LLC (x1029)": 41468.92,
-      "ROTH IRA - 379 (x0379)": 500.00
-    },
-    "real_estate": {
-      "1835 Cozy Cove": 1011000.00
-    },
-    "vehicles": {
-      "2017 Volkswagen Alltrack": 30229.94,
-      "2018 Volkswagen Alltrack": 11939.93
-    },
-    "other_assets": {
-      "Abe x2528": 20000.00
-    },
-    "credit_cards": {
-      "Platinum (x4352)": 251.50,
-      "Account - bold": 1776.50,
-      "Aadvantage Autoworks": 874.91
-    },
-    "loans": {
-      "Arvest": -148000.00,
-      "Dragon Loan": -134000.00,
-      "Indirect Marino": -101322.60
+      "amount": 1844.48,
+      "change": {
+        "amount": -7285.49,
+        "percentage": -79.8,
+        "period": "1M"
+      }
     }
-  }
+  },
+  "moneyDetails": {
+    "accounts": [
+      {
+        "name": "Cash Spending (…1258)",
+        "institution": "Capital One",
+        "type": "Checking",
+        "balance": 1144.27,
+        "lastUpdated": "18 hours ago"
+      },
+      {
+        "name": "HI Bills Savings (…209…)",
+        "institution": "Capital One",
+        "type": "Savings",
+        "balance": 269.70,
+        "lastUpdated": "18 hours ago"
+      }
+    ]
+  },
+  "cards": [
+    {
+      "title": "Net Worth",
+      "value": 1415859.88,
+      "subtext": "1.2% increase (1M)"
+    },
+    {
+      "title": "Cash",
+      "value": 1844.48,
+      "subtext": "-79.8% change (1M)"
+    }
+  ]
 }
