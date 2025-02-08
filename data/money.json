@@ -24,30 +24,13 @@
       "accounts": [
         {
           "name": "LPL Persisted (…1003…)",
-          "balance": 99348.65,
-          "lastUpdated": "2 days ago"
+          "balance": 99348.65
         },
         {
           "name": "Rollover IRA (…3712…)",
-          "balance": 50.00
-        }
-      ]
-    },
-    {
-      "id": "creditcards",
-      "title": "Credit Cards",
-      "total": 25412.67,
-      "accounts": [
-        {
-          "name": "Platinum (…0613…)",
-          "balance": 3230
-        },
-        {
-          "name": "Account (…Multi…)",
-          "balance": 1292.16
+          "balance": 50
         }
       ]
     }
-    // ... Add more sections (Loans, Real Estate, Vehicles, etc.) as needed
   ]
 }
