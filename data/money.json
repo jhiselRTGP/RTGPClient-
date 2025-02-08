@@ -24,11 +24,12 @@
       "accounts": [
         {
           "name": "LPL Persisted (…1003…)",
-          "balance": 99348.65
+          "balance": 99348.65,
+          "lastUpdated": "2 days ago"
         },
         {
           "name": "Rollover IRA (…3712…)",
-          "balance": 50
+          "balance": 50.00
         }
       ]
     }
