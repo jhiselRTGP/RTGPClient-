@@ -7,67 +7,28 @@
       "milestones": [
         "Reduce daily usage each week",
         "Try nicotine patches/gum",
-        "Seek accountability or support group"
+        "Seek support group or coach"
       ],
-      "advisorPrompt": "AI Plan: Gradually reduce nicotine intake; consider therapy...",
+      "advisorPrompt": "AI Plan: Gradually reduce intake, consider therapy, celebrate small weekly successes.",
       "checklist": [
         { "label": "Set a quit date", "done": false },
-        { "label": "Remove all cigarettes from home/car", "done": false },
-        { "label": "Purchase nicotine patches/gum", "done": false },
-        { "label": "Join a support group or therapy program", "done": false }
-      ],
-      "metrics": {
-        "type": "countdown",
-        "description": "Cigarettes smoked per week",
-        "baseline": 20,
-        "goal": 0
-      }
+        { "label": "Throw away all cigarettes at home", "done": false }
+      ]
     },
     {
       "id": "exercise",
       "title": "Exercise",
       "targetDate": "2025-01-31",
       "milestones": [
-        "Join a gym or home workout routine",
-        "Exercise 3x per week to start",
-        "Increase to 5x per week after one month"
+        "Join a gym or workout routine",
+        "Exercise 3x per week",
+        "Increase to 5x after 1 month"
       ],
-      "advisorPrompt": "AI Plan: Start with baseline fitness, pick fun activities...",
+      "advisorPrompt": "AI Plan: Start with a baseline, pick fun activities, and ramp up gradually.",
       "checklist": [
-        { "label": "Sign up for gym membership or streaming workout app", "done": false },
-        { "label": "Buy comfortable workout clothes/shoes", "done": false },
-        { "label": "Schedule 3 workouts this week", "done": false }
-      ],
-      "metrics": {
-        "type": "frequency",
-        "description": "Workouts per week",
-        "baseline": 0,
-        "goal": 5
-      }
-    },
-    {
-      "id": "retirement",
-      "title": "Retirement",
-      "targetDate": "2035-01-01",
-      "milestones": [
-        "Open or expand retirement accounts",
-        "Meet with a financial advisor",
-        "Reevaluate your portfolio annually"
-      ],
-      "advisorPrompt": "AI Plan: Increase your savings rate by 10% each year...",
-      "checklist": [
-        { "label": "Open a Roth IRA (if not opened already)", "done": false },
-        { "label": "Max 401(k) employer match", "done": false },
-        { "label": "Schedule meeting with financial advisor", "done": false }
-      ],
-      "metrics": {
-        "type": "financial",
-        "description": "Retirement fund balance ($)",
-        "baseline": 50000,
-        "goal": 500000
-      }
+        { "label": "Sign up for gym membership", "done": false },
+        { "label": "Buy workout clothes", "done": false }
+      ]
     }
-
-    // ...and so on for your other goals
   ]
 }
