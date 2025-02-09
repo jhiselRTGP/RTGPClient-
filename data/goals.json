@@ -11,7 +11,6 @@
       ],
       "advisorPrompt": "AI Plan: Increase your savings rate each year...",
       "checklist": [],
-      // Reference whichever accounts you want under "Retirement" ...
       "accountIds": [
         "acct-rollover3712",
         "acct-roth332",
@@ -40,6 +39,5 @@
         "Negotiate best deal"
       ]
     }
-    // ... and so on for your other Life Goals
   ]
 }
