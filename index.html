@@ -88,8 +88,10 @@
       </div>
 
       <div class="solid-sheet-body">
+        <!-- This container is where we inject summary and accounts -->
         <div id="overlayBody" class="main-overlay-content"></div>
 
+        <!-- These are always listed after #overlayBody in the HTML, so they appear below. -->
         <div class="common-components">
           <h3>Checklist</h3>
           <ul id="overlayChecklist" class="checklist"></ul>
@@ -179,7 +181,7 @@
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer (pinned at bottom) -->
   <footer class="footer">
     <button class="footer-button" onclick="showPage('life')">
       <span class="material-symbols-outlined">favorite</span>
