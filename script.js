@@ -48,7 +48,7 @@ function showPage(pageId) {
 }
 
 /***********************************************************
- * BOTTOM-SHEET OVERLAY
+ * BOTTOM-SHEET OVERLAY (NOW FULL PAGE)
  ************************************************************/
 const detailOverlay = document.getElementById('detailOverlay');
 const closeOverlayBtn = document.getElementById('closeOverlay');
@@ -140,6 +140,7 @@ function drawPerformanceChart(canvasId, points) {
 
     const x = leftPad + xFrac * w;
     const y = (canvas.height - bottomPad) - (yFrac * h);
+
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   });
@@ -148,11 +149,12 @@ function drawPerformanceChart(canvasId, points) {
   canvas.chartData = { points, leftPad, rightPad, topPad, bottomPad, w, h, minVal, maxVal };
 }
 
+// Chart tooltip
 const chartTooltip = document.getElementById('chartTooltip');
 function handleChartMouseMove(e) {
   const canvas = e.target;
   if (!canvas.chartData) return;
-  const { points, leftPad, rightPad, topPad, bottomPad, w, h, minVal, maxVal } = canvas.chartData;
+  const { points, leftPad, w } = canvas.chartData;
   const rect = canvas.getBoundingClientRect();
   const mouseX = e.clientX - rect.left;
   const relativeX = mouseX - leftPad;
@@ -174,7 +176,6 @@ function handleChartMouseMove(e) {
   chartTooltip.style.top = (rect.top + 10) + 'px';
   chartTooltip.textContent = `${pt.label}: $${pt.value.toLocaleString()}`;
 }
-
 function handleChartMouseLeave() {
   chartTooltip.style.display = 'none';
 }
@@ -186,7 +187,7 @@ if (overlayCanvas) {
 }
 
 /***********************************************************
- * OPEN OVERLAY (Full View)
+ * OPEN OVERLAY (ACCOUNTS + FULL SCREEN)
  ************************************************************/
 function openDetailOverlay(goalId, titleText, bodyHtml, {
   checklist = [],
@@ -194,25 +195,23 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
   photos = [],
   accounts = []
 } = {}) {
+  // Clear existing
   overlayTitle.textContent = titleText;
-
-  // Clear old items
   overlayBody.innerHTML = '';
   overlayChecklist.innerHTML = '';
   overlayAttachments.innerHTML = '';
   overlayPhotos.innerHTML = '';
   overlayChatHistory.innerHTML = '';
 
-  // Insert the summary text
+  // Insert summary
   const summaryDiv = document.createElement('div');
   summaryDiv.innerHTML = bodyHtml;
   overlayBody.appendChild(summaryDiv);
 
-  // If we have "accounts", display them in an .account-list
+  // Show accounts if present
   if (accounts.length > 0) {
     const acctList = document.createElement('div');
     acctList.classList.add('account-list');
-
     accounts.forEach(acct => {
       const acctItem = document.createElement('div');
       acctItem.classList.add('account-item');
@@ -229,7 +228,6 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
       acctItem.appendChild(rightDiv);
       acctList.appendChild(acctItem);
     });
-
     overlayBody.appendChild(acctList);
   }
 
@@ -294,7 +292,7 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts = {}) {
   summaryDiv.innerHTML = summaryHtml;
   body.appendChild(summaryDiv);
 
-  // "Full View" button
+  // Full View button
   const fullBtn = document.createElement('button');
   fullBtn.textContent = 'Full View';
   fullBtn.classList.add('expand-btn');
@@ -327,7 +325,6 @@ async function loadGoals() {
     container.innerHTML = '';
 
     (data.lifeGoals || []).forEach((goal) => {
-      // Build a summary with target date, milestones, etc.
       let summary = `<p><strong>Target Date:</strong> ${goal.targetDate || 'N/A'}</p>`;
       if (goal.milestones && goal.milestones.length > 0) {
         summary += `<p><strong>Milestones:</strong> ${goal.milestones.join(', ')}</p>`;
@@ -336,7 +333,7 @@ async function loadGoals() {
         summary += `<p><em>AI Plan:</em> ${goal.advisorPrompt}</p>`;
       }
 
-      // Convert accountIds to real accounts (for Retirement, etc.)
+      // Map accountIds to real accounts
       let realAccounts = [];
       if (goal.accountIds) {
         realAccounts = goal.accountIds.map(id => accountsMap[id]).filter(Boolean);
@@ -355,7 +352,7 @@ async function loadGoals() {
 }
 
 /***********************************************************
- * LOAD CALENDAR (Optional)
+ * LOAD CALENDAR
  ************************************************************/
 async function loadCalendar() {
   try {
@@ -377,7 +374,7 @@ async function loadCalendar() {
 }
 
 /***********************************************************
- * LOAD PLAN (Optional)
+ * LOAD PLAN
  ************************************************************/
 async function loadPlan() {
   try {
@@ -460,16 +457,13 @@ if (darkModeCheckbox) {
  * ON PAGE LOAD
  ************************************************************/
 window.addEventListener('DOMContentLoaded', async () => {
-  // 1) load accounts + performance
   await loadAccounts();
   await loadPerformance();
 
-  // 2) load the rest
   await loadGoals();
   await loadCalendar();
   await loadPlan();
   await loadMoney();
 
-  // 3) default page
   showPage('life');
 });
