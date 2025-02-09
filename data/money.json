@@ -1,18 +1,28 @@
-// data/money.json
 {
   "moneySections": [
     {
       "id": "cash",
       "title": "Cash",
       "total": 1844.48,
-      "accountIds": ["acct-1258", "acct-209", "acct-1367"]
+      "accountIds": ["acct-1258", "acct-209", "acct-1367", "acct-7412"]
     },
     {
       "id": "investments",
       "title": "Investments",
       "total": 876563.03,
-      "accountIds": ["acct-1003", "acct-3712", "acct-4380"]
+      "accountIds": ["acct-1003", "acct-3712", "acct-4380", "acct-8973"]
     },
-    ...
+    {
+      "id": "real-estate",
+      "title": "Real Estate",
+      "total": 1010800,
+      "accountIds": [],
+      "photos": [
+        {
+          "src": "https://example.com/children-walking.jpg",
+          "alt": "Two children walking outdoors"
+        }
+      ]
+    }
   ]
 }
