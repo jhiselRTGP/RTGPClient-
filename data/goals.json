@@ -9,7 +9,7 @@
         "Try nicotine patches/gum",
         "Seek accountability/support group"
       ],
-      "advisorPrompt": "AI Plan: Gradually reduce nicotine intake; consider therapy or a support group; reward small weekly successes.",
+      "advisorPrompt": "AI Plan: Gradually reduce nicotine intake...",
       "checklist": [
         { "label": "Set a quit date", "done": false }
       ]
@@ -19,11 +19,11 @@
       "title": "Exercise",
       "targetDate": "2025-01-31",
       "milestones": [
-        "Join gym/home workout routine",
-        "Exercise 3x/wk initially",
+        "Join a gym",
+        "Exercise 3x per week",
         "Increase to 5x after 1 month"
       ],
-      "advisorPrompt": "AI Plan: Start with baseline, pick fun activities, ramp up gradually to build a lasting habit.",
+      "advisorPrompt": "AI Plan: Start with baseline fitness...",
       "checklist": [
         { "label": "Buy workout clothes", "done": false }
       ]
@@ -35,12 +35,9 @@
       "milestones": [
         "Open or expand retirement accounts",
         "Meet with a financial advisor",
-        "Reevaluate portfolio annually"
+        "Reevaluate annually"
       ],
-      "advisorPrompt": "AI Plan: Increase savings rate yearly, use tax-advantaged accounts, track progress annually.",
-      "checklist": [
-        { "label": "Set up auto-transfer to 401(k)/IRA", "done": false }
-      ]
+      "advisorPrompt": "AI Plan: Increase your savings rate each year..."
     },
     {
       "id": "startRIA",
@@ -48,12 +45,8 @@
       "targetDate": "2025-06-30",
       "milestones": [
         "Draft business plan",
-        "File legal registrations",
+        "File registrations",
         "Implement compliance"
-      ],
-      "advisorPrompt": "AI Plan: Outline your niche, register properly, set up compliance, then market effectively.",
-      "checklist": [
-        { "label": "Decide on RIA niche", "done": false }
       ]
     },
     {
@@ -61,13 +54,9 @@
       "title": "Eat Better",
       "targetDate": "2024-09-01",
       "milestones": [
-        "Add more fruits & veggies",
-        "Track daily calories/macros",
-        "Meal prep on weekends"
-      ],
-      "advisorPrompt": "AI Plan: Replace processed foods, plan meals in advance, and keep a simple nutrition log.",
-      "checklist": [
-        { "label": "Buy fresh produce weekly", "done": false }
+        "More fruits & veggies",
+        "Track daily macros",
+        "Meal prep weekly"
       ]
     },
     {
@@ -76,12 +65,8 @@
       "targetDate": "2026-03-01",
       "milestones": [
         "Determine budget & financing",
-        "Test drive top 3 models",
-        "Negotiate final deal"
-      ],
-      "advisorPrompt": "AI Plan: Save for a down payment, compare loan rates, research reliable models, finalize best deal.",
-      "checklist": [
-        { "label": "Save 10% monthly toward down payment", "done": false }
+        "Test-drive 3 models",
+        "Negotiate best deal"
       ]
     },
     {
@@ -90,12 +75,8 @@
       "targetDate": "2024-11-01",
       "milestones": [
         "Get contractor quotes",
-        "Plan layout/materials",
+        "Choose layout/materials",
         "Schedule renovation"
-      ],
-      "advisorPrompt": "AI Plan: Gather multiple quotes, create a functional layout, keep a contingency fund for surprises.",
-      "checklist": [
-        { "label": "Call 3 contractors for quotes", "done": false }
       ]
     },
     {
@@ -103,13 +84,9 @@
       "title": "Clean Up Backyard",
       "targetDate": "2024-05-15",
       "milestones": [
-        "Remove old furniture/debris",
-        "Trim or remove overgrowth",
-        "Add basic landscaping/garden"
-      ],
-      "advisorPrompt": "AI Plan: Clear clutter, trim overgrowth, consider simple landscaping (mulch, raised beds).",
-      "checklist": [
-        { "label": "Dispose old chairs, broken items", "done": false }
+        "Remove debris/furniture",
+        "Trim overgrowth",
+        "Add basic landscaping"
       ]
     }
   ]
