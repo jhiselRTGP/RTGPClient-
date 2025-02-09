@@ -7,53 +7,53 @@
       "milestones": [
         "Reduce daily usage each week",
         "Try nicotine patches/gum",
-        "Seek accountability partner or coach"
+        "Seek accountability or support group"
       ],
-      "advisorPrompt": "AI Plan: Focus on gradually reducing your nicotine intake, explore therapy or a support group, and celebrate weekly milestones to reinforce progress."
+      "advisorPrompt": "AI Plan: Gradually reduce nicotine intake; consider therapy or a support program; celebrate small victories each week."
     },
     {
       "id": "exercise",
       "title": "Exercise",
       "targetDate": "2025-01-31",
       "milestones": [
-        "Join a local gym or home workout routine",
-        "Exercise 3x per week",
-        "Increase to 5x per week after Month 1"
+        "Join a gym or home workout routine",
+        "Exercise 3x per week to start",
+        "Increase to 5x per week after one month"
       ],
-      "advisorPrompt": "AI Plan: Begin with a baseline fitness assessment, pick activities you enjoy (like cycling or group fitness), and build habits by setting achievable weekly goals."
+      "advisorPrompt": "AI Plan: Start with baseline fitness, pick fun activities (like spinning or classes), and ramp up gradually to make exercise a habit."
     },
     {
       "id": "retirement",
       "title": "Retirement",
       "targetDate": "2035-01-01",
       "milestones": [
-        "Open or increase contributions to retirement accounts",
+        "Open or expand retirement accounts",
         "Meet with a financial advisor",
-        "Reevaluate portfolio annually"
+        "Reevaluate your portfolio annually"
       ],
-      "advisorPrompt": "AI Plan: Create a budget that increases savings by 10% each year, explore tax-advantaged accounts, and routinely rebalance investments for long-term growth."
+      "advisorPrompt": "AI Plan: Increase your savings rate by 10% each year, use tax-advantaged accounts, rebalance investments, and review progress annually."
     },
     {
       "id": "startRIA",
       "title": "Start the RIA",
       "targetDate": "2025-06-30",
       "milestones": [
-        "Develop business plan",
-        "File legal documents and registrations",
-        "Establish compliance processes"
+        "Draft business plan",
+        "File necessary paperwork and registrations",
+        "Implement compliance processes"
       ],
-      "advisorPrompt": "AI Plan: Outline your niche, register with the appropriate securities authority, build your tech stack and compliance procedures, then market your RIA services effectively."
+      "advisorPrompt": "AI Plan: Define your niche market, handle all legal registrations, set up a compliance system, and develop a marketing strategy to grow your client base."
     },
     {
       "id": "eatBetter",
       "title": "Eat Better",
       "targetDate": "2024-09-01",
       "milestones": [
-        "Incorporate more fruits/veggies",
+        "Add more fruits & veggies each day",
         "Track daily calories or macros",
-        "Try meal prepping each weekend"
+        "Meal prep on weekends"
       ],
-      "advisorPrompt": "AI Plan: Aim to replace processed foods with fresh produce, plan meals ahead of time, and track progress via a food journal or nutrition app."
+      "advisorPrompt": "AI Plan: Replace processed foods with fresh produce, plan & prep meals in advance, and keep a daily food log to stay consistent."
     },
     {
       "id": "buyNewCar",
@@ -62,31 +62,31 @@
       "milestones": [
         "Determine budget & financing",
         "Test drive top 3 choices",
-        "Negotiate or arrange purchase"
+        "Negotiate price or secure best deal"
       ],
-      "advisorPrompt": "AI Plan: Save a down payment over 12 months, research reliable models within your budget, and leverage online comparisons to get the best deal."
+      "advisorPrompt": "AI Plan: Save up a down payment over the next year, compare loan rates, research reliable models, and finalize your purchase with strategic negotiation."
     },
     {
       "id": "refinishBasement",
       "title": "Refinish Basement",
       "targetDate": "2024-11-01",
       "milestones": [
-        "Obtain quotes from contractors",
-        "Decide on layout & materials",
-        "Schedule construction"
+        "Gather contractor quotes",
+        "Plan layout & materials",
+        "Schedule renovation"
       ],
-      "advisorPrompt": "AI Plan: Plan a functional layout that adds both utility and resale value, gather multiple contractor bids, and set aside a contingency fund for unexpected costs."
+      "advisorPrompt": "AI Plan: Create a layout that adds functional living space, collect at least three contractor bids, and keep a contingency budget for surprises."
     },
     {
       "id": "cleanBackyard",
       "title": "Clean Up Backyard",
       "targetDate": "2024-05-15",
       "milestones": [
-        "Remove debris, old furniture, etc.",
-        "Prune or remove overgrown plants",
-        "Set up landscaping or garden"
+        "Remove old furniture & debris",
+        "Prune or remove overgrowth",
+        "Add simple landscaping or garden"
       ],
-      "advisorPrompt": "AI Plan: Clear out clutter, trim overgrowth, consider adding simple landscaping features (like raised beds or mulch), and plan a maintenance schedule so it stays neat."
+      "advisorPrompt": "AI Plan: Clear all clutter, trim plants, and consider raised beds or decorative mulch. Establish a maintenance schedule so it stays neat all season."
     }
   ]
 }
