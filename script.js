@@ -74,8 +74,7 @@ overlayCalendarBtn.addEventListener('click', () => {
 /***********************************************************
  * GLOBAL ACCOUNTS MAP
  ************************************************************/
-// ADDED: We load accounts.json and store each account by ID
-let accountsMap = {}; 
+let accountsMap = {};
 
 async function loadAccounts() {
   try {
@@ -92,7 +91,7 @@ async function loadAccounts() {
 /***********************************************************
  * PERFORMANCE DATA & INTERACTIVE CHART
  ************************************************************/
-let performanceMap = {}; 
+let performanceMap = {};
 
 async function loadPerformance() {
   try {
@@ -141,7 +140,6 @@ function drawPerformanceChart(canvasId, points) {
 
     const x = leftPad + xFrac * w;
     const y = (canvas.height - bottomPad) - (yFrac * h);
-
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   });
@@ -169,6 +167,7 @@ function handleChartMouseMove(e) {
     chartTooltip.style.display = 'none';
     return;
   }
+
   const pt = points[iNear];
   chartTooltip.style.display = 'block';
   chartTooltip.style.left = (rect.left + mouseX + 10) + 'px';
@@ -197,22 +196,23 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
 } = {}) {
   overlayTitle.textContent = titleText;
 
-  // Clear
+  // Clear old items
   overlayBody.innerHTML = '';
   overlayChecklist.innerHTML = '';
   overlayAttachments.innerHTML = '';
   overlayPhotos.innerHTML = '';
   overlayChatHistory.innerHTML = '';
 
-  // Insert summary
+  // Insert the summary text
   const summaryDiv = document.createElement('div');
   summaryDiv.innerHTML = bodyHtml;
   overlayBody.appendChild(summaryDiv);
 
-  // If accounts exist, show them below summary text
+  // If we have "accounts", display them in an .account-list
   if (accounts.length > 0) {
     const acctList = document.createElement('div');
     acctList.classList.add('account-list');
+
     accounts.forEach(acct => {
       const acctItem = document.createElement('div');
       acctItem.classList.add('account-item');
@@ -229,6 +229,7 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
       acctItem.appendChild(rightDiv);
       acctList.appendChild(acctItem);
     });
+
     overlayBody.appendChild(acctList);
   }
 
@@ -288,7 +289,7 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts = {}) {
   body.classList.add('card-body');
   body.style.display = 'none';
 
-  // Insert summary text
+  // Insert summary
   const summaryDiv = document.createElement('div');
   summaryDiv.innerHTML = summaryHtml;
   body.appendChild(summaryDiv);
@@ -303,6 +304,7 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts = {}) {
   });
   body.appendChild(fullBtn);
 
+  // Toggle collapse
   header.addEventListener('click', () => {
     isCollapsed = !isCollapsed;
     body.style.display = isCollapsed ? 'none' : 'block';
@@ -315,7 +317,7 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts = {}) {
 }
 
 /***********************************************************
- * LOAD GOALS (Optional)
+ * LOAD GOALS
  ************************************************************/
 async function loadGoals() {
   try {
@@ -325,11 +327,25 @@ async function loadGoals() {
     container.innerHTML = '';
 
     (data.lifeGoals || []).forEach((goal) => {
-      const summary = `<p><strong>Target Date:</strong> ${goal.targetDate || 'N/A'}</p>`;
-      // etc. ...
+      // Build a summary with target date, milestones, etc.
+      let summary = `<p><strong>Target Date:</strong> ${goal.targetDate || 'N/A'}</p>`;
+      if (goal.milestones && goal.milestones.length > 0) {
+        summary += `<p><strong>Milestones:</strong> ${goal.milestones.join(', ')}</p>`;
+      }
+      if (goal.advisorPrompt) {
+        summary += `<p><em>AI Plan:</em> ${goal.advisorPrompt}</p>`;
+      }
+
+      // Convert accountIds to real accounts (for Retirement, etc.)
+      let realAccounts = [];
+      if (goal.accountIds) {
+        realAccounts = goal.accountIds.map(id => accountsMap[id]).filter(Boolean);
+      }
+
       const card = createCollapsibleCard(goal.id, goal.title, summary, {
         bodyHtml: summary,
-        checklist: goal.checklist || []
+        checklist: goal.checklist || [],
+        accounts: realAccounts
       });
       container.appendChild(card);
     });
@@ -342,18 +358,51 @@ async function loadGoals() {
  * LOAD CALENDAR (Optional)
  ************************************************************/
 async function loadCalendar() {
-  // similar pattern
+  try {
+    const res = await fetch('data/calendar.json');
+    const data = await res.json();
+    const container = document.getElementById('calendarContainer');
+    container.innerHTML = '';
+
+    (data.events || []).forEach((evt) => {
+      const summary = `<p><strong>Date:</strong> ${evt.date}</p>`;
+      const card = createCollapsibleCard(`cal-${evt.name}`, evt.name, summary, {
+        bodyHtml: summary
+      });
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Error loading calendar:', err);
+  }
 }
 
 /***********************************************************
  * LOAD PLAN (Optional)
  ************************************************************/
 async function loadPlan() {
-  // similar pattern
+  try {
+    const res = await fetch('data/plan.json');
+    const data = await res.json();
+    const container = document.getElementById('planContainer');
+    container.innerHTML = '';
+
+    (data.plans || []).forEach((p) => {
+      let summary = `<p><strong>Progress:</strong> ${p.progress || 0}%</p>`;
+      if (p.details) {
+        summary += `<p>${p.details}</p>`;
+      }
+      const card = createCollapsibleCard(`plan-${p.goalName}`, p.goalName, summary, {
+        bodyHtml: summary
+      });
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Error loading plan:', err);
+  }
 }
 
 /***********************************************************
- * LOAD MONEY (Key snippet)
+ * LOAD MONEY
  ************************************************************/
 async function loadMoney() {
   try {
@@ -363,15 +412,11 @@ async function loadMoney() {
     container.innerHTML = '';
 
     (data.moneySections || []).forEach((section) => {
-      // 1) Convert accountIds to real accounts from accountsMap
       const realAccounts = (section.accountIds || []).map(id => accountsMap[id]).filter(Boolean);
-
-      // 2) Build summary text
       const summary = `<p><strong>Total:</strong> $${(section.total || 0).toLocaleString()}</p>`;
 
-      // 3) Create card
       const card = createCollapsibleCard(
-        `money-${section.id}`,    // unique ID for performance
+        `money-${section.id}`,
         section.title,
         summary,
         {
@@ -415,16 +460,16 @@ if (darkModeCheckbox) {
  * ON PAGE LOAD
  ************************************************************/
 window.addEventListener('DOMContentLoaded', async () => {
-  // 1) Load accounts + performance
-  await loadAccounts();      // we create accountsMap
-  await loadPerformance();   // we create performanceMap
+  // 1) load accounts + performance
+  await loadAccounts();
+  await loadPerformance();
 
-  // 2) Load data for each page
+  // 2) load the rest
   await loadGoals();
   await loadCalendar();
   await loadPlan();
   await loadMoney();
 
-  // 3) Default page
+  // 3) default page
   showPage('life');
 });
