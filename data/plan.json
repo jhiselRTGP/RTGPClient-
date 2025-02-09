@@ -1,14 +1,14 @@
 {
   "plans": [
     {
-      "goalName": "Buy a House",
-      "progress": 40,
-      "details": "Saving up for down payment, checking mortgage options."
+      "goalName": "refinishBasement",
+      "progress": 30,
+      "details": "Collected 2 quotes, deciding on contractor."
     },
     {
-      "goalName": "Start Business",
-      "progress": 10,
-      "details": "Drafting business plan, exploring small business loans."
+      "goalName": "retirement",
+      "progress": 40,
+      "details": "Increased monthly 401(k) contribution by 5%."
     }
   ]
 }
