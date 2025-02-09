@@ -1,12 +1,13 @@
 {
   "performanceData": {
-    "quitSmoking": [
-      { "label": "Day1", "value": 10 },
-      { "label": "Day5", "value": 5 }
+    "money-investments": [
+      { "label": "Jan", "value": 850000 },
+      { "label": "Feb", "value": 860000 },
+      { "label": "Mar", "value": 875000 }
     ],
-    "money-real-estate": [
-      { "label": "Jan", "value": 1000000 },
-      { "label": "Feb", "value": 1010000 }
+    "retirement": [
+      { "label": "Jan", "value": 120000 },
+      { "label": "Feb", "value": 123000 }
     ]
   }
 }
