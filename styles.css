@@ -232,7 +232,6 @@ body {
   display: block;
 }
 .solid-sheet-container {
-  /* fill the entire overlay */
   position: relative;
   width: 100%;
   height: 100%;
@@ -261,14 +260,13 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
-
 .solid-sheet-body {
   flex: 1;
   overflow-y: auto;
   padding: 1rem;
 }
 
-/* so the bottom AI chat is pinned below */
+/* pinned chat at bottom */
 .modern-chat-container {
   flex-shrink: 0;
   background: #333;
@@ -276,9 +274,6 @@ body {
   padding: 1rem;
 }
 
-/*
-  Common components in overlay
-*/
 .common-components h3 {
   margin-top: 1rem;
 }
