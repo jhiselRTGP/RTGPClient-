@@ -74,7 +74,7 @@ overlayCalendarBtn.addEventListener('click', () => {
 /***********************************************************
  * PERFORMANCE DATA & INTERACTIVE CHART
  ************************************************************/
-let performanceMap = {}; // e.g. { "goalId": [ { label, value }, ... ] }
+let performanceMap = {}; // e.g. { "someId": [ { label, value }, ... ] }
 
 async function loadPerformance() {
   try {
@@ -102,7 +102,6 @@ function drawPerformanceChart(canvasId, points) {
   const values = points.map(p => p.value);
   const minVal = Math.min(...values);
   const maxVal = Math.max(...values);
-
   const leftPad = 40, rightPad = 20, topPad = 20, bottomPad = 30;
   const w = canvas.width - leftPad - rightPad;
   const h = canvas.height - topPad - bottomPad;
@@ -130,12 +129,11 @@ function drawPerformanceChart(canvasId, points) {
   });
   ctx.stroke();
 
-  // for optional tooltip
+  // store chart meta for optional tooltip
   canvas.chartData = { points, leftPad, rightPad, topPad, bottomPad, w, h, minVal, maxVal };
 }
 
 const chartTooltip = document.getElementById('chartTooltip');
-
 function handleChartMouseMove(e) {
   const canvas = e.target;
   if (!canvas.chartData) return;
@@ -184,7 +182,7 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
   overlayTitle.textContent = titleText;
   overlayBody.innerHTML = bodyHtml;
 
-  // clear old items
+  // Clear old items
   overlayChecklist.innerHTML = '';
   overlayAttachments.innerHTML = '';
   overlayPhotos.innerHTML = '';
@@ -223,15 +221,14 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
     overlayPhotos.appendChild(img);
   });
 
-  // If "accounts" is present (like for money sections):
+  // If "accounts" is present, show them in a styled list
   if (accounts.length > 0) {
     const acctHeader = document.createElement('h3');
     acctHeader.textContent = 'Accounts in This Section:';
     overlayBody.appendChild(acctHeader);
 
-    // We'll do a nicer layout for the accounts
     const acctList = document.createElement('div');
-    acctList.classList.add('account-list'); // We'll style in CSS
+    acctList.classList.add('account-list');
 
     accounts.forEach(acct => {
       const acctItem = document.createElement('div');
@@ -239,7 +236,7 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
 
       const leftDiv = document.createElement('div');
       leftDiv.classList.add('account-left');
-      leftDiv.textContent = acct.name;
+      leftDiv.textContent = acct.name; 
 
       const rightDiv = document.createElement('div');
       rightDiv.classList.add('account-right');
@@ -247,7 +244,6 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
 
       acctItem.appendChild(leftDiv);
       acctItem.appendChild(rightDiv);
-
       acctList.appendChild(acctItem);
     });
 
@@ -257,7 +253,7 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
   // show overlay
   detailOverlay.classList.add('open');
 
-  // performance chart
+  // Performance chart
   const points = performanceMap[goalId] || [];
   drawPerformanceChart('overlayPerformanceCanvas', points);
 }
@@ -427,7 +423,6 @@ async function loadMoney() {
     (data.moneySections || []).forEach((section) => {
       const summary = `<p><strong>Total:</strong> $${section.total?.toLocaleString() || 0}</p>`;
 
-      // pass in photos + accounts
       const card = createCollapsibleCard(
         `money-${section.id}`,
         section.title,
@@ -476,7 +471,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   // 1) load performance data
   await loadPerformance();
 
-  // 2) load the rest
+  // 2) load other data
   await loadGoals();
   await loadCalendar();
   await loadPlan();
