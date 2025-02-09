@@ -1,12 +1,8 @@
 {
   "performanceData": {
     "quitSmoking": [
-      { "label": "Day 1", "value": 5 },
-      { "label": "Day 10", "value": 2 }
-    ],
-    "retirement": [
-      { "label": "Jan 2023", "value": 50000 },
-      { "label": "Dec 2023", "value": 55000 }
+      { "label": "Day1", "value": 10 },
+      { "label": "Day5", "value": 5 }
     ],
     "money-real-estate": [
       { "label": "Jan", "value": 1000000 },
