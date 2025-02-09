@@ -48,7 +48,7 @@ function showPage(pageId) {
 }
 
 /***********************************************************
- * BOTTOM-SHEET OVERLAY (FULL SCREEN)
+ * FULL-PAGE OVERLAY
  ************************************************************/
 const detailOverlay = document.getElementById('detailOverlay');
 const closeOverlayBtn = document.getElementById('closeOverlay');
@@ -146,7 +146,10 @@ function drawPerformanceChart(canvasId, points) {
   });
   ctx.stroke();
 
-  canvas.chartData = { points, leftPad, rightPad, topPad, bottomPad, w, h, minVal, maxVal };
+  canvas.chartData = {
+    points, leftPad, rightPad, topPad, bottomPad, w, h,
+    minVal, maxVal
+  };
 }
 
 // Chart tooltip
@@ -187,7 +190,7 @@ if (overlayCanvas) {
 }
 
 /***********************************************************
- * OPEN OVERLAY (Full screen, accounts displayed)
+ * OPEN OVERLAY
  ************************************************************/
 function openDetailOverlay(goalId, titleText, bodyHtml, {
   checklist = [],
@@ -196,7 +199,8 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
   accounts = []
 } = {}) {
   overlayTitle.textContent = titleText;
-  // Clear old stuff
+
+  // Clear old items
   overlayBody.innerHTML = '';
   overlayChecklist.innerHTML = '';
   overlayAttachments.innerHTML = '';
@@ -208,7 +212,7 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
   summaryDiv.innerHTML = bodyHtml;
   overlayBody.appendChild(summaryDiv);
 
-  // Show any accounts
+  // If we have "accounts," display them
   if (accounts.length > 0) {
     const acctList = document.createElement('div');
     acctList.classList.add('account-list');
@@ -234,7 +238,7 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
   // Show overlay
   detailOverlay.classList.add('open');
 
-  // Draw chart if any performance data
+  // Performance
   const points = performanceMap[goalId] || [];
   drawPerformanceChart('overlayPerformanceCanvas', points);
 }
@@ -252,7 +256,7 @@ overlayChatSend.addEventListener('click', () => {
     overlayChatMsg.value = '';
     overlayChatHistory.scrollTop = overlayChatHistory.scrollHeight;
 
-    // AI response placeholder
+    // AI placeholder
     setTimeout(() => {
       const aiBubble = document.createElement('div');
       aiBubble.classList.add('chat-bubble', 'ai-bubble');
@@ -292,7 +296,7 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts = {}) {
   summaryDiv.innerHTML = summaryHtml;
   body.appendChild(summaryDiv);
 
-  // Full View button
+  // Full View
   const fullBtn = document.createElement('button');
   fullBtn.textContent = 'Full View';
   fullBtn.classList.add('expand-btn');
@@ -314,7 +318,7 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts = {}) {
 }
 
 /***********************************************************
- * LOAD GOALS
+ * LOAD GOALS 
  ************************************************************/
 async function loadGoals() {
   try {
@@ -324,20 +328,25 @@ async function loadGoals() {
     container.innerHTML = '';
 
     (data.lifeGoals || []).forEach((goal) => {
-      // Build summary
       let summary = `<p><strong>Target Date:</strong> ${goal.targetDate || 'N/A'}</p>`;
-      if (goal.milestones && goal.milestones.length > 0) {
+      if (goal.milestones && goal.milestones.length) {
         summary += `<p><strong>Milestones:</strong> ${goal.milestones.join(', ')}</p>`;
       }
       if (goal.advisorPrompt) {
         summary += `<p><em>AI Plan:</em> ${goal.advisorPrompt}</p>`;
       }
 
-      // Map accountIds -> real accounts
+      // Log the IDs to see if there's a mismatch
+      console.log(`Goal: ${goal.title}, accountIds:`, goal.accountIds);
+
+      // Convert accountIds -> real objects
       let realAccounts = [];
       if (goal.accountIds) {
         realAccounts = goal.accountIds.map(id => accountsMap[id]).filter(Boolean);
       }
+
+      // Also log the final array
+      console.log(`Mapped accounts for ${goal.title}:`, realAccounts);
 
       const card = createCollapsibleCard(goal.id, goal.title, summary, {
         bodyHtml: summary,
@@ -362,7 +371,7 @@ async function loadCalendar() {
     container.innerHTML = '';
 
     (data.events || []).forEach((evt) => {
-      const summary = `<p><strong>Date:</strong> ${evt.date}</p>`;
+      let summary = `<p><strong>Date:</strong> ${evt.date}</p>`;
       const card = createCollapsibleCard(`cal-${evt.name}`, evt.name, summary, {
         bodyHtml: summary
       });
@@ -409,8 +418,10 @@ async function loadMoney() {
     container.innerHTML = '';
 
     (data.moneySections || []).forEach((section) => {
-      // Map accountIds
       const realAccounts = (section.accountIds || []).map(id => accountsMap[id]).filter(Boolean);
+
+      console.log(`Money Section: ${section.title}, IDs:`, section.accountIds);
+      console.log(`Mapped accounts:`, realAccounts);
 
       const summary = `<p><strong>Total:</strong> $${(section.total || 0).toLocaleString()}</p>`;
       const card = createCollapsibleCard(
@@ -458,17 +469,13 @@ if (darkModeCheckbox) {
  * ON PAGE LOAD
  ************************************************************/
 window.addEventListener('DOMContentLoaded', async () => {
-  // Load accounts first, so we can map IDs
-  await loadAccounts();
-  // Then load performance (if you want charts)
-  await loadPerformance();
+  await loadAccounts();      // create accountsMap
+  await loadPerformance();   // create performanceMap
 
-  // Then load the main data
   await loadGoals();
   await loadCalendar();
   await loadPlan();
   await loadMoney();
 
-  // Default page
   showPage('life');
 });
