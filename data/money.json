@@ -1,28 +1,46 @@
 {
   "moneySections": [
     {
-      "id": "cash",
-      "title": "Cash",
-      "total": 1844.48,
-      "accountIds": ["acct-1258", "acct-209", "acct-1367", "acct-7412"]
-    },
-    {
       "id": "investments",
       "title": "Investments",
-      "total": 876563.03,
-      "accountIds": ["acct-1003", "acct-3712", "acct-4380", "acct-8973"]
+      "total": 875561.93,
+      "accountIds": [
+        "acct-lplrestricted",
+        "acct-lplespp",
+        "acct-rollover3712",
+        "acct-roth332",
+        "acct-indiv8973",
+        "acct-cindyTra",
+        "acct-jeremyHsa",
+        "acct-cindyP401k",
+        "acct-cindyTrasa",
+        "acct-lplFinancial401k",
+        "acct-roth8179",
+        "acct-lplPerf"
+      ]
     },
     {
-      "id": "real-estate",
+      "id": "realestate",
       "title": "Real Estate",
-      "total": 1010800,
-      "accountIds": [],
-      "photos": [
-        {
-          "src": "https://example.com/children-walking.jpg",
-          "alt": "Two children walking outdoors"
-        }
+      "total": 1014800,
+      "accountIds": ["acct-cozyCove"]
+    },
+    {
+      "id": "vehicles",
+      "title": "Vehicles",
+      "total": 30322.14,
+      "accountIds": [
+        "acct-vwPassat",
+        "acct-vwMultivan"
       ]
     }
+    // If you also want "Cash," "Credit Cards," "Loans," etc., add more sections:
+    // {
+    //   "id": "cash",
+    //   "title": "Cash",
+    //   "total": 1844.48,
+    //   "accountIds": ["acct-1258", ...]
+    // },
+    // etc.
   ]
 }
