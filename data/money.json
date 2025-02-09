@@ -34,21 +34,5 @@
         "acct-vwMultivan"
       ]
     }
-    /*
-    // If you want more sections, you can add them here:
-    {
-      "id": "cash",
-      "title": "Cash",
-      "total": 1844.48,
-      "accountIds": ["acct-1258", "acct-...", ...]
-    },
-    {
-      "id": "loans",
-      "title": "Loans",
-      "total": 371295,
-      "accountIds": [...]
-    },
-    etc...
-    */
   ]
 }
