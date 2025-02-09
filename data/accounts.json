@@ -1,40 +1,9 @@
+// data/accounts.json
 {
   "accounts": [
-    {
-      "id": "acct-1258",
-      "name": "Cash Spending (…1258)",
-      "balance": 1144.27
-    },
-    {
-      "id": "acct-209",
-      "name": "HI Bills Savings (…209…)",
-      "balance": 269.70
-    },
-    {
-      "id": "acct-1367",
-      "name": "Cindy Spending (…1367…)",
-      "balance": 2.37
-    },
-    {
-      "id": "acct-7412",
-      "name": "HI CC Payment Account (…7412…)",
-      "balance": 491.83
-    },
-    {
-      "id": "acct-1003",
-      "name": "LPL Persisted (…1003…)",
-      "balance": 99348.65
-    },
-    {
-      "id": "acct-3712",
-      "name": "Rollover IRA (…3712…)",
-      "balance": 50.0
-    },
-    {
-      "id": "acct-4380",
-      "name": "ROTH IRA (…4380…)",
-      "balance": 561.2
-    }
-    // etc. Add more as needed
+    { "id": "acct-1258", "name": "Cash Spending (…1258)", "balance": 1144.27 },
+    { "id": "acct-209",  "name": "HI Bills Savings (…209…)", "balance": 269.70 },
+    { "id": "acct-1367", "name": "Cindy Spending (…1367…)", "balance": 2.37 },
+    ...
   ]
 }
