@@ -74,7 +74,11 @@ overlayCalendarBtn.addEventListener('click', () => {
 /***********************************************************
  * PERFORMANCE DATA & INTERACTIVE CHART
  ************************************************************/
-let performanceMap = {}; // if you want global performance data for certain goals
+/*
+  If you’re using a separate performance.json, you can load it here.
+  Or if you only use performance data in money.json or goals, skip this.
+*/
+let performanceMap = {};
 
 async function loadPerformance() {
   try {
@@ -88,7 +92,7 @@ async function loadPerformance() {
 
 /**
  * drawPerformanceChart(canvasId, points):
- *  Expects "points" to be an array of objects like:
+ *  Expects an array of objects like:
  *  [ { label: "Jan 1", value: 1000 }, { label: "Jan 15", value: 1200 } ]
  */
 function drawPerformanceChart(canvasId, points) {
@@ -126,7 +130,6 @@ function drawPerformanceChart(canvasId, points) {
     const xFrac = i / (points.length - 1);
     const valRange = maxVal - minVal || 1;
     const yFrac = (pt.value - minVal) / valRange;
-
     const x = leftPad + xFrac * w;
     const y = (canvas.height - bottomPad) - (yFrac * h);
 
@@ -135,12 +138,13 @@ function drawPerformanceChart(canvasId, points) {
   });
   ctx.stroke();
 
-  // If you want a tooltip, store chart meta
+  // Store chart data for optional tooltip
   canvas.chartData = { points, leftPad, rightPad, topPad, bottomPad, w, h, minVal, maxVal };
 }
 
 // Optional tooltip logic
 const chartTooltip = document.getElementById('chartTooltip');
+
 function handleChartMouseMove(e) {
   const canvas = e.target;
   if (!canvas.chartData) return;
@@ -148,7 +152,6 @@ function handleChartMouseMove(e) {
 
   const rect = canvas.getBoundingClientRect();
   const mouseX = e.clientX - rect.left;
-  const mouseY = e.clientY - rect.top;
   const relativeX = mouseX - leftPad;
 
   if (relativeX < 0 || relativeX > w) {
@@ -163,43 +166,43 @@ function handleChartMouseMove(e) {
   }
 
   const pt = points[iNear];
-  const xFrac = iNear / (points.length - 1);
   const valRange = maxVal - minVal || 1;
-  const yFrac = (pt.value - minVal) / valRange;
-  const x = leftPad + xFrac * w;
-  const y = (canvas.height - bottomPad) - (yFrac * h);
-
+  // (We could do more if we want the y position for the tooltip)
   chartTooltip.style.display = 'block';
-  chartTooltip.style.left = (rect.left + x + 10) + 'px';
-  chartTooltip.style.top = (rect.top + y - 20) + 'px';
+  chartTooltip.style.left = (rect.left + mouseX + 10) + 'px';
+  chartTooltip.style.top = (rect.top + 10) + 'px';
   chartTooltip.textContent = `${pt.label}: $${pt.value.toLocaleString()}`;
 }
+
 function handleChartMouseLeave(e) {
   chartTooltip.style.display = 'none';
 }
+
 const overlayCanvas = document.getElementById('overlayPerformanceCanvas');
-overlayCanvas.addEventListener('mousemove', handleChartMouseMove);
-overlayCanvas.addEventListener('mouseleave', handleChartMouseLeave);
+if (overlayCanvas) {
+  overlayCanvas.addEventListener('mousemove', handleChartMouseMove);
+  overlayCanvas.addEventListener('mouseleave', handleChartMouseLeave);
+}
 
 /***********************************************************
  * OPEN OVERLAY (for Full View)
  ************************************************************/
-function openDetailOverlay(goalId, titleText, bodyHtml, { 
-  checklist = [], 
-  attachments = [], 
+function openDetailOverlay(goalId, titleText, bodyHtml, {
+  checklist = [],
+  attachments = [],
   photos = [],
   accounts = []
 } = {}) {
   overlayTitle.textContent = titleText;
   overlayBody.innerHTML = bodyHtml;
 
-  // clear old items
+  // Clear old items
   overlayChecklist.innerHTML = '';
   overlayAttachments.innerHTML = '';
   overlayPhotos.innerHTML = '';
   overlayChatHistory.innerHTML = '';
 
-  // fill checklist
+  // Checklist
   checklist.forEach(item => {
     const li = document.createElement('li');
     const cb = document.createElement('input');
@@ -212,7 +215,7 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
     overlayChecklist.appendChild(li);
   });
 
-  // fill attachments
+  // Attachments
   attachments.forEach(att => {
     const div = document.createElement('div');
     div.classList.add('attachment-item');
@@ -224,7 +227,7 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
     overlayAttachments.appendChild(div);
   });
 
-  // fill photos
+  // Photos
   photos.forEach(photo => {
     const img = document.createElement('img');
     img.src = photo.src;
@@ -232,21 +235,19 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
     overlayPhotos.appendChild(img);
   });
 
-  // Instead of a bulleted list, build chart blocks for each account
+  // If "accounts" is present (like on the Money overlay):
+  // Build the mini-charts for each account
   accounts.forEach((acct, i) => {
-    // Container block
     const acctBlock = document.createElement('div');
     acctBlock.classList.add('overlay-account-block');
-    overlayBody.appendChild(acctBlock);
 
-    // Account name
-    const acctName = document.createElement('h3');
-    acctName.textContent = acct.name || `Account ${i+1}`;
-    acctBlock.appendChild(acctName);
+    const acctTitle = document.createElement('h3');
+    acctTitle.textContent = acct.name || `Account ${i+1}`;
+    acctBlock.appendChild(acctTitle);
 
-    // Period selector
+    // Period <select>
     const periodSelect = document.createElement('select');
-    ['1M', '3M', '6M'].forEach((p) => {
+    ['1M', '3M', '6M'].forEach(p => {
       const opt = document.createElement('option');
       opt.value = p;
       opt.textContent = p;
@@ -254,15 +255,15 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
     });
     acctBlock.appendChild(periodSelect);
 
-    // Canvas for the chart
+    // Canvas
     const canvasId = `acctChart-${goalId}-${i}`;
-    const chartCanvas = document.createElement('canvas');
-    chartCanvas.id = canvasId;
-    chartCanvas.width = 300;
-    chartCanvas.height = 150;
-    chartCanvas.addEventListener('mousemove', handleChartMouseMove);
-    chartCanvas.addEventListener('mouseleave', handleChartMouseLeave);
-    acctBlock.appendChild(chartCanvas);
+    const acctCanvas = document.createElement('canvas');
+    acctCanvas.id = canvasId;
+    acctCanvas.width = 300;
+    acctCanvas.height = 150;
+    acctCanvas.addEventListener('mousemove', handleChartMouseMove);
+    acctCanvas.addEventListener('mouseleave', handleChartMouseLeave);
+    acctBlock.appendChild(acctCanvas);
 
     // Update chart function
     function updateChart() {
@@ -271,17 +272,16 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
       drawPerformanceChart(canvasId, points);
     }
 
-    // Listen for changes
     periodSelect.addEventListener('change', updateChart);
+    updateChart(); // initial load
 
-    // Initial chart load
-    updateChart();
+    overlayBody.appendChild(acctBlock);
   });
 
-  // show overlay
+  // Show the overlay
   detailOverlay.classList.add('open');
 
-  // If you still want a big chart for the entire section:
+  // If you want a big chart for the entire goalId from performanceMap:
   const points = performanceMap[goalId] || [];
   drawPerformanceChart('overlayPerformanceCanvas', points);
 }
@@ -299,7 +299,7 @@ overlayChatSend.addEventListener('click', () => {
     overlayChatMsg.value = '';
     overlayChatHistory.scrollTop = overlayChatHistory.scrollHeight;
 
-    // AI response (placeholder)
+    // AI response placeholder
     setTimeout(() => {
       const aiBubble = document.createElement('div');
       aiBubble.classList.add('chat-bubble', 'ai-bubble');
@@ -311,7 +311,7 @@ overlayChatSend.addEventListener('click', () => {
 });
 
 /***********************************************************
- * COLLAPSIBLE CARDS
+ * COLLAPSIBLE CARDS HELPER
  ************************************************************/
 function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts) {
   const card = document.createElement('div');
@@ -332,13 +332,14 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts) {
 
   const body = document.createElement('div');
   body.classList.add('card-body');
+  body.style.display = 'none'; // starts collapsed
 
-  // Insert summary text
+  // Insert the "summaryHtml" for the collapsed section
   const summaryDiv = document.createElement('div');
   summaryDiv.innerHTML = summaryHtml;
   body.appendChild(summaryDiv);
 
-  // Full View button
+  // "Full View" button → openDetailOverlay
   const fullBtn = document.createElement('button');
   fullBtn.textContent = 'Full View';
   fullBtn.classList.add('expand-btn');
@@ -348,19 +349,11 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts) {
   });
   body.appendChild(fullBtn);
 
-  // Start collapsed
-  body.style.display = 'none';
-
-  // collapse toggling
+  // Toggle expand/collapse
   header.addEventListener('click', () => {
     isCollapsed = !isCollapsed;
-    if (isCollapsed) {
-      body.style.display = 'none';
-      toggleIcon.textContent = 'expand_more';
-    } else {
-      body.style.display = 'block';
-      toggleIcon.textContent = 'expand_less';
-    }
+    body.style.display = isCollapsed ? 'none' : 'block';
+    toggleIcon.textContent = isCollapsed ? 'expand_more' : 'expand_less';
   });
 
   card.appendChild(header);
@@ -369,16 +362,92 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts) {
 }
 
 /***********************************************************
- * LOAD GOALS / CALENDAR / PLAN
+ * LOAD GOALS
  ************************************************************/
 async function loadGoals() {
-  // same as before
+  try {
+    const res = await fetch('data/goals.json');
+    const data = await res.json();
+    const container = document.getElementById('goalsContainer');
+    container.innerHTML = '';
+
+    // "data.lifeGoals" is presumably an array of goals
+    data.lifeGoals.forEach((goal) => {
+      // Build a short summary for the collapsed card
+      let summary = `<p><strong>Target Date:</strong> ${goal.targetDate || 'N/A'}</p>`;
+      if (goal.milestones) {
+        summary += `<p><strong>Milestones:</strong> ${goal.milestones.join(', ')}</p>`;
+      }
+      // Include the AI plan or advisor prompt
+      if (goal.advisorPrompt) {
+        summary += `<p><em>AI Plan:</em> ${goal.advisorPrompt}</p>`;
+      }
+
+      // If you want to show more details in "Full View," pass them in bodyHtml
+      // or keep it simple and pass the same summary for now
+      const card = createCollapsibleCard(goal.id, goal.title, summary, {
+        bodyHtml: summary
+        // attachments: [],
+        // photos: [],
+        // checklist: [],
+        // ...
+      });
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Error loading goals:', err);
+  }
 }
+
+/***********************************************************
+ * LOAD CALENDAR
+ ************************************************************/
 async function loadCalendar() {
-  // same as before
+  try {
+    const res = await fetch('data/calendar.json');
+    const data = await res.json();
+    const container = document.getElementById('calendarContainer');
+    container.innerHTML = '';
+
+    data.events.forEach((evt) => {
+      let summary = `<p><strong>Date:</strong> ${evt.date}</p>`;
+      summary += `<p>Description: ${evt.description || '(none)'}</p>`;
+      // pass summary as collapsed view
+      const card = createCollapsibleCard(`cal-${evt.name}`, evt.name, summary, {
+        bodyHtml: summary
+      });
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Error loading calendar:', err);
+  }
 }
+
+/***********************************************************
+ * LOAD PLAN
+ ************************************************************/
 async function loadPlan() {
-  // same as before
+  try {
+    const res = await fetch('data/plan.json');
+    const data = await res.json();
+    const container = document.getElementById('planContainer');
+    container.innerHTML = '';
+
+    data.plans.forEach((p) => {
+      let summary = `<p><strong>Goal Name:</strong> ${p.goalName}</p>`;
+      summary += `<p><strong>Progress:</strong> ${p.progress}%</p>`;
+      if (p.details) {
+        summary += `<p>${p.details}</p>`;
+      }
+
+      const card = createCollapsibleCard(`plan-${p.goalName}`, p.goalName, summary, {
+        bodyHtml: summary
+      });
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Error loading plan:', err);
+  }
 }
 
 /***********************************************************
@@ -392,17 +461,16 @@ async function loadMoney() {
     container.innerHTML = '';
 
     (data.moneySections || []).forEach((section) => {
-      // Card summary
-      const summary = `<p><strong>Total:</strong> $${section.total.toLocaleString()}</p>`;
-
-      // We won't build a bulleted list here; just pass a summary
+      // Short summary
+      const summary = `<p><strong>Total:</strong> $${section.total?.toLocaleString() || 0}</p>`;
+      // Create a card
       const card = createCollapsibleCard(
         `money-${section.id}`,
         section.title,
         summary,
         {
-          bodyHtml: summary, // or some other text if you want
-          accounts: section.accounts
+          bodyHtml: summary,
+          accounts: section.accounts // used in openDetailOverlay
         }
       );
       container.appendChild(card);
@@ -440,14 +508,15 @@ if (darkModeCheckbox) {
  * ON PAGE LOAD
  ************************************************************/
 window.addEventListener('DOMContentLoaded', async () => {
-  // load performance (if you want a big section chart)
+  // If you have a separate performance.json for big section charts:
   await loadPerformance();
 
-  // load other data
-  await loadGoals();
-  await loadCalendar();
-  await loadPlan();
-  await loadMoney();
+  // Then load each data set
+  await loadGoals();    // loads data/goals.json
+  await loadCalendar(); // loads data/calendar.json
+  await loadPlan();     // loads data/plan.json
+  await loadMoney();    // loads data/money.json
 
+  // Default page
   showPage('life');
 });
