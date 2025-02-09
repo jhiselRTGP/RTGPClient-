@@ -7,12 +7,13 @@
       "milestones": [
         "Reduce daily usage each week",
         "Try nicotine patches/gum",
-        "Seek support group or coach"
+        "Seek accountability/support group"
       ],
-      "advisorPrompt": "AI Plan: Gradually reduce intake, consider therapy, celebrate small weekly successes.",
+      "advisorPrompt": "AI Plan: Gradually reduce your nicotine intake, consider therapy or a support program, and reward small weekly victories.",
       "checklist": [
         { "label": "Set a quit date", "done": false },
-        { "label": "Throw away all cigarettes at home", "done": false }
+        { "label": "Dispose of all cigarettes at home/car", "done": false },
+        { "label": "Research nicotine gum/patch options", "done": false }
       ]
     },
     {
@@ -20,14 +21,110 @@
       "title": "Exercise",
       "targetDate": "2025-01-31",
       "milestones": [
-        "Join a gym or workout routine",
-        "Exercise 3x per week",
-        "Increase to 5x after 1 month"
+        "Join gym or home workout routine",
+        "Exercise 3x per week initially",
+        "Increase to 5x after first month"
       ],
-      "advisorPrompt": "AI Plan: Start with a baseline, pick fun activities, and ramp up gradually.",
+      "advisorPrompt": "AI Plan: Start with baseline fitness, pick activities you enjoy, and add workouts gradually to build a lasting habit.",
       "checklist": [
-        { "label": "Sign up for gym membership", "done": false },
-        { "label": "Buy workout clothes", "done": false }
+        { "label": "Join local gym or sign up for streaming workouts", "done": false },
+        { "label": "Buy comfortable workout clothes", "done": false },
+        { "label": "Plan 3 workout sessions this week", "done": false }
+      ]
+    },
+    {
+      "id": "retirement",
+      "title": "Retirement",
+      "targetDate": "2035-01-01",
+      "milestones": [
+        "Open/expand retirement accounts",
+        "Meet with financial advisor",
+        "Review and rebalance annually"
+      ],
+      "advisorPrompt": "AI Plan: Increase your savings rate each year, utilize tax-advantaged accounts, and track progress on an annual basis.",
+      "checklist": [
+        { "label": "Set up auto-transfer to 401(k) / IRA", "done": false },
+        { "label": "Schedule advisor meeting", "done": false }
+      ]
+    },
+    {
+      "id": "startRIA",
+      "title": "Start the RIA",
+      "targetDate": "2025-06-30",
+      "milestones": [
+        "Draft business plan",
+        "Complete legal registrations",
+        "Establish compliance processes"
+      ],
+      "advisorPrompt": "AI Plan: Outline services, handle necessary registrations, set up compliance, then market your new RIA effectively.",
+      "checklist": [
+        { "label": "Decide on RIA niche or specialty", "done": false },
+        { "label": "Register with the appropriate securities authority", "done": false },
+        { "label": "Implement record-keeping system", "done": false }
+      ]
+    },
+    {
+      "id": "eatBetter",
+      "title": "Eat Better",
+      "targetDate": "2024-09-01",
+      "milestones": [
+        "Increase fruits & veggies daily",
+        "Track calories or macros",
+        "Meal prep on weekends"
+      ],
+      "advisorPrompt": "AI Plan: Prioritize whole foods, reduce processed options, plan meals ahead, and keep a simple nutrition log.",
+      "checklist": [
+        { "label": "Buy fresh produce weekly", "done": false },
+        { "label": "Limit sugary drinks/snacks", "done": false },
+        { "label": "Meal prep Sundays", "done": false }
+      ]
+    },
+    {
+      "id": "buyNewCar",
+      "title": "Buy a New Car",
+      "targetDate": "2026-03-01",
+      "milestones": [
+        "Determine budget & financing",
+        "Test-drive top 3 models",
+        "Negotiate final deal"
+      ],
+      "advisorPrompt": "AI Plan: Save for a down payment over the next year, research reliable models, and compare loan rates to secure the best purchase.",
+      "checklist": [
+        { "label": "Save 10% monthly for down payment", "done": false },
+        { "label": "Compare loan offers at 2-3 banks", "done": false },
+        { "label": "Schedule test drives", "done": false }
+      ]
+    },
+    {
+      "id": "refinishBasement",
+      "title": "Refinish Basement",
+      "targetDate": "2024-11-01",
+      "milestones": [
+        "Get contractor quotes",
+        "Choose layout & materials",
+        "Schedule renovation"
+      ],
+      "advisorPrompt": "AI Plan: Plan a functional layout, gather at least three quotes, and keep a contingency budget for any surprises.",
+      "checklist": [
+        { "label": "Call 3 contractors for quotes", "done": false },
+        { "label": "Decide on flooring & paint", "done": false },
+        { "label": "Budget 10% extra for unexpected costs", "done": false }
+      ]
+    },
+    {
+      "id": "cleanBackyard",
+      "title": "Clean Up Backyard",
+      "targetDate": "2024-05-15",
+      "milestones": [
+        "Remove debris & old furniture",
+        "Trim overgrowth",
+        "Add basic landscaping/garden"
+      ],
+      "advisorPrompt": "AI Plan: Clear out clutter, trim or remove overgrown areas, and consider simple landscaping features like mulch or raised beds.",
+      "checklist": [
+        { "label": "Dispose of old chairs & broken items", "done": false },
+        { "label": "Trim shrubs & trees", "done": false },
+        { "label": "Lay fresh mulch, plant flowers", "done": false }
       ]
     }
   ]
