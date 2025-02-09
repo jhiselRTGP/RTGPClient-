@@ -1,70 +1,16 @@
 {
   "performanceData": {
+    "quitSmoking": [
+      { "label": "Day 1", "value": 5 },
+      { "label": "Day 10", "value": 2 }
+    ],
     "retirement": [
-      { "month": "Jan", "value": 20000 },
-      { "month": "Feb", "value": 22000 },
-      { "month": "Mar", "value": 23000 },
-      { "month": "Apr", "value": 25000 },
-      { "month": "May", "value": 27000 },
-      { "month": "Jun", "value": 29000 },
-      { "month": "Jul", "value": 31000 },
-      { "month": "Aug", "value": 33500 },
-      { "month": "Sep", "value": 34500 },
-      { "month": "Oct", "value": 36000 },
-      { "month": "Nov", "value": 37500 },
-      { "month": "Dec", "value": 39000 }
+      { "label": "Jan 2023", "value": 50000 },
+      { "label": "Dec 2023", "value": 55000 }
     ],
-    "house": [
-      { "month": "Jan", "value": 5000 },
-      { "month": "Feb", "value": 8000 },
-      { "month": "Mar", "value": 12000 },
-      { "month": "Apr", "value": 15000 },
-      { "month": "May", "value": 18000 },
-      { "month": "Jun", "value": 20000 },
-      { "month": "Jul", "value": 22500 },
-      { "month": "Aug", "value": 24000 },
-      { "month": "Sep", "value": 25500 },
-      { "month": "Oct", "value": 27000 },
-      { "month": "Nov", "value": 30000 },
-      { "month": "Dec", "value": 32000 }
-    ],
-    "kidsDance": [
-      { "month": "Jan", "value": 0 },
-      { "month": "Feb", "value": 200 },
-      { "month": "Mar", "value": 500 },
-      { "month": "Apr", "value": 700 }
-    ],
-    "upgradeCar": [
-      { "month": "Jan", "value": 0 },
-      { "month": "Feb", "value": 1000 },
-      { "month": "Mar", "value": 2000 },
-      { "month": "Apr", "value": 3500 },
-      { "month": "May", "value": 4000 }
-    ],
-    "worldTravel": [
-      { "month": "Jan", "value": 4000 },
-      { "month": "Feb", "value": 4500 },
-      { "month": "Mar", "value": 5000 },
-      { "month": "Apr", "value": 6000 },
-      { "month": "May", "value": 7500 }
-    ],
-    "childEdu": [
-      { "month": "Jan", "value": 0 },
-      { "month": "Feb", "value": 1000 },
-      { "month": "Mar", "value": 2000 },
-      { "month": "Apr", "value": 3000 },
-      { "month": "May", "value": 5000 }
-    ],
-    "startBusiness": [
-      { "month": "Jan", "value": 0 },
-      { "month": "Feb", "value": 500 },
-      { "month": "Mar", "value": 2500 },
-      { "month": "Apr", "value": 5000 }
-    ],
-    "anniversaryTrip": [
-      { "month": "Jan", "value": 200 },
-      { "month": "Feb", "value": 400 },
-      { "month": "Mar", "value": 600 }
+    "money-real-estate": [
+      { "label": "Jan", "value": 1000000 },
+      { "label": "Feb", "value": 1010000 }
     ]
   }
 }
