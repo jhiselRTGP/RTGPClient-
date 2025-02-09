@@ -1,13 +1,13 @@
 {
   "performanceData": {
+    "retirement": [
+      { "label": "Jan", "value": 120000 },
+      { "label": "Feb", "value": 123000 }
+    ],
     "money-investments": [
       { "label": "Jan", "value": 850000 },
       { "label": "Feb", "value": 860000 },
       { "label": "Mar", "value": 875000 }
-    ],
-    "retirement": [
-      { "label": "Jan", "value": 120000 },
-      { "label": "Feb", "value": 123000 }
     ]
   }
 }
