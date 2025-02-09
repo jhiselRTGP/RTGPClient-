@@ -238,7 +238,7 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
   // Show overlay
   detailOverlay.classList.add('open');
 
-  // Performance
+  // Performance data
   const points = performanceMap[goalId] || [];
   drawPerformanceChart('overlayPerformanceCanvas', points);
 }
@@ -296,7 +296,7 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts = {}) {
   summaryDiv.innerHTML = summaryHtml;
   body.appendChild(summaryDiv);
 
-  // Full View
+  // "Full View" button
   const fullBtn = document.createElement('button');
   fullBtn.textContent = 'Full View';
   fullBtn.classList.add('expand-btn');
@@ -306,6 +306,7 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts = {}) {
   });
   body.appendChild(fullBtn);
 
+  // Expand/collapse on header click
   header.addEventListener('click', () => {
     isCollapsed = !isCollapsed;
     body.style.display = isCollapsed ? 'none' : 'block';
@@ -318,7 +319,7 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts = {}) {
 }
 
 /***********************************************************
- * LOAD GOALS 
+ * LOAD GOALS
  ************************************************************/
 async function loadGoals() {
   try {
@@ -336,17 +337,11 @@ async function loadGoals() {
         summary += `<p><em>AI Plan:</em> ${goal.advisorPrompt}</p>`;
       }
 
-      // Log the IDs to see if there's a mismatch
-      console.log(`Goal: ${goal.title}, accountIds:`, goal.accountIds);
-
       // Convert accountIds -> real objects
       let realAccounts = [];
       if (goal.accountIds) {
         realAccounts = goal.accountIds.map(id => accountsMap[id]).filter(Boolean);
       }
-
-      // Also log the final array
-      console.log(`Mapped accounts for ${goal.title}:`, realAccounts);
 
       const card = createCollapsibleCard(goal.id, goal.title, summary, {
         bodyHtml: summary,
@@ -420,9 +415,6 @@ async function loadMoney() {
     (data.moneySections || []).forEach((section) => {
       const realAccounts = (section.accountIds || []).map(id => accountsMap[id]).filter(Boolean);
 
-      console.log(`Money Section: ${section.title}, IDs:`, section.accountIds);
-      console.log(`Mapped accounts:`, realAccounts);
-
       const summary = `<p><strong>Total:</strong> $${(section.total || 0).toLocaleString()}</p>`;
       const card = createCollapsibleCard(
         `money-${section.id}`,
@@ -430,8 +422,7 @@ async function loadMoney() {
         summary,
         {
           bodyHtml: summary,
-          accounts: realAccounts,
-          photos: section.photos || []
+          accounts: realAccounts
         }
       );
       container.appendChild(card);
@@ -469,13 +460,16 @@ if (darkModeCheckbox) {
  * ON PAGE LOAD
  ************************************************************/
 window.addEventListener('DOMContentLoaded', async () => {
-  await loadAccounts();      // create accountsMap
-  await loadPerformance();   // create performanceMap
+  // 1) Load accounts + performance
+  await loadAccounts();
+  await loadPerformance();
 
+  // 2) Then load other data
   await loadGoals();
   await loadCalendar();
   await loadPlan();
   await loadMoney();
 
+  // 3) Show default page
   showPage('life');
 });
