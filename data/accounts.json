@@ -1,84 +1,80 @@
 {
   "accounts": [
     {
-      "id": "acct-lplRestricted",
+      "id": "acct-lplrestricted",
       "name": "LPL RESTRICTED UN...",
       "balance": 93133.55
     },
     {
-      "id": "acct-lplEspp7723",
-      "name": "LPL ESPP (…7723…)",
-      "balance": 0.0
+      "id": "acct-lplespp",
+      "name": "LPL ESPP (...7723...)",
+      "balance": 0.00
     },
     {
-      "id": "acct-rolloverIra",
-      "name": "Rollover IRA (…****…)",
-      "balance": 0.0
+      "id": "acct-rollover3712",
+      "name": "Rollover IRA (...3712...)",
+      "balance": 0.00
     },
     {
-      "id": "acct-rothIra3320",
-      "name": "ROTH IRA (…3320…)",
+      "id": "acct-roth332",
+      "name": "ROTH IRA (...332...)",
       "balance": 64.80
     },
     {
-      "id": "acct-individualTod",
-      "name": "Individual TOD (…)",
-      "balance": 81803.87
+      "id": "acct-indiv8973",
+      "name": "Indiv Brokerage (...8973...)",
+      "balance": 81083.87
     },
     {
-      "id": "acct-cindyTrIra",
-      "name": "Cindy Tr IRA (…****…)",
+      "id": "acct-cindyTra",
+      "name": "Cindy Tr IRA (...)",
       "balance": 183620.54
     },
     {
-      "id": "acct-jerremyHsa",
-      "name": "Jerremy HSA",
+      "id": "acct-jeremyHsa",
+      "name": "Jeremy HSA",
       "balance": 15128.00
     },
     {
-      "id": "acct-cindyPrincipal401k",
+      "id": "acct-cindyP401k",
       "name": "Cindy principal 401k",
       "balance": 13316.00
     },
     {
-      "id": "acct-cindyTrasameroca401k",
+      "id": "acct-cindyTrasa",
       "name": "Cindy trasameroca 401k",
       "balance": 34906.00
     },
     {
-      "id": "acct-lplFinancialPlan",
+      "id": "acct-lplFinancial401k",
       "name": "LPL Financial LLC Plan",
       "balance": 417846.93
     },
     {
-      "id": "acct-rothIra8179",
+      "id": "acct-roth8179",
       "name": "Roth IRA - 8179",
-      "balance": 0.0
+      "balance": 0.00
     },
     {
-      "id": "acct-lplPerformance",
-      "name": "LPL PERFORMANCE (…xxxx…)",
+      "id": "acct-lplPerf",
+      "name": "LPL PERFORMANCE (...)",
       "balance": 14099.90
     },
     {
-      "id": "acct-realEstate",
-      "name": "Real Estate",
-      "balance": 1014800.00
-    },
-    {
-      "id": "acct-16335CozyCove",
+      "id": "acct-cozyCove",
       "name": "16335 Cozy Cove",
       "balance": 1014800.00
     },
     {
-      "id": "acct-vehicles",
-      "name": "Vehicles",
-      "balance": 30322.14
-    },
-    {
-      "id": "acct-2017VwPassat",
+      "id": "acct-vwPassat",
       "name": "2017 Volkswagen Passat",
       "balance": 13022.91
+    },
+    {
+      "id": "acct-vwMultivan",
+      "name": "2013 Volkswagen Multivan",
+      "balance": 17299.23
     }
+    // You can add more accounts as needed
   ]
 }
