@@ -21,8 +21,8 @@
       "balance": 64.80
     },
     {
-      "id": "acct-indivTod",
-      "name": "Indiv TOD",
+      "id": "acct-individualTod",
+      "name": "Individual TOD (…)",
       "balance": 81803.87
     },
     {
@@ -57,13 +57,23 @@
     },
     {
       "id": "acct-lplPerformance",
-      "name": "LPL PERFORMANCE",
+      "name": "LPL PERFORMANCE (…xxxx…)",
       "balance": 14099.90
+    },
+    {
+      "id": "acct-realEstate",
+      "name": "Real Estate",
+      "balance": 1014800.00
     },
     {
       "id": "acct-16335CozyCove",
       "name": "16335 Cozy Cove",
       "balance": 1014800.00
+    },
+    {
+      "id": "acct-vehicles",
+      "name": "Vehicles",
+      "balance": 30322.14
     },
     {
       "id": "acct-2017VwPassat",
