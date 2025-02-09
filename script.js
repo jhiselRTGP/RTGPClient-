@@ -75,8 +75,8 @@ overlayCalendarBtn.addEventListener('click', () => {
  * PERFORMANCE DATA & INTERACTIVE CHART
  ************************************************************/
 /*
-  If you’re using a separate performance.json, you can load it here.
-  Or if you only use performance data in money.json or goals, skip this.
+  If you're storing performance data in a separate file, you can load it here.
+  Otherwise, if your money or goals JSON already include performanceData, skip this.
 */
 let performanceMap = {};
 
@@ -90,11 +90,6 @@ async function loadPerformance() {
   }
 }
 
-/**
- * drawPerformanceChart(canvasId, points):
- *  Expects an array of objects like:
- *  [ { label: "Jan 1", value: 1000 }, { label: "Jan 15", value: 1200 } ]
- */
 function drawPerformanceChart(canvasId, points) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
@@ -111,7 +106,6 @@ function drawPerformanceChart(canvasId, points) {
   const values = points.map(p => p.value);
   const minVal = Math.min(...values);
   const maxVal = Math.max(...values);
-
   const leftPad = 40, rightPad = 20, topPad = 20, bottomPad = 30;
   const w = canvas.width - leftPad - rightPad;
   const h = canvas.height - topPad - bottomPad;
@@ -130,6 +124,7 @@ function drawPerformanceChart(canvasId, points) {
     const xFrac = i / (points.length - 1);
     const valRange = maxVal - minVal || 1;
     const yFrac = (pt.value - minVal) / valRange;
+
     const x = leftPad + xFrac * w;
     const y = (canvas.height - bottomPad) - (yFrac * h);
 
@@ -138,11 +133,11 @@ function drawPerformanceChart(canvasId, points) {
   });
   ctx.stroke();
 
-  // Store chart data for optional tooltip
+  // For optional tooltip usage
   canvas.chartData = { points, leftPad, rightPad, topPad, bottomPad, w, h, minVal, maxVal };
 }
 
-// Optional tooltip logic
+// Optional tooltip
 const chartTooltip = document.getElementById('chartTooltip');
 
 function handleChartMouseMove(e) {
@@ -153,7 +148,6 @@ function handleChartMouseMove(e) {
   const rect = canvas.getBoundingClientRect();
   const mouseX = e.clientX - rect.left;
   const relativeX = mouseX - leftPad;
-
   if (relativeX < 0 || relativeX > w) {
     chartTooltip.style.display = 'none';
     return;
@@ -166,8 +160,6 @@ function handleChartMouseMove(e) {
   }
 
   const pt = points[iNear];
-  const valRange = maxVal - minVal || 1;
-  // (We could do more if we want the y position for the tooltip)
   chartTooltip.style.display = 'block';
   chartTooltip.style.left = (rect.left + mouseX + 10) + 'px';
   chartTooltip.style.top = (rect.top + 10) + 'px';
@@ -191,7 +183,8 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
   checklist = [],
   attachments = [],
   photos = [],
-  accounts = []
+  accounts = [],
+  metrics = null
 } = {}) {
   overlayTitle.textContent = titleText;
   overlayBody.innerHTML = bodyHtml;
@@ -202,7 +195,7 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
   overlayPhotos.innerHTML = '';
   overlayChatHistory.innerHTML = '';
 
-  // Checklist
+  // Show a checklist of tasks (if present)
   checklist.forEach(item => {
     const li = document.createElement('li');
     const cb = document.createElement('input');
@@ -235,8 +228,20 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
     overlayPhotos.appendChild(img);
   });
 
-  // If "accounts" is present (like on the Money overlay):
-  // Build the mini-charts for each account
+  // If there's a "metrics" object, show it
+  if (metrics) {
+    const metricsDiv = document.createElement('div');
+    metricsDiv.innerHTML = `
+      <h3>Goal Metrics</h3>
+      <p><strong>Type:</strong> ${metrics.type}</p>
+      <p><strong>Description:</strong> ${metrics.description}</p>
+      <p><strong>Baseline:</strong> ${metrics.baseline}</p>
+      <p><strong>Goal:</strong> ${metrics.goal}</p>
+    `;
+    overlayBody.appendChild(metricsDiv);
+  }
+
+  // If "accounts" is present (like for Money), build mini-charts
   accounts.forEach((acct, i) => {
     const acctBlock = document.createElement('div');
     acctBlock.classList.add('overlay-account-block');
@@ -265,7 +270,6 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
     acctCanvas.addEventListener('mouseleave', handleChartMouseLeave);
     acctBlock.appendChild(acctCanvas);
 
-    // Update chart function
     function updateChart() {
       const selectedPeriod = periodSelect.value;
       const points = acct.performanceData?.[selectedPeriod] || [];
@@ -278,10 +282,9 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
     overlayBody.appendChild(acctBlock);
   });
 
-  // Show the overlay
   detailOverlay.classList.add('open');
 
-  // If you want a big chart for the entire goalId from performanceMap:
+  // For the "big chart" if you have performanceMap
   const points = performanceMap[goalId] || [];
   drawPerformanceChart('overlayPerformanceCanvas', points);
 }
@@ -299,7 +302,7 @@ overlayChatSend.addEventListener('click', () => {
     overlayChatMsg.value = '';
     overlayChatHistory.scrollTop = overlayChatHistory.scrollHeight;
 
-    // AI response placeholder
+    // AI response (placeholder)
     setTimeout(() => {
       const aiBubble = document.createElement('div');
       aiBubble.classList.add('chat-bubble', 'ai-bubble');
@@ -332,14 +335,14 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts) {
 
   const body = document.createElement('div');
   body.classList.add('card-body');
-  body.style.display = 'none'; // starts collapsed
+  body.style.display = 'none';
 
-  // Insert the "summaryHtml" for the collapsed section
+  // Insert the collapsed summary
   const summaryDiv = document.createElement('div');
   summaryDiv.innerHTML = summaryHtml;
   body.appendChild(summaryDiv);
 
-  // "Full View" button → openDetailOverlay
+  // Full View button
   const fullBtn = document.createElement('button');
   fullBtn.textContent = 'Full View';
   fullBtn.classList.add('expand-btn');
@@ -349,7 +352,6 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts) {
   });
   body.appendChild(fullBtn);
 
-  // Toggle expand/collapse
   header.addEventListener('click', () => {
     isCollapsed = !isCollapsed;
     body.style.display = isCollapsed ? 'none' : 'block';
@@ -371,26 +373,28 @@ async function loadGoals() {
     const container = document.getElementById('goalsContainer');
     container.innerHTML = '';
 
-    // "data.lifeGoals" is presumably an array of goals
-    data.lifeGoals.forEach((goal) => {
-      // Build a short summary for the collapsed card
+    // For each goal in data.lifeGoals
+    (data.lifeGoals || []).forEach((goal) => {
       let summary = `<p><strong>Target Date:</strong> ${goal.targetDate || 'N/A'}</p>`;
       if (goal.milestones) {
         summary += `<p><strong>Milestones:</strong> ${goal.milestones.join(', ')}</p>`;
       }
-      // Include the AI plan or advisor prompt
       if (goal.advisorPrompt) {
         summary += `<p><em>AI Plan:</em> ${goal.advisorPrompt}</p>`;
       }
 
-      // If you want to show more details in "Full View," pass them in bodyHtml
-      // or keep it simple and pass the same summary for now
+      // Optionally show metrics in collapsed view or only in Full View
+      // We'll just show them in Full View for clarity
+      let fullViewHtml = summary;
+      if (goal.metrics) {
+        fullViewHtml += `<p><strong>Metrics:</strong> ${goal.metrics.description} (Type: ${goal.metrics.type})<br>Baseline: ${goal.metrics.baseline} -> Goal: ${goal.metrics.goal}</p>`;
+      }
+
+      // Build the card
       const card = createCollapsibleCard(goal.id, goal.title, summary, {
-        bodyHtml: summary
-        // attachments: [],
-        // photos: [],
-        // checklist: [],
-        // ...
+        bodyHtml: fullViewHtml,
+        checklist: goal.checklist || [],
+        metrics: goal.metrics || null
       });
       container.appendChild(card);
     });
@@ -409,10 +413,12 @@ async function loadCalendar() {
     const container = document.getElementById('calendarContainer');
     container.innerHTML = '';
 
-    data.events.forEach((evt) => {
+    (data.events || []).forEach((evt) => {
       let summary = `<p><strong>Date:</strong> ${evt.date}</p>`;
-      summary += `<p>Description: ${evt.description || '(none)'}</p>`;
-      // pass summary as collapsed view
+      if (evt.description) {
+        summary += `<p>${evt.description}</p>`;
+      }
+
       const card = createCollapsibleCard(`cal-${evt.name}`, evt.name, summary, {
         bodyHtml: summary
       });
@@ -433,13 +439,12 @@ async function loadPlan() {
     const container = document.getElementById('planContainer');
     container.innerHTML = '';
 
-    data.plans.forEach((p) => {
+    (data.plans || []).forEach((p) => {
       let summary = `<p><strong>Goal Name:</strong> ${p.goalName}</p>`;
-      summary += `<p><strong>Progress:</strong> ${p.progress}%</p>`;
+      summary += `<p><strong>Progress:</strong> ${p.progress || 0}%</p>`;
       if (p.details) {
         summary += `<p>${p.details}</p>`;
       }
-
       const card = createCollapsibleCard(`plan-${p.goalName}`, p.goalName, summary, {
         bodyHtml: summary
       });
@@ -461,18 +466,11 @@ async function loadMoney() {
     container.innerHTML = '';
 
     (data.moneySections || []).forEach((section) => {
-      // Short summary
       const summary = `<p><strong>Total:</strong> $${section.total?.toLocaleString() || 0}</p>`;
-      // Create a card
-      const card = createCollapsibleCard(
-        `money-${section.id}`,
-        section.title,
-        summary,
-        {
-          bodyHtml: summary,
-          accounts: section.accounts // used in openDetailOverlay
-        }
-      );
+      const card = createCollapsibleCard(`money-${section.id}`, section.title, summary, {
+        bodyHtml: summary,
+        accounts: section.accounts || []
+      });
       container.appendChild(card);
     });
   } catch (err) {
@@ -508,14 +506,14 @@ if (darkModeCheckbox) {
  * ON PAGE LOAD
  ************************************************************/
 window.addEventListener('DOMContentLoaded', async () => {
-  // If you have a separate performance.json for big section charts:
+  // Optionally load performance data if you have a separate file
   await loadPerformance();
 
-  // Then load each data set
-  await loadGoals();    // loads data/goals.json
-  await loadCalendar(); // loads data/calendar.json
-  await loadPlan();     // loads data/plan.json
-  await loadMoney();    // loads data/money.json
+  // Load other data
+  await loadGoals();
+  await loadCalendar();
+  await loadPlan();
+  await loadMoney();
 
   // Default page
   showPage('life');
