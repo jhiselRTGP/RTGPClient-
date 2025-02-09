@@ -74,14 +74,12 @@ overlayCalendarBtn.addEventListener('click', () => {
 /***********************************************************
  * GLOBAL ACCOUNTS MAP
  ************************************************************/
-// We'll fetch data/accounts.json once, store it in a global map for easy reference
-let accountsMap = {}; // e.g. { "acct-1258": { name, balance, ... }, ... }
+let accountsMap = {};
 
 async function loadAccounts() {
   try {
     const res = await fetch('data/accounts.json');
     const data = await res.json();
-    // Build a map by ID
     data.accounts.forEach(acct => {
       accountsMap[acct.id] = acct;
     });
@@ -93,7 +91,7 @@ async function loadAccounts() {
 /***********************************************************
  * PERFORMANCE DATA & INTERACTIVE CHART
  ************************************************************/
-let performanceMap = {}; // e.g. { "retirement": [ { label, value }, ... ] }
+let performanceMap = {};
 
 async function loadPerformance() {
   try {
@@ -142,12 +140,12 @@ function drawPerformanceChart(canvasId, points) {
 
     const x = leftPad + xFrac * w;
     const y = (canvas.height - bottomPad) - (yFrac * h);
+
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   });
   ctx.stroke();
 
-  // store chart data for optional tooltip
   canvas.chartData = { points, leftPad, rightPad, topPad, bottomPad, w, h, minVal, maxVal };
 }
 
@@ -156,7 +154,6 @@ function handleChartMouseMove(e) {
   const canvas = e.target;
   if (!canvas.chartData) return;
   const { points, leftPad, rightPad, topPad, bottomPad, w, h, minVal, maxVal } = canvas.chartData;
-
   const rect = canvas.getBoundingClientRect();
   const mouseX = e.clientX - rect.left;
   const relativeX = mouseX - leftPad;
@@ -170,6 +167,7 @@ function handleChartMouseMove(e) {
     chartTooltip.style.display = 'none';
     return;
   }
+
   const pt = points[iNear];
   chartTooltip.style.display = 'block';
   chartTooltip.style.left = (rect.left + mouseX + 10) + 'px';
@@ -188,7 +186,8 @@ if (overlayCanvas) {
 }
 
 /***********************************************************
- * OPEN OVERLAY (Full View)
+ * OPEN OVERLAY (Full View) — KEY CHANGE: Insert summary FIRST,
+ * THEN show accounts, THEN user sees "Checklist," etc. below
  ************************************************************/
 function openDetailOverlay(goalId, titleText, bodyHtml, {
   checklist = [],
@@ -196,57 +195,25 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
   photos = [],
   accounts = []
 } = {}) {
+  // Title
   overlayTitle.textContent = titleText;
-  overlayBody.innerHTML = bodyHtml;
 
-  // Clear old items
+  // Clear
+  overlayBody.innerHTML = ''; 
   overlayChecklist.innerHTML = '';
   overlayAttachments.innerHTML = '';
   overlayPhotos.innerHTML = '';
   overlayChatHistory.innerHTML = '';
 
-  // Checklist
-  checklist.forEach(item => {
-    const li = document.createElement('li');
-    const cb = document.createElement('input');
-    cb.type = 'checkbox';
-    cb.checked = item.done || false;
-    const label = document.createElement('label');
-    label.textContent = item.label || 'Task';
-    li.appendChild(cb);
-    li.appendChild(label);
-    overlayChecklist.appendChild(li);
-  });
+  // 1) Insert the summary text (e.g. "Total: $876,563.03")
+  const summaryDiv = document.createElement('div');
+  summaryDiv.innerHTML = bodyHtml;
+  overlayBody.appendChild(summaryDiv);
 
-  // Attachments
-  attachments.forEach(att => {
-    const div = document.createElement('div');
-    div.classList.add('attachment-item');
-    const link = document.createElement('a');
-    link.href = att.url || '#';
-    link.target = '_blank';
-    link.textContent = att.name || 'Attachment';
-    div.appendChild(link);
-    overlayAttachments.appendChild(div);
-  });
-
-  // Photos
-  photos.forEach(photo => {
-    const img = document.createElement('img');
-    img.src = photo.src;
-    img.alt = photo.alt || 'Photo';
-    overlayPhotos.appendChild(img);
-  });
-
-  // If we have an array of "accounts" (already resolved objects), show them
+  // 2) Immediately add the accounts, if any
   if (accounts.length > 0) {
-    const acctHeader = document.createElement('h3');
-    acctHeader.textContent = 'Accounts in This Section:';
-    overlayBody.appendChild(acctHeader);
-
     const acctList = document.createElement('div');
     acctList.classList.add('account-list');
-
     accounts.forEach(acct => {
       const acctItem = document.createElement('div');
       acctItem.classList.add('account-item');
@@ -263,7 +230,6 @@ function openDetailOverlay(goalId, titleText, bodyHtml, {
       acctItem.appendChild(rightDiv);
       acctList.appendChild(acctItem);
     });
-
     overlayBody.appendChild(acctList);
   }
 
@@ -349,7 +315,7 @@ function createCollapsibleCard(goalId, title, summaryHtml, overlayOpts = {}) {
 }
 
 /***********************************************************
- * LOAD GOALS
+ * LOAD GOALS / CALENDAR / PLAN
  ************************************************************/
 async function loadGoals() {
   try {
@@ -376,9 +342,6 @@ async function loadGoals() {
   }
 }
 
-/***********************************************************
- * LOAD CALENDAR
- ************************************************************/
 async function loadCalendar() {
   try {
     const res = await fetch('data/calendar.json');
@@ -400,9 +363,6 @@ async function loadCalendar() {
   }
 }
 
-/***********************************************************
- * LOAD PLAN
- ************************************************************/
 async function loadPlan() {
   try {
     const res = await fetch('data/plan.json');
@@ -412,9 +372,7 @@ async function loadPlan() {
 
     (data.plans || []).forEach((p) => {
       let summary = `<p><strong>Progress:</strong> ${p.progress || 0}%</p>`;
-      if (p.details) {
-        summary += `<p>${p.details}</p>`;
-      }
+      if (p.details) summary += `<p>${p.details}</p>`;
 
       const card = createCollapsibleCard(`plan-${p.goalName}`, p.goalName, summary, {
         bodyHtml: summary
@@ -427,7 +385,7 @@ async function loadPlan() {
 }
 
 /***********************************************************
- * LOAD MONEY (with shared accounts)
+ * LOAD MONEY
  ************************************************************/
 async function loadMoney() {
   try {
@@ -436,24 +394,20 @@ async function loadMoney() {
     const container = document.getElementById('moneyContainer');
     container.innerHTML = '';
 
-    // For each money section, gather the actual account objects from "accountsMap"
     (data.moneySections || []).forEach((section) => {
       const summary = `<p><strong>Total:</strong> $${section.total?.toLocaleString() || 0}</p>`;
-
-      // We'll create a new array of the actual account objects
       let realAccounts = [];
       if (section.accountIds) {
         realAccounts = section.accountIds.map(aid => accountsMap[aid]).filter(Boolean);
       }
 
-      // Pass them into createCollapsibleCard for the overlay
       const card = createCollapsibleCard(
         `money-${section.id}`,
         section.title,
         summary,
         {
           bodyHtml: summary,
-          accounts: realAccounts, 
+          accounts: realAccounts,
           photos: section.photos || []
         }
       );
@@ -492,16 +446,16 @@ if (darkModeCheckbox) {
  * ON PAGE LOAD
  ************************************************************/
 window.addEventListener('DOMContentLoaded', async () => {
-  // 1) Load Accounts + Performance first
-  await loadAccounts();      // fetch data/accounts.json into accountsMap
-  await loadPerformance();   // fetch data/performance.json into performanceMap
+  // Load accounts + performance first
+  await loadAccounts();
+  await loadPerformance();
 
-  // 2) Then load other data
+  // Then load the rest
   await loadGoals();
   await loadCalendar();
   await loadPlan();
   await loadMoney();
 
-  // default page
+  // Default page
   showPage('life');
 });
