@@ -45,7 +45,13 @@
       "accounts": [
         {
           "name": "18335 Cozy Cove",
-          "balance": 1010800.00
+          "balance": 1010800
+        }
+      ],
+      "photos": [
+        {
+          "src": "https://example.com/children-walking.jpg",
+          "alt": "Two children walking outdoors"
         }
       ]
     },
