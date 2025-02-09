@@ -14,8 +14,12 @@
           "balance": 269.70
         },
         {
-          "name": "Misc Checking (…5412…)",
-          "balance": 430.51
+          "name": "Cindy Spending (…1367…)",
+          "balance": 2.37
+        },
+        {
+          "name": "HI CC Payment Account (…7412…)",
+          "balance": 491.83
         }
       ]
     },
@@ -56,32 +60,13 @@
       ]
     },
     {
-      "id": "vehicles",
-      "title": "Vehicles",
-      "total": 30222.14,
-      "accounts": [
-        {
-          "name": "2017 Volkswagen Passat",
-          "balance": 13022.51
-        },
-        {
-          "name": "2013 Volkswagen Multivan",
-          "balance": 17299.63
-        }
-      ]
-    },
-    {
       "id": "other-assets",
       "title": "Other Assets",
       "total": 90000,
       "accounts": [
         {
-          "name": "Avi 8225",
-          "balance": 8000
-        },
-        {
-          "name": "Kelfer",
-          "balance": 82000
+          "name": "Some Misc Asset",
+          "balance": 5000
         }
       ]
     },
@@ -95,27 +80,8 @@
           "balance": 3230
         },
         {
-          "name": "Account (…Multi…)",
-          "balance": 1292.16
-        }
-      ]
-    },
-    {
-      "id": "loans",
-      "title": "Loans",
-      "total": 371295,
-      "accounts": [
-        {
-          "name": "Amort Mortgage",
-          "balance": 246300
-        },
-        {
-          "name": "Margin Loan",
-          "balance": 32000
-        },
-        {
-          "name": "Indirect Marine (…Boat…)",
-          "balance": 101625
+          "name": "HI Spending Savings (…333…)",
+          "balance": 333.88
         }
       ]
     }
