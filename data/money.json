@@ -4,84 +4,23 @@
       "id": "cash",
       "title": "Cash",
       "total": 1844.48,
-      "accounts": [
-        {
-          "name": "Cash Spending (…1258)",
-          "balance": 1144.27
-        },
-        {
-          "name": "HI Bills Savings (…209…)",
-          "balance": 269.70
-        },
-        {
-          "name": "Cindy Spending (…1367…)",
-          "balance": 2.37
-        },
-        {
-          "name": "HI CC Payment Account (…7412…)",
-          "balance": 491.83
-        }
-      ]
+      "accountIds": ["acct-1258", "acct-209", "acct-1367", "acct-7412"]
     },
     {
       "id": "investments",
       "title": "Investments",
       "total": 876563.03,
-      "accounts": [
-        {
-          "name": "LPL Persisted (…1003…)",
-          "balance": 99348.65
-        },
-        {
-          "name": "Rollover IRA (…3712…)",
-          "balance": 50.00
-        },
-        {
-          "name": "ROTH IRA (…4380…)",
-          "balance": 561.20
-        }
-      ]
+      "accountIds": ["acct-1003", "acct-3712", "acct-4380"]
     },
     {
       "id": "real-estate",
       "title": "Real Estate",
       "total": 1010800,
-      "accounts": [
-        {
-          "name": "18335 Cozy Cove",
-          "balance": 1010800
-        }
-      ],
+      "accountIds": [],
       "photos": [
         {
           "src": "https://example.com/children-walking.jpg",
           "alt": "Two children walking outdoors"
-        }
-      ]
-    },
-    {
-      "id": "other-assets",
-      "title": "Other Assets",
-      "total": 90000,
-      "accounts": [
-        {
-          "name": "Some Misc Asset",
-          "balance": 5000
-        }
-      ]
-    },
-    {
-      "id": "credit-cards",
-      "title": "Credit Cards",
-      "total": 25412.67,
-      "accounts": [
-        {
-          "name": "Platinum (…0613…)",
-          "balance": 3230
-        },
-        {
-          "name": "HI Spending Savings (…333…)",
-          "balance": 333.88
         }
       ]
     }
