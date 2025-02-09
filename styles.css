@@ -1,13 +1,9 @@
-/* 
-  -----------------------
-   BASIC GLOBAL STYLES 
-  -----------------------
-*/
+/* BASIC GLOBAL STYLES */
 html, body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
-  background-color: #111; /* Dark theme background */
+  background-color: #111; 
   color: #eee;
 }
 
@@ -23,11 +19,7 @@ body {
   flex-direction: column;
 }
 
-/*
-  ------------------------
-   TOP BANNER
-  ------------------------
-*/
+/* TOP BANNER */
 .top-banner {
   display: flex;
   align-items: center;
@@ -47,15 +39,11 @@ body {
   cursor: pointer;
 }
 
-/*
-  -----------------------
-   SIDE MENU (slides in from LEFT)
-  -----------------------
-*/
+/* SIDE MENU (LEFT) */
 .side-menu {
   position: fixed;
   top: 0;
-  left: 0; /* keep it on the left */
+  left: 0;
   width: 250px;
   height: 100vh;
   background-color: #222;
@@ -95,11 +83,7 @@ body {
   color: #00ff7f;
 }
 
-/*
-  -----------------------
-   CHAT OVERLAY
-  -----------------------
-*/
+/* CHAT OVERLAY */
 .chat-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -163,15 +147,11 @@ body {
   cursor: pointer;
 }
 
-/*
-  -----------------------
-   MAIN CONTENT & CARDS
-  -----------------------
-*/
+/* MAIN CONTENT & CARDS */
 .main-content {
   flex: 1;
   padding: 1rem;
-  padding-bottom: 60px; /* space for fixed footer */
+  padding-bottom: 60px; 
 }
 .cards-grid {
   display: flex;
@@ -179,7 +159,6 @@ body {
   gap: 1rem;
 }
 
-/* Collapsible cards */
 .card {
   background-color: #222;
   border: 1px solid #444;
@@ -205,7 +184,7 @@ body {
 }
 .card-body {
   margin-top: 0.5rem;
-  display: none; /* toggled via JS */
+  display: none; 
 }
 .expand-btn {
   display: inline-block;
@@ -221,11 +200,7 @@ body {
   background: #45ff9a;
 }
 
-/*
-  -----------------------
-   FULL OVERLAY (BOTTOM SHEET)
-  -----------------------
-*/
+/* FULL OVERLAY (BOTTOM SHEET) */
 .full-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -238,8 +213,7 @@ body {
 }
 .solid-sheet-container {
   position: absolute;
-  bottom: 0;
-  left: 0; right: 0;
+  bottom: 0; left: 0; right: 0;
   background-color: #222;
   color: #fff;
   max-height: 80vh;
@@ -303,11 +277,7 @@ body {
   font-size: 0.9rem;
 }
 
-/*
-  -----------------------
-   OVERLAY CHAT
-  -----------------------
-*/
+/* OVERLAY CHAT */
 .modern-chat-container {
   background: #333;
   border-top: 1px solid #444;
@@ -361,11 +331,7 @@ body {
   cursor: pointer;
 }
 
-/*
-  -----------------------------------------
-   ACCOUNT LISTING (for the overlay)
-  -----------------------------------------
-*/
+/* ACCOUNT LIST in overlay (for money) */
 .account-list {
   display: flex;
   flex-direction: column;
@@ -374,7 +340,7 @@ body {
 }
 .account-item {
   display: flex;
-  justify-content: space-between; /* name left, balance right */
+  justify-content: space-between;
   align-items: center;
   background-color: #333;
   padding: 0.5rem;
@@ -387,14 +353,10 @@ body {
 .account-right {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #00ff7f; /* bright green for balance */
+  color: #00ff7f;
 }
 
-/*
-  -----------------------
-   STICKY FOOTER
-  -----------------------
-*/
+/* STICKY FOOTER */
 .footer {
   position: fixed;
   bottom: 0; left: 0;
