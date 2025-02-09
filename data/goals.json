@@ -1,122 +1,92 @@
 {
   "lifeGoals": [
     {
+      "id": "quitSmoking",
+      "title": "Quit Smoking",
+      "targetDate": "2024-12-31",
+      "milestones": [
+        "Reduce daily usage each week",
+        "Try nicotine patches/gum",
+        "Seek accountability partner or coach"
+      ],
+      "advisorPrompt": "AI Plan: Focus on gradually reducing your nicotine intake, explore therapy or a support group, and celebrate weekly milestones to reinforce progress."
+    },
+    {
+      "id": "exercise",
+      "title": "Exercise",
+      "targetDate": "2025-01-31",
+      "milestones": [
+        "Join a local gym or home workout routine",
+        "Exercise 3x per week",
+        "Increase to 5x per week after Month 1"
+      ],
+      "advisorPrompt": "AI Plan: Begin with a baseline fitness assessment, pick activities you enjoy (like cycling or group fitness), and build habits by setting achievable weekly goals."
+    },
+    {
       "id": "retirement",
       "title": "Retirement",
-      "targetDate": "2040",
+      "targetDate": "2035-01-01",
       "milestones": [
-        "Save 1 million by 2035",
-        "Achieve stable monthly returns by 2040"
+        "Open or increase contributions to retirement accounts",
+        "Meet with a financial advisor",
+        "Reevaluate portfolio annually"
       ],
-      "advisorPrompt": "Should I adjust my 401(k) contributions?",
-      "checklist": [
-        { "label": "Rebalance 401(k)" },
-        { "label": "Increase IRA contributions" }
-      ]
+      "advisorPrompt": "AI Plan: Create a budget that increases savings by 10% each year, explore tax-advantaged accounts, and routinely rebalance investments for long-term growth."
     },
     {
-      "id": "house",
-      "title": "Buy a House",
-      "targetDate": "2028",
+      "id": "startRIA",
+      "title": "Start the RIA",
+      "targetDate": "2025-06-30",
       "milestones": [
-        "Save 20% down payment",
-        "Get mortgage pre-approval",
-        "Find a realtor"
+        "Develop business plan",
+        "File legal documents and registrations",
+        "Establish compliance processes"
       ],
-      "advisorPrompt": "How much more do I need for the down payment?"
+      "advisorPrompt": "AI Plan: Outline your niche, register with the appropriate securities authority, build your tech stack and compliance procedures, then market your RIA services effectively."
     },
     {
-      "id": "kidsDance",
-      "title": "Kids' Dance Event",
-      "targetDate": "Next Month",
+      "id": "eatBetter",
+      "title": "Eat Better",
+      "targetDate": "2024-09-01",
       "milestones": [
-        "Buy costumes",
-        "Finalize routine",
-        "Schedule practice sessions"
+        "Incorporate more fruits/veggies",
+        "Track daily calories or macros",
+        "Try meal prepping each weekend"
       ],
-      "advisorPrompt": "Any local store discount for dance gear?",
-      "checklist": [
-        { "label": "Buy Shoes" },
-        { "label": "Buy Costumes" },
-        { "label": "Plan Snacks" }
-      ]
+      "advisorPrompt": "AI Plan: Aim to replace processed foods with fresh produce, plan meals ahead of time, and track progress via a food journal or nutrition app."
     },
     {
-      "id": "upgradeCar",
-      "title": "Upgrade Car",
-      "targetDate": "2026",
+      "id": "buyNewCar",
+      "title": "Buy a New Car",
+      "targetDate": "2026-03-01",
       "milestones": [
-        "Research models",
-        "Decide lease vs. buy",
-        "Get pre-approved loan"
+        "Determine budget & financing",
+        "Test drive top 3 choices",
+        "Negotiate or arrange purchase"
       ],
-      "advisorPrompt": "Should I lease or finance?"
+      "advisorPrompt": "AI Plan: Save a down payment over 12 months, research reliable models within your budget, and leverage online comparisons to get the best deal."
     },
     {
-      "id": "worldTravel",
-      "title": "World Travel",
-      "targetDate": "2030",
+      "id": "refinishBasement",
+      "title": "Refinish Basement",
+      "targetDate": "2024-11-01",
       "milestones": [
-        "Get passports",
-        "Plan each continent",
-        "Set travel fund"
+        "Obtain quotes from contractors",
+        "Decide on layout & materials",
+        "Schedule construction"
       ],
-      "advisorPrompt": "Which travel rewards card is best?"
+      "advisorPrompt": "AI Plan: Plan a functional layout that adds both utility and resale value, gather multiple contractor bids, and set aside a contingency fund for unexpected costs."
     },
     {
-      "id": "childEdu",
-      "title": "Fund Child's Education",
-      "targetDate": "2035",
+      "id": "cleanBackyard",
+      "title": "Clean Up Backyard",
+      "targetDate": "2024-05-15",
       "milestones": [
-        "Open 529 plan",
-        "Monthly contributions",
-        "Look into scholarships"
+        "Remove debris, old furniture, etc.",
+        "Prune or remove overgrown plants",
+        "Set up landscaping or garden"
       ],
-      "advisorPrompt": "What’s the ideal monthly 529 contribution?"
-    },
-    {
-      "id": "startBusiness",
-      "title": "Start a Business",
-      "targetDate": "2027",
-      "milestones": [
-        "Business plan",
-        "Form LLC",
-        "Secure funding"
-      ],
-      "advisorPrompt": "Should I apply for an SBA loan or find investors?"
-    },
-    {
-      "id": "anniversaryTrip",
-      "title": "50th Wedding Anniversary Trip",
-      "targetDate": "2032",
-      "milestones": [
-        "Choose destination",
-        "Book flights",
-        "Plan activities"
-      ],
-      "advisorPrompt": "Tips for large family group discounts?"
-    },
-    {
-      "id": "gymRoutine",
-      "title": "Consistent Gym Routine",
-      "targetDate": "6 Months",
-      "milestones": [
-        "Hire personal trainer",
-        "Schedule workouts",
-        "Track progress weekly"
-      ],
-      "advisorPrompt": "Any advice on gym membership deals?"
-    },
-    {
-      "id": "codingSkills",
-      "title": "Improve Coding Skills",
-      "targetDate": "1 Year",
-      "milestones": [
-        "Complete online course",
-        "Build personal projects",
-        "Attend hackathon"
-      ],
-      "advisorPrompt": "Which programming language is best for finance apps?"
+      "advisorPrompt": "AI Plan: Clear out clutter, trim overgrowth, consider adding simple landscaping features (like raised beds or mulch), and plan a maintenance schedule so it stays neat."
     }
   ]
 }
