@@ -1,34 +1,6 @@
 {
   "lifeGoals": [
     {
-      "id": "quitSmoking",
-      "title": "Quit Smoking",
-      "targetDate": "2024-12-31",
-      "milestones": [
-        "Reduce daily usage each week",
-        "Try nicotine patches/gum",
-        "Seek accountability/support group"
-      ],
-      "advisorPrompt": "AI Plan: Gradually reduce nicotine intake...",
-      "checklist": [
-        { "label": "Set a quit date", "done": false }
-      ]
-    },
-    {
-      "id": "exercise",
-      "title": "Exercise",
-      "targetDate": "2025-01-31",
-      "milestones": [
-        "Join a gym",
-        "Exercise 3x per week",
-        "Increase to 5x after 1 month"
-      ],
-      "advisorPrompt": "AI Plan: Start with baseline fitness...",
-      "checklist": [
-        { "label": "Buy workout clothes", "done": false }
-      ]
-    },
-    {
       "id": "retirement",
       "title": "Retirement",
       "targetDate": "2035-01-01",
@@ -39,50 +11,13 @@
       ],
       "advisorPrompt": "AI Plan: Increase your savings rate each year...",
       "checklist": [],
+      // Reference whichever accounts you want under "Retirement" ...
       "accountIds": [
-        "acct-1003",
-        "acct-3712",
-        "acct-4380"
-      ]
-    },
-    {
-      "id": "startRIA",
-      "title": "Start the RIA",
-      "targetDate": "2025-06-30",
-      "milestones": [
-        "Draft business plan",
-        "File registrations",
-        "Implement compliance"
-      ]
-    },
-    {
-      "id": "eatBetter",
-      "title": "Eat Better",
-      "targetDate": "2024-09-01",
-      "milestones": [
-        "More fruits & veggies",
-        "Track daily macros",
-        "Meal prep weekly"
-      ]
-    },
-    {
-      "id": "buyNewCar",
-      "title": "Buy a New Car",
-      "targetDate": "2026-03-01",
-      "milestones": [
-        "Determine budget & financing",
-        "Test-drive 3 models",
-        "Negotiate best deal"
-      ]
-    },
-    {
-      "id": "refinishBasement",
-      "title": "Refinish Basement",
-      "targetDate": "2024-11-01",
-      "milestones": [
-        "Get contractor quotes",
-        "Choose layout/materials",
-        "Schedule renovation"
+        "acct-rollover3712",
+        "acct-roth332",
+        "acct-roth8179",
+        "acct-lplrestricted",
+        "acct-lplFinancial401k"
       ]
     },
     {
@@ -94,6 +29,17 @@
         "Trim overgrowth",
         "Add basic landscaping"
       ]
+    },
+    {
+      "id": "buyNewCar",
+      "title": "Buy a New Car",
+      "targetDate": "2026-03-01",
+      "milestones": [
+        "Determine budget & financing",
+        "Test-drive 3 models",
+        "Negotiate best deal"
+      ]
     }
+    // ... and so on for your other Life Goals
   ]
 }
