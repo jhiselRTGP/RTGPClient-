@@ -40,9 +40,9 @@
       "advisorPrompt": "AI Plan: Increase your savings rate each year...",
       "checklist": [],
       "accountIds": [
-        "acct-1003",  // LPL Persisted
-        "acct-3712",  // Rollover IRA
-        "acct-4380"   // ROTH IRA
+        "acct-1003",
+        "acct-3712",
+        "acct-4380"
       ]
     },
     {
