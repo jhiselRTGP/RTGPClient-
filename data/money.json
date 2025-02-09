@@ -7,93 +7,16 @@
       "accounts": [
         {
           "name": "Cash Spending (…1258)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 1144 },
-              { "label": "End",   "value": 1144 * 1.2 }
-            ],
-            "3M": [
-              { "label": "Month1", "value": 1144 },
-              { "label": "Month2", "value": 1144 * 1.2 },
-              { "label": "Month3", "value": 1144 * 1.2 * 1.2 }
-            ],
-            "6M": [
-              { "label": "M1", "value": 1144 },
-              { "label": "M2", "value": 1144 * 1.2 },
-              { "label": "M3", "value": 1144 * 1.2 * 1.2 },
-              { "label": "M4", "value": 1144 * 1.2 ** 3 },
-              { "label": "M5", "value": 1144 * 1.2 ** 4 },
-              { "label": "M6", "value": 1144 * 1.2 ** 5 }
-            ]
-          }
+          "balance": 1144.27
         },
         {
           "name": "HI Bills Savings (…209…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 269 },
-              { "label": "End",   "value": 269 * 1.2 }
-            ],
-            "3M": [
-              { "label": "Month1", "value": 269 },
-              { "label": "Month2", "value": 269 * 1.2 },
-              { "label": "Month3", "value": 269 * 1.2 * 1.2 }
-            ],
-            "6M": [
-              { "label": "M1", "value": 269 },
-              { "label": "M2", "value": 269 * 1.2 },
-              { "label": "M3", "value": 269 * 1.2 * 1.2 },
-              { "label": "M4", "value": 269 * 1.2 ** 3 },
-              { "label": "M5", "value": 269 * 1.2 ** 4 },
-              { "label": "M6", "value": 269 * 1.2 ** 5 }
-            ]
-          }
+          "balance": 269.70
         },
         {
-          "name": "Cindy Spending (…1367…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 83 },
-              { "label": "End",   "value": 83 * 1.2 }
-            ],
-            "3M": [
-              { "label": "Month1", "value": 83 },
-              { "label": "Month2", "value": 83 * 1.2 },
-              { "label": "Month3", "value": 83 * 1.2 * 1.2 }
-            ],
-            "6M": [
-              { "label": "M1", "value": 83 },
-              { "label": "M2", "value": 83 * 1.2 },
-              { "label": "M3", "value": 83 * 1.2 * 1.2 },
-              { "label": "M4", "value": 83 * 1.2 ** 3 },
-              { "label": "M5", "value": 83 * 1.2 ** 4 },
-              { "label": "M6", "value": 83 * 1.2 ** 5 }
-            ]
-          }
-        },
-        {
-          "name": "HI CC Payment Account (…7412…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 349 },
-              { "label": "End",   "value": 349 * 1.2 }
-            ],
-            "3M": [
-              { "label": "Month1", "value": 349 },
-              { "label": "Month2", "value": 349 * 1.2 },
-              { "label": "Month3", "value": 349 * 1.2 * 1.2 }
-            ],
-            "6M": [
-              { "label": "M1", "value": 349 },
-              { "label": "M2", "value": 349 * 1.2 },
-              { "label": "M3", "value": 349 * 1.2 * 1.2 },
-              { "label": "M4", "value": 349 * 1.2 ** 3 },
-              { "label": "M5", "value": 349 * 1.2 ** 4 },
-              { "label": "M6", "value": 349 * 1.2 ** 5 }
-            ]
-          }
+          "name": "Misc Checking (…5412…)",
+          "balance": 430.51
         }
-        // ... add other "Cash" accounts if you wish
       ]
     },
     {
@@ -103,133 +26,15 @@
       "accounts": [
         {
           "name": "LPL Persisted (…1003…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 99348 },
-              { "label": "End",   "value": 99348 * 1.2 }
-            ],
-            "3M": [
-              { "label": "Month1", "value": 99348 },
-              { "label": "Month2", "value": 99348 * 1.2 },
-              { "label": "Month3", "value": 99348 * 1.2 * 1.2 }
-            ],
-            "6M": [
-              { "label": "M1", "value": 99348 },
-              { "label": "M2", "value": 99348 * 1.2 },
-              { "label": "M3", "value": 99348 * 1.2 * 1.2 },
-              { "label": "M4", "value": 99348 * 1.2 ** 3 },
-              { "label": "M5", "value": 99348 * 1.2 ** 4 },
-              { "label": "M6", "value": 99348 * 1.2 ** 5 }
-            ]
-          }
+          "balance": 99348.65
         },
         {
           "name": "Rollover IRA (…3712…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 50 },
-              { "label": "End",   "value": 50 * 1.2 }
-            ],
-            "3M": [
-              { "label": "Month1", "value": 50 },
-              { "label": "Month2", "value": 60 },
-              { "label": "Month3", "value": 72 }
-            ],
-            "6M": [
-              { "label": "M1", "value": 50 },
-              { "label": "M2", "value": 60 },
-              { "label": "M3", "value": 72 },
-              { "label": "M4", "value": 86.4 },
-              { "label": "M5", "value": 103.68 },
-              { "label": "M6", "value": 124.416 }
-            ]
-          }
+          "balance": 50.00
         },
         {
           "name": "ROTH IRA (…4380…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 561 },
-              { "label": "End",   "value": 561 * 1.2 }
-            ],
-            "3M": [
-              { "label": "Month1", "value": 561 },
-              { "label": "Month2", "value": 673.2 },
-              { "label": "Month3", "value": 807.84 }
-            ],
-            "6M": [
-              { "label": "M1", "value": 561 },
-              { "label": "M2", "value": 673.2 },
-              { "label": "M3", "value": 807.84 },
-              { "label": "M4", "value": 969.41 },
-              { "label": "M5", "value": 1163.29 },
-              { "label": "M6", "value": 1395.95 }
-            ]
-          }
-        },
-        {
-          "name": "Indiv TOD (…9872…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 18903 },
-              { "label": "End",   "value": 18903 * 1.2 }
-            ],
-            /* 3M, 6M similarly if you wish */
-          }
-        },
-        {
-          "name": "Cindy IRA (…xxxx…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 183624 },
-              { "label": "End",   "value": 183624 * 1.2 }
-            ]
-          }
-        },
-        {
-          "name": "Jonny HSA",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 16120 },
-              { "label": "End",   "value": 16120 * 1.2 }
-            ]
-          }
-        },
-        {
-          "name": "Cindy universal 401k",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 13306 },
-              { "label": "End",   "value": 13306 * 1.2 }
-            ]
-          }
-        },
-        {
-          "name": "LPL Fine Noble ICD",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 41032 },
-              { "label": "End",   "value": 41032 * 1.2 }
-            ]
-          }
-        },
-        {
-          "name": "ROTH IRA (…xxxx…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 2266 },
-              { "label": "End",   "value": 2266 * 1.2 }
-            ]
-          }
-        },
-        {
-          "name": "LPL PERFORMANCE (…xxxx…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 14099 },
-              { "label": "End",   "value": 14099 * 1.2 }
-            ]
-          }
+          "balance": 561.20
         }
       ]
     },
@@ -240,12 +45,7 @@
       "accounts": [
         {
           "name": "18335 Cozy Cove",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 1010800 },
-              { "label": "End",   "value": 1010800 * 1.2 }
-            ]
-          }
+          "balance": 1010800.00
         }
       ]
     },
@@ -256,21 +56,11 @@
       "accounts": [
         {
           "name": "2017 Volkswagen Passat",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 13022 },
-              { "label": "End",   "value": 13022 * 1.2 }
-            ]
-          }
+          "balance": 13022.51
         },
         {
           "name": "2013 Volkswagen Multivan",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 17299 },
-              { "label": "End",   "value": 17299 * 1.2 }
-            ]
-          }
+          "balance": 17299.63
         }
       ]
     },
@@ -281,21 +71,11 @@
       "accounts": [
         {
           "name": "Avi 8225",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 8000 },
-              { "label": "End",   "value": 8000 * 1.2 }
-            ]
-          }
+          "balance": 8000
         },
         {
           "name": "Kelfer",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 82000 },
-              { "label": "End",   "value": 82000 * 1.2 }
-            ]
-          }
+          "balance": 82000
         }
       ]
     },
@@ -306,21 +86,11 @@
       "accounts": [
         {
           "name": "Platinum (…0613…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 3230 },
-              { "label": "End",   "value": 3230 * 1.2 }
-            ]
-          }
+          "balance": 3230
         },
         {
           "name": "Account (…Multi…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 1292 },
-              { "label": "End",   "value": 1292 * 1.2 }
-            ]
-          }
+          "balance": 1292.16
         }
       ]
     },
@@ -331,30 +101,15 @@
       "accounts": [
         {
           "name": "Amort Mortgage",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 246300 },
-              { "label": "End",   "value": 246300 * 1.2 }
-            ]
-          }
+          "balance": 246300
         },
         {
           "name": "Margin Loan",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 32000 },
-              { "label": "End",   "value": 32000 * 1.2 }
-            ]
-          }
+          "balance": 32000
         },
         {
           "name": "Indirect Marine (…Boat…)",
-          "performanceData": {
-            "1M": [
-              { "label": "Start", "value": 101625 },
-              { "label": "End",   "value": 101625 * 1.2 }
-            ]
-          }
+          "balance": 101625
         }
       ]
     }
