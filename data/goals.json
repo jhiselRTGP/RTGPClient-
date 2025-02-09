@@ -9,7 +9,19 @@
         "Try nicotine patches/gum",
         "Seek accountability or support group"
       ],
-      "advisorPrompt": "AI Plan: Gradually reduce nicotine intake; consider therapy or a support program; celebrate small victories each week."
+      "advisorPrompt": "AI Plan: Gradually reduce nicotine intake; consider therapy...",
+      "checklist": [
+        { "label": "Set a quit date", "done": false },
+        { "label": "Remove all cigarettes from home/car", "done": false },
+        { "label": "Purchase nicotine patches/gum", "done": false },
+        { "label": "Join a support group or therapy program", "done": false }
+      ],
+      "metrics": {
+        "type": "countdown",
+        "description": "Cigarettes smoked per week",
+        "baseline": 20,
+        "goal": 0
+      }
     },
     {
       "id": "exercise",
@@ -20,7 +32,18 @@
         "Exercise 3x per week to start",
         "Increase to 5x per week after one month"
       ],
-      "advisorPrompt": "AI Plan: Start with baseline fitness, pick fun activities (like spinning or classes), and ramp up gradually to make exercise a habit."
+      "advisorPrompt": "AI Plan: Start with baseline fitness, pick fun activities...",
+      "checklist": [
+        { "label": "Sign up for gym membership or streaming workout app", "done": false },
+        { "label": "Buy comfortable workout clothes/shoes", "done": false },
+        { "label": "Schedule 3 workouts this week", "done": false }
+      ],
+      "metrics": {
+        "type": "frequency",
+        "description": "Workouts per week",
+        "baseline": 0,
+        "goal": 5
+      }
     },
     {
       "id": "retirement",
@@ -31,62 +54,20 @@
         "Meet with a financial advisor",
         "Reevaluate your portfolio annually"
       ],
-      "advisorPrompt": "AI Plan: Increase your savings rate by 10% each year, use tax-advantaged accounts, rebalance investments, and review progress annually."
-    },
-    {
-      "id": "startRIA",
-      "title": "Start the RIA",
-      "targetDate": "2025-06-30",
-      "milestones": [
-        "Draft business plan",
-        "File necessary paperwork and registrations",
-        "Implement compliance processes"
+      "advisorPrompt": "AI Plan: Increase your savings rate by 10% each year...",
+      "checklist": [
+        { "label": "Open a Roth IRA (if not opened already)", "done": false },
+        { "label": "Max 401(k) employer match", "done": false },
+        { "label": "Schedule meeting with financial advisor", "done": false }
       ],
-      "advisorPrompt": "AI Plan: Define your niche market, handle all legal registrations, set up a compliance system, and develop a marketing strategy to grow your client base."
-    },
-    {
-      "id": "eatBetter",
-      "title": "Eat Better",
-      "targetDate": "2024-09-01",
-      "milestones": [
-        "Add more fruits & veggies each day",
-        "Track daily calories or macros",
-        "Meal prep on weekends"
-      ],
-      "advisorPrompt": "AI Plan: Replace processed foods with fresh produce, plan & prep meals in advance, and keep a daily food log to stay consistent."
-    },
-    {
-      "id": "buyNewCar",
-      "title": "Buy a New Car",
-      "targetDate": "2026-03-01",
-      "milestones": [
-        "Determine budget & financing",
-        "Test drive top 3 choices",
-        "Negotiate price or secure best deal"
-      ],
-      "advisorPrompt": "AI Plan: Save up a down payment over the next year, compare loan rates, research reliable models, and finalize your purchase with strategic negotiation."
-    },
-    {
-      "id": "refinishBasement",
-      "title": "Refinish Basement",
-      "targetDate": "2024-11-01",
-      "milestones": [
-        "Gather contractor quotes",
-        "Plan layout & materials",
-        "Schedule renovation"
-      ],
-      "advisorPrompt": "AI Plan: Create a layout that adds functional living space, collect at least three contractor bids, and keep a contingency budget for surprises."
-    },
-    {
-      "id": "cleanBackyard",
-      "title": "Clean Up Backyard",
-      "targetDate": "2024-05-15",
-      "milestones": [
-        "Remove old furniture & debris",
-        "Prune or remove overgrowth",
-        "Add simple landscaping or garden"
-      ],
-      "advisorPrompt": "AI Plan: Clear all clutter, trim plants, and consider raised beds or decorative mulch. Establish a maintenance schedule so it stays neat all season."
+      "metrics": {
+        "type": "financial",
+        "description": "Retirement fund balance ($)",
+        "baseline": 50000,
+        "goal": 500000
+      }
     }
+
+    // ...and so on for your other goals
   ]
 }
