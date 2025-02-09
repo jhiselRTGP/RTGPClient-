@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Life Automation Framework</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link
@@ -30,7 +31,7 @@
     </button>
   </header>
 
-  <!-- Side Menu (slides in from left) -->
+  <!-- Side Menu -->
   <aside class="side-menu" id="sideMenu">
     <button class="close-menu" id="closeMenu" title="Close Menu">
       <span class="material-symbols-outlined">close</span>
@@ -88,10 +89,10 @@
       </div>
 
       <div class="solid-sheet-body">
-        <!-- This container is where we inject summary and accounts -->
+        <!-- Where we dynamically inject summary text, account list, etc. -->
         <div id="overlayBody" class="main-overlay-content"></div>
 
-        <!-- These are always listed after #overlayBody in the HTML, so they appear below. -->
+        <!-- "common-components": checklist, attachments, photos, etc. appear below overlayBody -->
         <div class="common-components">
           <h3>Checklist</h3>
           <ul id="overlayChecklist" class="checklist"></ul>
@@ -181,7 +182,7 @@
     </section>
   </main>
 
-  <!-- Footer (pinned at bottom) -->
+  <!-- Footer -->
   <footer class="footer">
     <button class="footer-button" onclick="showPage('life')">
       <span class="material-symbols-outlined">favorite</span>
