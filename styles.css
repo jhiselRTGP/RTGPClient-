@@ -239,7 +239,7 @@ body {
   color: #fff;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: hidden; /* top to bottom */
 }
 .solid-sheet-header {
   flex-shrink: 0;
